@@ -1,58 +1,39 @@
 ---
 title: "Worklog Tuần 4"
-date: "2025-09-09"
+date: "2025-10-05"
 weight: 1
 chapter: false
 pre: " <b> 1.4. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
 ### Mục tiêu tuần 4:
 
-- Kết nối, làm quen với các thành viên trong First Cloud Journey.
-- Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+- Học và nắm vững các **dịch vụ bảo mật trên AWS**: Share Responsibility Model, AWS IAM, Amazon Cognito, AWS Organizations, AWS KMS.
+- Thực hành **AWS Security Hub**: kích hoạt Security Hub và điểm từng bộ tiêu chuẩn bảo mật.
+- Thực hành **tối ưu chi phí EC2 với Lambda**: tạo Tag cho Instance, Role cho Lambda và Lambda Function.
+- Quản lý tài nguyên với **Tag và Resource Groups**: quản lý truy cập EC2 Resource Tag, giới hạn quyền user với IAM Permission Boundary.
+- Thực hành **mã hóa dữ liệu với AWS KMS**: tạo KMS, S3, CloudTrail, Athena và kiểm thử chia sẻ dữ liệu mã hóa.
+- Thực hành **IAM Role & Condition**: cấp quyền cho ứng dụng truy cập dịch vụ AWS. 
+
 
 ### Các công việc cần triển khai trong tuần này:
 
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP <br>                    | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Ngày | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
+| --- | --- | --- | --- | --- |
+| 1 | - Dịch vụ bảo mật trên AWS: <br>&emsp; + Share Responsibility Model <br>&emsp; + AWS Identity and Access Management <br>&emsp; + Amazon Cognito <br>&emsp; +  AWS Organizations <br>&emsp; + Amazon Key Management Service | 29/09/2025 | 29/09/2025 | <https://github.com/tuanvu250/AWS-FCJ/blob/main/module/module-05/note.md> |
+| 2 | -Thực hành bắt đầu với AWS Security Hub: <br>&emsp; + Kích hoạt Security Hub & điểm từng bộ tiêu chuẩn <br> - Thực hành tối ưu chi phí EC2 với Lambda: <br>&emsp; + Tạo Tag cho Instance & Tạo Role cho Lambda <br>&emsp; + Tạo Lambda Function & kiểm tra kết quả | 30/09/2025 | 30/09/2025 | <https://000018.awsstudygroup.com/vi/> <br> <https://000022.awsstudygroup.com/vi/> |
+| 3 | - Quản lý tài nguyên bằng Tag và Resource Groups <br> - Quản lý truy cập vào dịch vụ EC2 Resource Tag với AWS IAM <br> - Giới hạn quyền của user với IAM Permission Boundary | 01/10/2025 | 01/10/2025 | <https://000027.awsstudygroup.com/vi/> <br> <https://000028.awsstudygroup.com/vi/> <br> <https://000030.awsstudygroup.com/vi/> |
+| 4 | - Thực hành Mã hóa ở trạng thái lưu trữ với AWS KMS: <br>&emsp; + Tạo Key Management Service & Amazon S3 <br>&emsp; + Tạo AWS CloudTrail & Amazon Athena <br>&emsp; + Kiểm thử và chia sẻ dữ liệu mã hóa trên S3 <br> - Thực hành IAM Role & Condition | 02/10/2025 | 02/10/2025 | <https://000033.awsstudygroup.com/vi/> <br> <https://000044.awsstudygroup.com/vi/> |
+| 5 | - Sự kiện [AWS GenAI Builder Club] AI-Driven Development Life Cycle: Reimagining Software Engineering (2pm Friday 3/10/2025) | 03/10/2025 | 03/10/2025 |  |
+| 6 | - Thực hành Cấp quyền cho ứng dụng truy cập dịch vụ AWS với IAM Role <br> - Dịch vụ cơ sở dữ liệu trên AWS: Database Concepts review  | 04/10/2025 | 04/10/2025 | <https://000048.awsstudygroup.com/> <br> <https://github.com/tuanvu250/AWS-FCJ/blob/main/module/module-06/note.md> |
 
 ### Kết quả đạt được tuần 4:
 
-- Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản:
-
-  - Compute
-  - Storage
-  - Networking
-  - Database
-  - ...
-
-- Đã tạo và cấu hình AWS Free Tier account thành công.
-
-- Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-- Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-
-  - Access Key
-  - Secret Key
-  - Region mặc định
-  - ...
-
-- Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  - Kiểm tra thông tin tài khoản & cấu hình
-  - Lấy danh sách region
-  - Xem dịch vụ EC2
-  - Tạo và quản lý key pair
-  - Kiểm tra thông tin dịch vụ đang chạy
-  - ...
-
-- Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-- ...
+- Hoàn thành việc học về **dịch vụ bảo mật trên AWS**: Share Responsibility Model, AWS IAM, Amazon Cognito, AWS Organizations và AWS KMS.
+- Thực hành thành công **AWS Security Hub**: kích hoạt Security Hub và điểm từng bộ tiêu chuẩn bảo mật.
+- Hoàn thành lab **tối ưu chi phí EC2 với Lambda**: tạo Tag cho Instance, Role cho Lambda và Lambda Function, kiểm tra kết quả thành công.
+- Thực hành thành công **quản lý tài nguyên với Tag và Resource Groups**, quản lý truy cập vào EC2 Resource Tag với AWS IAM, và giới hạn quyền user với IAM Permission Boundary.
+- Hoàn thành lab **mã hóa ở trạng thái lưu trữ với AWS KMS**: tạo KMS, S3, CloudTrail, Athena và kiểm thử chia sẻ dữ liệu mã hóa thành công.
+- Thực hành thành công **IAM Role & Condition**: cấp quyền cho ứng dụng truy cập dịch vụ AWS với IAM Role.
+- Tham gia sự kiện **[AWS GenAI Builder Club] AI-Driven Development Life Cycle: Reimagining Software Engineering**.
+- Học và ghi chú về **Database Concepts** trên AWS.  
