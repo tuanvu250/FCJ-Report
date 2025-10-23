@@ -1,59 +1,61 @@
 ---
 title: "Week 6 Worklog"
-date: "2025-09-09"
+date: "2025-10-19"
 weight: 1
 chapter: false
 pre: " <b> 1.6. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
-
 ### Week 6 Objectives:
 
-- Connect and get acquainted with members of First Cloud Journey.
-- Understand basic AWS services, how to use the console & CLI.
+- Learn and master **Docker and Docker Compose**: containerization, docker images, docker-compose.
+- Practice **deploying applications on Docker with AWS**: create Docker images, push to ECR.
+- Practice **Amazon Elastic Container Service (ECS)**: deploy and manage containers on AWS.
+- Learn about **Nginx**: reverse proxy, load balancing, web server configuration.
+- Participate in **"DATA SCIENCE ON AWS"** workshop: explore data science and machine learning services on AWS.
+- Practice **Serverless Architecture**: API Gateway, Lambda, SAM deployment.
+- Practice **Amazon Cognito**: user authentication and authorization.
+- Practice **S3 Static Website with SSL**: set up secure static website on S3.
 
 ### Tasks to be carried out this week:
 
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP <br>                              | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Day | Task | Start Date | Completion Date | Reference Material |
+| --- | --- | --- | --- | --- |
+| 1 | - Learn about docker, docker-compose <br> | 10/13/2025 | 10/13/2025 | <https://github.com/tuanvu250/AWS-FCJ/tree/main/bonus/docker> <br> <https://docs.docker.com/get-started/> |
+| 2 | - Practice deploying applications on Docker with AWS <br> - Practice deploying applications on Amazon Elastic Container Service | 10/14/2025 | 10/14/2025 | <https://000015.awsstudygroup.com/vi/> <br> <https://000016.awsstudygroup.com/vi/> |
+| 3 | - Learn about Nginx | 10/15/2025 | 10/15/2025 | <https://github.com/tuanvu250/AWS-FCJ/tree/main/bonus/nginx> <br> <https://www.youtube.com/watch?v=C_cVyFWD2KQ&t=2774s> |
+| 4 | - WORKSHOP "DATA SCIENCE ON AWS" – UNLOCKING THE POWER OF DATA WITH CLOUD COMPUTING | 10/16/2025 | 10/16/2025 | <https://qhdn-hcmuni.fpt.edu.vn/2025/10/13/workshop-data-science-on-aws-mo-khoa-suc-manh-du-lieu-cung-dien-toan-dam-may/> |
+| 5 | - Serverless - Guide to writing Front-end calling API Gateway <br> - Serverless - Deploy application on SAM | 10/17/2025 | 10/17/2025 | <https://000079.awsstudygroup.com/vi/> <br> <https://000080.awsstudygroup.com/vi/> |
+| 6 | - Serverless - Authentication with Amazon Cognito <br> - Serverless - Set up SSL S3 Static website | 10/18/2025 | 10/18/2025 | <https://000081.awsstudygroup.com/vi/> <br> <https://000082.awsstudygroup.com/vi/> |
 
 ### Week 6 Achievements:
 
-- Understood what AWS is and mastered the basic service groups:
-
-  - Compute
-  - Storage
-  - Networking
-  - Database
-  - ...
-
-- Successfully created and configured an AWS Free Tier account.
-
-- Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
-
-- Installed and configured AWS CLI on the computer, including:
-
-  - Access Key
-  - Secret Key
-  - Default Region
-  - ...
-
-- Used AWS CLI to perform basic operations such as:
-
-  - Check account & configuration information
-  - Retrieve the list of regions
-  - View EC2 service
-  - Create and manage key pairs
-  - Check information about running services
-  - ...
-
-- Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-- ...
+- Completed learning about **Docker and Docker Compose**:
+  - Understood containerization and basic concepts
+  - Mastered creating Dockerfile and docker-compose.yml
+  - Managed Docker images and containers
+- Successfully practiced **deploying applications on Docker with AWS**:
+  - Created and managed Docker images
+  - Pushed images to Amazon ECR (Elastic Container Registry)
+  - Deployed containerized applications on AWS
+- Completed **Amazon Elastic Container Service (ECS)** lab:
+  - Created and configured ECS cluster
+  - Deployed task definitions and services
+  - Managed and scaled containers on ECS
+- Successfully learned about **Nginx**:
+  - Understood reverse proxy and load balancing
+  - Configured Nginx as web server
+  - Applied Nginx in microservices architecture
+- Participated in **"DATA SCIENCE ON AWS"** workshop: explored data science and machine learning services on AWS, learned how to apply cloud computing to data analysis.
+- Completed **Serverless Architecture** labs:
+  - Wrote Front-end calling API Gateway
+  - Deployed application with AWS SAM (Serverless Application Model)
+  - Integrated Lambda functions with API Gateway
+- Successfully practiced **Amazon Cognito**:
+  - Set up user pools and identity pools
+  - User authentication and authorization
+  - Integrated Cognito with web application
+- Completed **S3 Static Website with SSL** lab:
+  - Set up S3 bucket to host static website
+  - Configured SSL/TLS certificate
+  - Deployed secure static website with HTTPS

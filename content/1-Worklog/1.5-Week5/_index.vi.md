@@ -1,58 +1,40 @@
 ---
 title: "Worklog Tuần 5"
-date: "2025-09-09"
+date: "2025-10-12"
 weight: 1
 chapter: false
 pre: " <b> 1.5. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
 ### Mục tiêu tuần 5:
 
-- Kết nối, làm quen với các thành viên trong First Cloud Journey.
-- Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+- Học và nắm vững các **dịch vụ cơ sở dữ liệu trên AWS**: Amazon RDS, Amazon Aurora, Redshift, Elasticache.
+- Thực hành **Amazon RDS**: tạo và quản lý RDS instance.
+- Thực hành xây dựng **DataLake trên AWS**: thu thập và lưu trữ dữ liệu, tạo Data Catalog với Amazon Glue, phân tích và trực quan hóa với Amazon Athena.
+- Thực hành **Amazon DynamoDB Immersion Day**: làm việc với DynamoDB, hiểu về NoSQL database.
+- Thực hành **phân tích chi phí và hiệu năng** sử dụng AWS Glue và Amazon Athena.
+- Thực hành **xây dựng Datalake với dữ liệu thực tế**. 
+
 
 ### Các công việc cần triển khai trong tuần này:
 
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP <br>                    | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Ngày | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
+| --- | --- | --- | --- | --- |
+| 1 | - - Dịch vụ cơ sở dữ liệu trên AWS: <br>&emsp; + Amazon RDS & Amazon Aurora <br>&emsp; + Redshift - Elasticache | 06/10/2025 | 06/10/2025 | <https://github.com/tuanvu250/AWS-FCJ/blob/main/module/module-05/note.md> |
+| 2 | -    Thực hành bắt đầu với Amazon RDS: <br>&emsp <br> - Thực hành DataLake on AWS <br>&emsp; + Thu thập và lưu trữ dữ liệu <br>&emsp; + Tạo Data Catalog (Amazon Glue)<br>&emsp; + Phân tích và trực quan hóa (Amazon Athena) | 07/10/2025 | 07/10/2025 | <https://000005.awsstudygroup.com/vi/> <br> <https://000035.awsstudygroup.com/vi/> |
+| 3 | - Thực hành Amazon DynamoDB Immersion Day | 08/10/2025 | 08/10/2025 | <https://000039.awsstudygroup.com/vi/> |
+| 4 | - Thực hành Amazon DynamoDB Immersion Day | 09/10/2025 | 09/10/2025 | <https://000039.awsstudygroup.com/vi/> |
+| 5 | - Thực hành Phân tích chi phí và hiệu năng sử dụng với AWS Glue và Amazon Athena <br> - Thực hành Làm việc với Amazon DynamoDB | 10/10/2025 | 10/10/2025 | <https://000040.awsstudygroup.com/vi/> <br> <https://000060.awsstudygroup.com/vi/> |    
+| 6 | - Thực hành Xây dựng Datalake với dữ liệu của bạn | 11/10/2025 | 11/10/2025 | <https://000070.awsstudygroup.com/vi/> |
 
 ### Kết quả đạt được tuần 5:
 
-- Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản:
-
-  - Compute
-  - Storage
-  - Networking
-  - Database
-  - ...
-
-- Đã tạo và cấu hình AWS Free Tier account thành công.
-
-- Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-- Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-
-  - Access Key
-  - Secret Key
-  - Region mặc định
-  - ...
-
-- Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  - Kiểm tra thông tin tài khoản & cấu hình
-  - Lấy danh sách region
-  - Xem dịch vụ EC2
-  - Tạo và quản lý key pair
-  - Kiểm tra thông tin dịch vụ đang chạy
-  - ...
-
-- Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-- ...
+- Hoàn thành việc học về **dịch vụ cơ sở dữ liệu trên AWS**: Amazon RDS, Amazon Aurora, Redshift và Elasticache.
+- Thực hành thành công **Amazon RDS**: tạo, cấu hình và quản lý RDS instance.
+- Hoàn thành lab **DataLake trên AWS**: 
+  - Thu thập và lưu trữ dữ liệu trên S3
+  - Tạo Data Catalog sử dụng Amazon Glue
+  - Phân tích và trực quan hóa dữ liệu với Amazon Athena
+- Thực hành thành công **Amazon DynamoDB Immersion Day**: nắm vững cách làm việc với NoSQL database, các khái niệm về partition key, sort key, GSI/LSI.
+- Hoàn thành lab **phân tích chi phí và hiệu năng** với AWS Glue và Amazon Athena: tối ưu query, quản lý partition.
+- Thực hành thành công **xây dựng Datalake với dữ liệu thực tế**: áp dụng toàn bộ kiến thức đã học về data pipeline, ETL và analytics.  

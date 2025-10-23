@@ -1,58 +1,62 @@
 ---
 title: "Worklog Tuần 6"
-date: "2025-09-09"
+date: "2025-10-19"
 weight: 1
 chapter: false
 pre: " <b> 1.6. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
 ### Mục tiêu tuần 6:
 
-- Kết nối, làm quen với các thành viên trong First Cloud Journey.
-- Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+- Học và nắm vững **Docker và Docker Compose**: containerization, docker images, docker-compose.
+- Thực hành **triển khai ứng dụng trên Docker với AWS**: tạo Docker image, push lên ECR.
+- Thực hành **Amazon Elastic Container Service (ECS)**: triển khai và quản lý container trên AWS.
+- Tìm hiểu về **Nginx**: reverse proxy, load balancing, web server configuration.
+- Tham gia workshop **"DATA SCIENCE ON AWS"**: khám phá các dịch vụ data science và machine learning trên AWS.
+- Thực hành **Serverless Architecture**: API Gateway, Lambda, SAM deployment.
+- Thực hành **Amazon Cognito**: xác thực và phân quyền người dùng.
+- Thực hành **S3 Static Website với SSL**: thiết lập website tĩnh bảo mật trên S3. 
+
 
 ### Các công việc cần triển khai trong tuần này:
 
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP <br>                    | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Ngày | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
+| --- | --- | --- | --- | --- |
+| 1 | - Tìm hiểu về docker, docker-compose <br> | 13/10/2025 | 13/10/2025 | <https://github.com/tuanvu250/AWS-FCJ/tree/main/bonus/docker> <br> <https://docs.docker.com/get-started/> |
+| 2 | -Thực hành Triển khai ứng dụng trên Docker với AWS <br> - Thực hành Triển khai ứng dụng trên Amazon Elastic Container Service | 14/10/2025 | 14/10/2025 | <https://000015.awsstudygroup.com/vi/> <br> <https://000016.awsstudygroup.com/vi/> |
+| 3 | - Tìm hiểu về Nginx | 15/10/2025 | 15/10/2025 | <https://github.com/tuanvu250/AWS-FCJ/tree/main/bonus/nginx> <br> <https://www.youtube.com/watch?v=C_cVyFWD2KQ&t=2774s> |
+| 4 | -  WORKSHOP “DATA SCIENCE ON AWS” – MỞ KHÓA SỨC MẠNH DỮ LIỆU CÙNG ĐIỆN TOÁN ĐÁM MÂY | 16/10/2025 | 16/10/2025 | <https://qhdn-hcmuni.fpt.edu.vn/2025/10/13/workshop-data-science-on-aws-mo-khoa-suc-manh-du-lieu-cung-dien-toan-dam-may/> |
+| 5 | - Serverless - Hướng dẫn viết Front-end gọi API Gateway <br> - Serverless - Triển khai ứng dụng trên SAM | 17/10/2025 | 17/10/2025 | <https://000079.awsstudygroup.com/vi/> <br> <https://000080.awsstudygroup.com/vi/> |
+| 6 | - Serverless - Xác thực với Amazon Cognito <br> - Serverless - Thiết lập trang web SSL S3 Static  | 18/10/2025 | 18/10/2025 | <https://000081.awsstudygroup.com/vi/> <br> <https://000082.awsstudygroup.com/vi/> |
 
 ### Kết quả đạt được tuần 6:
 
-- Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản:
-
-  - Compute
-  - Storage
-  - Networking
-  - Database
-  - ...
-
-- Đã tạo và cấu hình AWS Free Tier account thành công.
-
-- Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-- Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-
-  - Access Key
-  - Secret Key
-  - Region mặc định
-  - ...
-
-- Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  - Kiểm tra thông tin tài khoản & cấu hình
-  - Lấy danh sách region
-  - Xem dịch vụ EC2
-  - Tạo và quản lý key pair
-  - Kiểm tra thông tin dịch vụ đang chạy
-  - ...
-
-- Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-- ...
+- Hoàn thành việc học về **Docker và Docker Compose**: 
+  - Hiểu về containerization và các khái niệm cơ bản
+  - Nắm vững cách tạo Dockerfile và docker-compose.yml
+  - Quản lý Docker images và containers
+- Thực hành thành công **triển khai ứng dụng trên Docker với AWS**:
+  - Tạo và quản lý Docker images
+  - Push images lên Amazon ECR (Elastic Container Registry)
+  - Triển khai ứng dụng containerized trên AWS
+- Hoàn thành lab **Amazon Elastic Container Service (ECS)**:
+  - Tạo và cấu hình ECS cluster
+  - Triển khai task definitions và services
+  - Quản lý và scale containers trên ECS
+- Học thành công về **Nginx**:
+  - Hiểu về reverse proxy và load balancing
+  - Cấu hình Nginx làm web server
+  - Áp dụng Nginx trong kiến trúc microservices
+- Tham gia workshop **"DATA SCIENCE ON AWS"**: khám phá các dịch vụ data science và machine learning trên AWS, học cách áp dụng điện toán đám mây vào phân tích dữ liệu.
+- Hoàn thành các lab **Serverless Architecture**:
+  - Viết Front-end gọi API Gateway
+  - Triển khai ứng dụng với AWS SAM (Serverless Application Model)
+  - Tích hợp Lambda functions với API Gateway
+- Thực hành thành công **Amazon Cognito**:
+  - Thiết lập user pools và identity pools
+  - Xác thực và phân quyền người dùng
+  - Tích hợp Cognito với ứng dụng web
+- Hoàn thành lab **S3 Static Website với SSL**:
+  - Thiết lập S3 bucket để host static website
+  - Cấu hình SSL/TLS certificate
+  - Triển khai website tĩnh bảo mật với HTTPS  

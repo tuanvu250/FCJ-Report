@@ -1,100 +1,85 @@
 ---
 title: "Event 2"
-date: "2025-09-09"
+date: "2025-10-03"
 weight: 1
 chapter: false
 pre: " <b> 4.2. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
-
-# Bài thu hoạch “GenAI-powered App-DB Modernization workshop”
+# Bài thu hoạch "AI-Driven Development Life Cycle: Reimagining Software Engineering"
 
 ### Mục Đích Của Sự Kiện
 
-- Chia sẻ best practices trong thiết kế ứng dụng hiện đại
-- Giới thiệu phương pháp DDD và event-driven architecture
-- Hướng dẫn lựa chọn compute services phù hợp
-- Giới thiệu công cụ AI hỗ trợ development lifecycle
+Khám phá cách AI thay đổi toàn bộ vòng đời phát triển phần mềm, từ planning đến deployment. Tìm hiểu cách tích hợp AI để tăng năng suất và tập trung vào tác vụ sáng tạo có giá trị cao.
 
-### Danh Sách Diễn Giả
+### Thông Tin Sự Kiện
 
-- **Jignesh Shah** - Director, Open Source Databases
-- **Erica Liu** - Sr. GTM Specialist, AppMod
-- **Fabrianne Effendi** - Assc. Specialist SA, Serverless Amazon Web Services
+- **Thời gian:** 2:00 PM - 4:30 PM, Thứ Sáu, 03/10/2025
+- **Địa điểm:** AWS Event Hall, L26 Bitexco Tower, HCMC
+- **Diễn giả:** Toan Huynh, My Nguyen 
 
 ### Nội Dung Nổi Bật
 
-#### Đưa ra các ảnh hưởng tiêu cực của kiến trúc ứng dụng cũ
+#### 1. AI in Development - Outcomes
 
-- Thời gian release sản phẩm lâu → Mất doanh thu/bỏ lỡ cơ hội
-- Hoạt động kém hiệu quả → Mất năng suất, tốn kém chi phí
-- Không tuân thủ các quy định về bảo mật → Mất an ninh, uy tín
+Việc áp dụng AI mang lại:
+- **Velocity** - Giảm time-to-market
+- **Quality** - Đáp ứng usability, reliability
+- **Market Responsiveness** - Phản ứng nhanh với thị trường
+- **Innovation** - Thúc đẩy đổi mới
+- **Developer Engagement** - Tăng sự hài lòng của developers
+- **Productivity** - Tăng giá trị, giảm chi phí
 
-#### Chuyển đổi sang kiến trúc ứng dụng mới - Microservice Architecture
+#### 2. Challenges with AI Development
 
-Chuyển đổi thành hệ thống modular – từng chức năng là một **dịch vụ độc lập** giao tiếp với nhau qua **sự kiện** với 3 trụ cột cốt lõi:
+**AI-Managed:** Không đáng tin cậy, khó giải thích, thiếu linh hoạt
 
-- **Queue Management**: Xử lý tác vụ bất đồng bộ
-- **Caching Strategy:** Tối ưu performance
-- **Message Handling:** Giao tiếp linh hoạt giữa services
+**AI-Assisted:** Không hiệu quả thực sự, manual inefficiencies, technical debts tích lũy
 
-#### Domain-Driven Design (DDD)
+#### 3. AI-Driven Development Lifecycle (AI-DLC)
 
-- **Phương pháp 4 bước**: Xác định domain events → sắp xếp timeline → identify actors → xác định bounded contexts
-- **Case study bookstore**: Minh họa cách áp dụng DDD thực tế
-- **Context mapping**: 7 patterns tích hợp bounded contexts
+**Core Concept:**
+- **AI as Collaborator:** AI hỗ trợ developers, con người kiểm soát quyết định quan trọng
+- **Human-Centric:** Developers là trung tâm, AI enhance không replace
+- **Accelerated Delivery:** Chu kỳ phát triển giảm từ tuần/tháng xuống giờ/ngày
 
-#### Event-Driven Architecture
+**Hai giai đoạn:**
+1. **Inception:** Build Context → User Stories → Plan
+2. **Construction:** Domain Model → Generate code → Deploy với IaaC
 
-- **3 patterns tích hợp**: Publish/Subscribe, Point-to-point, Streaming
-- **Lợi ích**: Loose coupling, scalability, resilience
-- **So sánh sync vs async**: Hiểu rõ trade-offs (sự đánh đổi)
+#### 4. 5-Stage Sequential Process
 
-#### Compute Evolution
+1. Product Owner → 2. Architect (Design) → 3. Architect (Construction) → 4. Engineer (POC) → 5. Engineer (MVP)
 
-- **Shared Responsibility Model**: Từ EC2 → ECS → Fargate → Lambda
-- **Serverless benefits**: No server management, auto-scaling, pay-for-value
-- **Functions vs Containers**: Criteria lựa chọn phù hợp
+#### 5. Anti-Patterns - 7 điều cần tránh
 
-#### Amazon Q Developer
+1. Không single-shot multi-step problems
+2. Tối ưu semantics-to-token ratio
+3. Refresh context strategically
+4. Kiểm soát AI over-reach
+5. Model biết cái cũ hơn cái mới
+6. Brownfield cần context building đặc biệt
+7. Cần độ chính xác như phẫu thuật
 
-- **SDLC automation**: Từ planning đến maintenance
-- **Code transformation**: Java upgrade, .NET modernization
-- **AWS Transform agents**: VMware, Mainframe, .NET migration
+#### 6. Amazon Q Developer
+**Prompt Structure:** Role → Plan (markdown với checkboxes) → Task
+
+**Example:** Xây dựng travel booking app với AI integration
+
+**Workflow:** Tạo thư mục → User stories → Clarification → Checkbox → Review → Execute
+
+#### 7. Kiro - AI-Powered Coding Assistant
+
+**Kiro** là AI coding assistant của AWS với 4 tính năng chính:
+
+1. **Agent Hooks:** Tự động trigger tasks khi events (file save), generate docs/tests/optimize
+2. **VS Code Compatible:** Hỗ trợ plugins, themes, settings
+3. **Claude Models:** Sonnet 3.7/4 với reasoning mạnh mẽ
+4. **Enterprise Security:** Built & operated by AWS
+
+**Ưu điểm:** Automation cao, context-aware, documentation-driven, enterprise-ready
 
 ### Những Gì Học Được
-
-#### Tư Duy Thiết Kế
-
-- **Business-first approach**: Luôn bắt đầu từ business domain, không phải technology
-- **Ubiquitous language**: Importance của common vocabulary giữa business và tech teams
-- **Bounded contexts**: Cách identify và manage complexity trong large systems
-
-#### Kiến Trúc Kỹ Thuật
-
-- **Event storming technique**: Phương pháp thực tế để mô hình hóa quy trình kinh doanh
-- Sử dụng **Event-driven communication** thay vì synchronous calls
-- **Integration patterns**: Hiểu khi nào dùng sync, async, pub/sub, streaming
-- **Compute spectrum**: Criteria chọn từ VM → containers → serverless
-
-#### Chiến Lược Hiện Đại Hóa
-
-- **Phased approach**: Không rush, phải có roadmap rõ ràng
-- **7Rs framework**: Nhiều con đường khác nhau tùy thuộc vào đặc điểm của mỗi ứng dụng
-- **ROI measurement**: Cost reduction + business agility
-
-### Ứng Dụng Vào Công Việc
-
-- **Áp dụng DDD** cho project hiện tại: Event storming sessions với business team
-- **Refactor microservices**: Sử dụng bounded contexts để identify service boundaries
-- **Implement event-driven patterns**: Thay thế một số sync calls bằng async messaging
-- **Serverless adoption**: Pilot AWS Lambda cho một số use cases phù hợp
-- **Try Amazon Q Developer**: Integrate vào development workflow để boost productivity
-
-### Trải nghiệm trong event
 
 Tham gia workshop **“GenAI-powered App-DB Modernization”** là một trải nghiệm rất bổ ích, giúp tôi có cái nhìn toàn diện về cách hiện đại hóa ứng dụng và cơ sở dữ liệu bằng các phương pháp và công cụ hiện đại. Một số trải nghiệm nổi bật:
 
@@ -113,11 +98,6 @@ Tham gia workshop **“GenAI-powered App-DB Modernization”** là một trải 
 
 - Trực tiếp tìm hiểu về **Amazon Q Developer**, công cụ AI hỗ trợ SDLC từ lập kế hoạch đến maintenance.
 - Học cách **tự động hóa code transformation** và pilot serverless với **AWS Lambda**, từ đó nâng cao năng suất phát triển.
-
-#### Kết nối và trao đổi
-
-- Workshop tạo cơ hội trao đổi trực tiếp với các chuyên gia, đồng nghiệp và team business, giúp **nâng cao ngôn ngữ chung (ubiquitous language)** giữa business và tech.
-- Qua các ví dụ thực tế, tôi nhận ra tầm quan trọng của **business-first approach**, luôn bắt đầu từ nhu cầu kinh doanh thay vì chỉ tập trung vào công nghệ.
 
 #### Bài học rút ra
 
