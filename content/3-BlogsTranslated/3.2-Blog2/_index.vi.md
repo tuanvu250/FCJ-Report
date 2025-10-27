@@ -6,129 +6,24 @@ chapter: false
 pre: " <b> 3.2. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
+  # **Hội nghị AWS EUC New York Summit: EUC201 - The AI Advantage: Unlocking the full potential of your EUC Services**
 
-# Bắt đầu với healthcare data lakes: Sử dụng microservices
+_Bởi Dave Jaskie và Matt Aylward_ | _ngày 27/06/2025 | [Amazon AppStream 2.0](https://aws.amazon.com/vi/blogs/desktop-and-application-streaming/category/desktop-app-streaming/amazon-appstream-2-0/), [Amazon Bedrock, Amazon Bedrock Agents](https://aws.amazon.com/vi/blogs/desktop-and-application-streaming/category/artificial-intelligence/amazon-machine-learning/amazon-bedrock/amazon-bedrock-agents/), [Amazon CloudWatch](https://aws.amazon.com/vi/blogs/desktop-and-application-streaming/category/management-tools/amazon-cloudwatch/), [Amazon WorkSpaces](https://aws.amazon.com/vi/blogs/desktop-and-application-streaming/category/end-user-computing/amazon-workspaces/), [Desktop & Application Streaming](https://aws.amazon.com/blogs/desktop-and-application-streaming/category/desktop-app-streaming/), [End User Computing](https://aws.amazon.com/vi/blogs/desktop-and-application-streaming/category/end-user-computing/)_.
 
-Các data lake có thể giúp các bệnh viện và cơ sở y tế chuyển dữ liệu thành những thông tin chi tiết về doanh nghiệp và duy trì hoạt động kinh doanh liên tục, đồng thời bảo vệ quyền riêng tư của bệnh nhân. **Data lake** là một kho lưu trữ tập trung, được quản lý và bảo mật để lưu trữ tất cả dữ liệu của bạn, cả ở dạng ban đầu và đã xử lý để phân tích. data lake cho phép bạn chia nhỏ các kho chứa dữ liệu và kết hợp các loại phân tích khác nhau để có được thông tin chi tiết và đưa ra các quyết định kinh doanh tốt hơn.
+Bạn có đang tìm cách ứng dụng AI để tối ưu các tác vụ quản trị và nâng cao năng suất người dùng không?
 
-Bài đăng trên blog này là một phần của loạt bài lớn hơn về việc bắt đầu cài đặt data lake dành cho lĩnh vực y tế. Trong bài đăng blog cuối cùng của tôi trong loạt bài, _“Bắt đầu với data lake dành cho lĩnh vực y tế: Đào sâu vào Amazon Cognito”_, tôi tập trung vào các chi tiết cụ thể của việc sử dụng Amazon Cognito và Attribute Based Access Control (ABAC) để xác thực và ủy quyền người dùng trong giải pháp data lake y tế. Trong blog này, tôi trình bày chi tiết cách giải pháp đã phát triển ở cấp độ cơ bản, bao gồm các quyết định thiết kế mà tôi đã đưa ra và các tính năng bổ sung được sử dụng. Bạn có thể truy cập các code samples cho giải pháp tại Git repo này để tham khảo.
+Trong bối cảnh kỹ thuật số liên tục phát triển, thành công của chiến lược End-User Computing (EUC) của doanh nghiệp phụ thuộc vào khả năng người dùng cuối tiếp cận và sử dụng dịch vụ hiệu quả.  
+Phiên thảo luận tương tác này sẽ trình bày cách bạn có thể tận dụng AI agentic của Amazon Bedrock kết hợp với Amazon WorkSpaces và Amazon CloudWatch.  
+Những công cụ này giúp tự động hóa các tác vụ quản trị và cung cấp thông tin chi tiết có thể hành động (actionable insights) từ các metrics và logs quan trọng.
 
----
+Trong buổi học, người tham dự sẽ được giới thiệu các chiến lược EUC quan trọng và học cách AI có thể chuyển đổi quy trình làm việc của họ. Bạn sẽ khám phá cách Amazon Bedrock giúp đơn giản hóa các quy trình phức tạp, mang đến cho quản trị viên các công cụ cần thiết để tăng hiệu suất. Ngoài ra, các bài thực hành (hands-on) cùng Amazon CloudWatch sẽ giúp bạn học cách thu thập dữ liệu quan trọng - bao gồm user connectivity, platforms, và IP addresses. Thông qua Amazon Bedrock, bạn sẽ phân tích dữ liệu để rút ra các thông tin giúp tối ưu hoạt động người dùng cuối.
 
-## Hướng dẫn kiến trúc
+Phiên này không chỉ mang lại kiến thức chuyên sâu, mà còn là trải nghiệm học tập thực tế. Người tham dự sẽ có hiểu biết rõ ràng về cách tích hợp AI và CloudWatch vào framework hiện có. Dù bạn là IT professional, system administrator, hay decision-maker, đây là cơ hội để nâng cao chiến lược EUC của bạn và đảm bảo cả admin lẫn người dùng đều hưởng lợi từ các công cụ và quy trình tối ưu hóa.
 
-Thay đổi chính kể từ lần trình bày cuối cùng của kiến trúc tổng thể là việc tách dịch vụ đơn lẻ thành một tập hợp các dịch vụ nhỏ để cải thiện khả năng bảo trì và tính linh hoạt. Việc tích hợp một lượng lớn dữ liệu y tế khác nhau thường yêu cầu các trình kết nối chuyên biệt cho từng định dạng; bằng cách giữ chúng được đóng gói riêng biệt với microservices, chúng ta có thể thêm, xóa và sửa đổi từng trình kết nối mà không ảnh hưởng đến những kết nối khác. Các microservices được kết nối rời thông qua tin nhắn publish/subscribe tập trung trong cái mà tôi gọi là “pub/sub hub”.
+Buổi _builders session_ này diễn ra vào ngày 16 tháng 7, lúc 9:15 AM EDT, tại Javits Convention Center. Vui lòng thêm buổi này vào lịch trình của bạn qua [liên kết](https://aws.amazon.com/vi/events/summits/new-york/agenda/?amer-summit-cards.sort-by=item.additionalFields.startDate&amer-summit-cards.sort-order=asc&awsf.amer-summit-session=*all&awsf.amer-summit-level=*all&awsf.amer-summit-areaofinterest=*all&awsf.amer-summit-industry=*all&awsf.amer-summit-roles=*all&awsf.amer-summit-topic=*all&amer-summit-cards.q=EUC201&amer-summit-cards.q_operator=AND) sau khi đăng ký.
 
-Giải pháp này đại diện cho những gì tôi sẽ coi là một lần lặp nước rút hợp lý khác từ last post của tôi. Phạm vi vẫn được giới hạn trong việc nhập và phân tích cú pháp đơn giản của các **HL7v2 messages** được định dạng theo **Quy tắc mã hóa 7 (ER7)** thông qua giao diện REST.
-
-**Kiến trúc giải pháp bây giờ như sau:**
-
-> _Hình 1. Kiến trúc tổng thể; những ô màu thể hiện những dịch vụ riêng biệt._
-
----
-
-Mặc dù thuật ngữ _microservices_ có một số sự mơ hồ cố hữu, một số đặc điểm là chung:
-
-- Chúng nhỏ, tự chủ, kết hợp rời rạc
-- Có thể tái sử dụng, giao tiếp thông qua giao diện được xác định rõ
-- Chuyên biệt để giải quyết một việc
-- Thường được triển khai trong **event-driven architecture**
-
-Khi xác định vị trí tạo ranh giới giữa các microservices, cần cân nhắc:
-
-- **Nội tại**: công nghệ được sử dụng, hiệu suất, độ tin cậy, khả năng mở rộng
-- **Bên ngoài**: chức năng phụ thuộc, tần suất thay đổi, khả năng tái sử dụng
-- **Con người**: quyền sở hữu nhóm, quản lý _cognitive load_
-
----
-
-## Lựa chọn công nghệ và phạm vi giao tiếp
-
-| Phạm vi giao tiếp                        | Các công nghệ / mô hình cần xem xét                                                        |
-| ---------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Trong một microservice                   | Amazon Simple Queue Service (Amazon SQS), AWS Step Functions                               |
-| Giữa các microservices trong một dịch vụ | AWS CloudFormation cross-stack references, Amazon Simple Notification Service (Amazon SNS) |
-| Giữa các dịch vụ                         | Amazon EventBridge, AWS Cloud Map, Amazon API Gateway                                      |
-
----
-
-## The pub/sub hub
-
-Việc sử dụng kiến trúc **hub-and-spoke** (hay message broker) hoạt động tốt với một số lượng nhỏ các microservices liên quan chặt chẽ.
-
-- Mỗi microservice chỉ phụ thuộc vào _hub_
-- Kết nối giữa các microservice chỉ giới hạn ở nội dung của message được xuất
-- Giảm số lượng synchronous calls vì pub/sub là _push_ không đồng bộ một chiều
-
-Nhược điểm: cần **phối hợp và giám sát** để tránh microservice xử lý nhầm message.
-
----
-
-## Core microservice
-
-Cung cấp dữ liệu nền tảng và lớp truyền thông, gồm:
-
-- **Amazon S3** bucket cho dữ liệu
-- **Amazon DynamoDB** cho danh mục dữ liệu
-- **AWS Lambda** để ghi message vào data lake và danh mục
-- **Amazon SNS** topic làm _hub_
-- **Amazon S3** bucket cho artifacts như mã Lambda
-
-> Chỉ cho phép truy cập ghi gián tiếp vào data lake qua hàm Lambda → đảm bảo nhất quán.
-
----
-
-## Front door microservice
-
-- Cung cấp API Gateway để tương tác REST bên ngoài
-- Xác thực & ủy quyền dựa trên **OIDC** thông qua **Amazon Cognito**
-- Cơ chế _deduplication_ tự quản lý bằng DynamoDB thay vì SNS FIFO vì:
-  1. SNS deduplication TTL chỉ 5 phút
-  2. SNS FIFO yêu cầu SQS FIFO
-  3. Chủ động báo cho sender biết message là bản sao
-
----
-
-## Staging ER7 microservice
-
-- Lambda “trigger” đăng ký với pub/sub hub, lọc message theo attribute
-- Step Functions Express Workflow để chuyển ER7 → JSON
-- Hai Lambda:
-  1. Sửa format ER7 (newline, carriage return)
-  2. Parsing logic
-- Kết quả hoặc lỗi được đẩy lại vào pub/sub hub
-
----
-
-## Tính năng mới trong giải pháp
-
-### 1. AWS CloudFormation cross-stack references
-
-Ví dụ _outputs_ trong core microservice:
-
-```yaml
-Outputs:
-  Bucket:
-    Value: !Ref Bucket
-    Export:
-      Name: !Sub ${AWS::StackName}-Bucket
-  ArtifactBucket:
-    Value: !Ref ArtifactBucket
-    Export:
-      Name: !Sub ${AWS::StackName}-ArtifactBucket
-  Topic:
-    Value: !Ref Topic
-    Export:
-      Name: !Sub ${AWS::StackName}-Topic
-  Catalog:
-    Value: !Ref Catalog
-    Export:
-      Name: !Sub ${AWS::StackName}-Catalog
-  CatalogArn:
-    Value: !GetAtt Catalog.Arn
-    Export:
-      Name: !Sub ${AWS::StackName}-CatalogArn
-```
+Đừng bỏ lỡ cơ hội thay đổi cách bạn tiếp cận end-user computing. Hãy tham gia để khai phá tiềm năng của AI, tự động hóa với sự tự tin, và nắm bắt insights giúp tổ chức của bạn tiến xa hơn. Đăng ký ngay hôm nay!
+| | |
+| --- | --- |
+| ![Hình 1](/images/3-BlogsTranslated/3.2-Blog2/1.png)    | Dave Jaskie có 15 năm kinh nghiệm trong lĩnh vực End User Computing. Ngoài công việc, Dave thích du lịch và leo núi cùng vợ và 4 người con. |
+|  ![Hình 2](/images/3-BlogsTranslated/3.2-Blog2/2.png)    | Matt Aylward là Solutions Architect tại Amazon Web Services (AWS), chuyên tạo ra các giải pháp đơn giản cho những thách thức kinh doanh phức tạp. Trước khi gia nhập AWS, Matt đã làm việc trong lĩnh vực triển khai hạ tầng, kiểm thử khôi phục sau thảm họa, và quản lý phân phối ứng dụng ảo. Ngoài giờ làm, anh thích dành thời gian cho gia đình, xem phim, và đi dã ngoại cùng chú chó năng động của mình. |

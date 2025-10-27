@@ -6,129 +6,24 @@ chapter: false
 pre: " <b> 3.2. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
+# **Hội nghị AWS EUC New York Summit: EUC201 - The AI Advantage: Unlocking the full potential of your EUC Services**
 
-# Getting Started with Healthcare Data Lakes: Using Microservices
+_Bởi Dave Jaskie và Matt Aylward_ | _ngày 27/06/2025 | [Amazon AppStream 2.0](https://aws.amazon.com/vi/blogs/desktop-and-application-streaming/category/desktop-app-streaming/amazon-appstream-2-0/), [Amazon Bedrock, Amazon Bedrock Agents](https://aws.amazon.com/vi/blogs/desktop-and-application-streaming/category/artificial-intelligence/amazon-machine-learning/amazon-bedrock/amazon-bedrock-agents/), [Amazon CloudWatch](https://aws.amazon.com/vi/blogs/desktop-and-application-streaming/category/management-tools/amazon-cloudwatch/), [Amazon WorkSpaces](https://aws.amazon.com/vi/blogs/desktop-and-application-streaming/category/end-user-computing/amazon-workspaces/), [Desktop & Application Streaming](https://aws.amazon.com/blogs/desktop-and-application-streaming/category/desktop-app-streaming/), [End User Computing](https://aws.amazon.com/vi/blogs/desktop-and-application-streaming/category/end-user-computing/)_.
 
-Data lakes can help hospitals and healthcare facilities turn data into business insights, maintain business continuity, and protect patient privacy. A **data lake** is a centralized, managed, and secure repository to store all your data, both in its raw and processed forms for analysis. Data lakes allow you to break down data silos and combine different types of analytics to gain insights and make better business decisions.
+Bạn có đang tìm cách ứng dụng AI để tối ưu các tác vụ quản trị và nâng cao năng suất người dùng không?
 
-This blog post is part of a larger series on getting started with setting up a healthcare data lake. In my final post of the series, _“Getting Started with Healthcare Data Lakes: Diving into Amazon Cognito”_, I focused on the specifics of using Amazon Cognito and Attribute Based Access Control (ABAC) to authenticate and authorize users in the healthcare data lake solution. In this blog, I detail how the solution evolved at a foundational level, including the design decisions I made and the additional features used. You can access the code samples for the solution in this Git repo for reference.
+Trong bối cảnh kỹ thuật số liên tục phát triển, thành công của chiến lược End-User Computing (EUC) của doanh nghiệp phụ thuộc vào khả năng người dùng cuối tiếp cận và sử dụng dịch vụ hiệu quả.  
+Phiên thảo luận tương tác này sẽ trình bày cách bạn có thể tận dụng AI agentic của Amazon Bedrock kết hợp với Amazon WorkSpaces và Amazon CloudWatch.  
+Những công cụ này giúp tự động hóa các tác vụ quản trị và cung cấp thông tin chi tiết có thể hành động (actionable insights) từ các metrics và logs quan trọng.
 
----
+Trong buổi học, người tham dự sẽ được giới thiệu các chiến lược EUC quan trọng và học cách AI có thể chuyển đổi quy trình làm việc của họ. Bạn sẽ khám phá cách Amazon Bedrock giúp đơn giản hóa các quy trình phức tạp, mang đến cho quản trị viên các công cụ cần thiết để tăng hiệu suất. Ngoài ra, các bài thực hành (hands-on) cùng Amazon CloudWatch sẽ giúp bạn học cách thu thập dữ liệu quan trọng - bao gồm user connectivity, platforms, và IP addresses. Thông qua Amazon Bedrock, bạn sẽ phân tích dữ liệu để rút ra các thông tin giúp tối ưu hoạt động người dùng cuối.
 
-## Architecture Guidance
+Phiên này không chỉ mang lại kiến thức chuyên sâu, mà còn là trải nghiệm học tập thực tế. Người tham dự sẽ có hiểu biết rõ ràng về cách tích hợp AI và CloudWatch vào framework hiện có. Dù bạn là IT professional, system administrator, hay decision-maker, đây là cơ hội để nâng cao chiến lược EUC của bạn và đảm bảo cả admin lẫn người dùng đều hưởng lợi từ các công cụ và quy trình tối ưu hóa.
 
-The main change since the last presentation of the overall architecture is the decomposition of a single service into a set of smaller services to improve maintainability and flexibility. Integrating a large volume of diverse healthcare data often requires specialized connectors for each format; by keeping them encapsulated separately as microservices, we can add, remove, and modify each connector without affecting the others. The microservices are loosely coupled via publish/subscribe messaging centered in what I call the “pub/sub hub.”
+Buổi _builders session_ này diễn ra vào ngày 16 tháng 7, lúc 9:15 AM EDT, tại Javits Convention Center. Vui lòng thêm buổi này vào lịch trình của bạn qua [liên kết](https://aws.amazon.com/vi/events/summits/new-york/agenda/?amer-summit-cards.sort-by=item.additionalFields.startDate&amer-summit-cards.sort-order=asc&awsf.amer-summit-session=*all&awsf.amer-summit-level=*all&awsf.amer-summit-areaofinterest=*all&awsf.amer-summit-industry=*all&awsf.amer-summit-roles=*all&awsf.amer-summit-topic=*all&amer-summit-cards.q=EUC201&amer-summit-cards.q_operator=AND) sau khi đăng ký.
 
-This solution represents what I would consider another reasonable sprint iteration from my last post. The scope is still limited to the ingestion and basic parsing of **HL7v2 messages** formatted in **Encoding Rules 7 (ER7)** through a REST interface.
-
-**The solution architecture is now as follows:**
-
-> _Figure 1. Overall architecture; colored boxes represent distinct services._
-
----
-
-While the term _microservices_ has some inherent ambiguity, certain traits are common:
-
-- Small, autonomous, loosely coupled
-- Reusable, communicating through well-defined interfaces
-- Specialized to do one thing well
-- Often implemented in an **event-driven architecture**
-
-When determining where to draw boundaries between microservices, consider:
-
-- **Intrinsic**: technology used, performance, reliability, scalability
-- **Extrinsic**: dependent functionality, rate of change, reusability
-- **Human**: team ownership, managing _cognitive load_
-
----
-
-## Technology Choices and Communication Scope
-
-| Communication scope                       | Technologies / patterns to consider                                                        |
-| ----------------------------------------- | ------------------------------------------------------------------------------------------ |
-| Within a single microservice              | Amazon Simple Queue Service (Amazon SQS), AWS Step Functions                               |
-| Between microservices in a single service | AWS CloudFormation cross-stack references, Amazon Simple Notification Service (Amazon SNS) |
-| Between services                          | Amazon EventBridge, AWS Cloud Map, Amazon API Gateway                                      |
-
----
-
-## The Pub/Sub Hub
-
-Using a **hub-and-spoke** architecture (or message broker) works well with a small number of tightly related microservices.
-
-- Each microservice depends only on the _hub_
-- Inter-microservice connections are limited to the contents of the published message
-- Reduces the number of synchronous calls since pub/sub is a one-way asynchronous _push_
-
-Drawback: **coordination and monitoring** are needed to avoid microservices processing the wrong message.
-
----
-
-## Core Microservice
-
-Provides foundational data and communication layer, including:
-
-- **Amazon S3** bucket for data
-- **Amazon DynamoDB** for data catalog
-- **AWS Lambda** to write messages into the data lake and catalog
-- **Amazon SNS** topic as the _hub_
-- **Amazon S3** bucket for artifacts such as Lambda code
-
-> Only allow indirect write access to the data lake through a Lambda function → ensures consistency.
-
----
-
-## Front Door Microservice
-
-- Provides an API Gateway for external REST interaction
-- Authentication & authorization based on **OIDC** via **Amazon Cognito**
-- Self-managed _deduplication_ mechanism using DynamoDB instead of SNS FIFO because:
-  1. SNS deduplication TTL is only 5 minutes
-  2. SNS FIFO requires SQS FIFO
-  3. Ability to proactively notify the sender that the message is a duplicate
-
----
-
-## Staging ER7 Microservice
-
-- Lambda “trigger” subscribed to the pub/sub hub, filtering messages by attribute
-- Step Functions Express Workflow to convert ER7 → JSON
-- Two Lambdas:
-  1. Fix ER7 formatting (newline, carriage return)
-  2. Parsing logic
-- Result or error is pushed back into the pub/sub hub
-
----
-
-## New Features in the Solution
-
-### 1. AWS CloudFormation Cross-Stack References
-
-Example _outputs_ in the core microservice:
-
-```yaml
-Outputs:
-  Bucket:
-    Value: !Ref Bucket
-    Export:
-      Name: !Sub ${AWS::StackName}-Bucket
-  ArtifactBucket:
-    Value: !Ref ArtifactBucket
-    Export:
-      Name: !Sub ${AWS::StackName}-ArtifactBucket
-  Topic:
-    Value: !Ref Topic
-    Export:
-      Name: !Sub ${AWS::StackName}-Topic
-  Catalog:
-    Value: !Ref Catalog
-    Export:
-      Name: !Sub ${AWS::StackName}-Catalog
-  CatalogArn:
-    Value: !GetAtt Catalog.Arn
-    Export:
-      Name: !Sub ${AWS::StackName}-CatalogArn
-```
+Đừng bỏ lỡ cơ hội thay đổi cách bạn tiếp cận end-user computing. Hãy tham gia để khai phá tiềm năng của AI, tự động hóa với sự tự tin, và nắm bắt insights giúp tổ chức của bạn tiến xa hơn. Đăng ký ngay hôm nay!
+| | |
+| --- | --- |
+| ![Hình 1](/images/3-BlogsTranslated/3.2-Blog2/1.png) | Dave Jaskie có 15 năm kinh nghiệm trong lĩnh vực End User Computing. Ngoài công việc, Dave thích du lịch và leo núi cùng vợ và 4 người con. |
+| ![Hình 2](/images/3-BlogsTranslated/3.2-Blog2/2.png) | Matt Aylward là Solutions Architect tại Amazon Web Services (AWS), chuyên tạo ra các giải pháp đơn giản cho những thách thức kinh doanh phức tạp. Trước khi gia nhập AWS, Matt đã làm việc trong lĩnh vực triển khai hạ tầng, kiểm thử khôi phục sau thảm họa, và quản lý phân phối ứng dụng ảo. Ngoài giờ làm, anh thích dành thời gian cho gia đình, xem phim, và đi dã ngoại cùng chú chó năng động của mình. |
