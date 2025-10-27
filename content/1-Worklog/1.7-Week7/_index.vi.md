@@ -1,58 +1,70 @@
 ---
 title: "Worklog Tuần 7"
-date: "2025-09-09"
+date: "2025-10-26"
 weight: 1
 chapter: false
 pre: " <b> 1.7. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
 ### Mục tiêu tuần 7:
 
-- Kết nối, làm quen với các thành viên trong First Cloud Journey.
-- Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+- Thực hành **deploy static website lên AWS** và cấu hình **Github Actions với AWS IAM User**.
+- Thực hành **chuyển đổi ứng dụng Monolith sang Microservices**: tách biệt các thành phần, containerization.
+- Học và thực hành **AWS Developer Tools**: CodeStar, CodePipeline, CodeBuild, CodeDeploy.
+- Thực hành **CI/CD Pipeline**: tự động hóa quy trình build, test và deploy ứng dụng.
+- Thực hành **tạo Microservice**: thiết kế, triển khai và quản lý microservices trên AWS.
+- Thực hành **cơ cấu lại dữ liệu và quy trình làm việc**: tối ưu hóa kiến trúc ứng dụng.
+- Thực hành **Amazon Kinesis**: streaming data, real-time data processing.
+- Thực hành **xây dựng Single Page Application (SPA) với xác thực**: tích hợp authentication và authorization. 
+
 
 ### Các công việc cần triển khai trong tuần này:
 
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP <br>                    | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Ngày | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
+| --- | --- | --- | --- | --- |
+| 1 | - Thực hành deploy stactic website lên AWS và cấu hình Github Actions với AWS IAM User <br> | 20/10/2025 | 20/10/2025 | <https://www.youtube.com/watch?v=oSZ0tzlkuWo> |
+| 2 | - Thực hành Chuyển đổi Ứng dụng Monolith | 21/10/2025 | 21/10/2025 | <https://000050.awsstudygroup.com/vi/> |
+| 3 | - Thực hành cấu hình tự động phát hành ứng dụng (AWS CodeStar, AWS CodePipeline, AWS CodeBuild, AWS CodeDeploy)  | 22/10/2025 | 22/10/2025 | <https://000051.awsstudygroup.com/vi/> |
+| 4 | -  Thực hành tạo một Microservice <br> - Cơ cấu lại dữ liệu và quy trình làm việc | 23/10/2025 | 23/10/2025 | <https://000052.awsstudygroup.com/vi/> <br> <https://000053.awsstudygroup.com/vi/> |
+| 5 | - Thực hành truyền thông tin với Kinesis | 24/10/2025 | 24/10/2025 | <https://000054.awsstudygroup.com/vi/> |
+| 6 | - Thực hành tạo một Ứng dụng Đơn trang (SPA) được xác thực  | 25/10/2025 | 25/10/2025 | <https://000055.awsstudygroup.com/vi/> |
 
 ### Kết quả đạt được tuần 7:
 
-- Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản:
-
-  - Compute
-  - Storage
-  - Networking
-  - Database
-  - ...
-
-- Đã tạo và cấu hình AWS Free Tier account thành công.
-
-- Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-- Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-
-  - Access Key
-  - Secret Key
-  - Region mặc định
-  - ...
-
-- Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  - Kiểm tra thông tin tài khoản & cấu hình
-  - Lấy danh sách region
-  - Xem dịch vụ EC2
-  - Tạo và quản lý key pair
-  - Kiểm tra thông tin dịch vụ đang chạy
-  - ...
-
-- Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-- ...
+- Thực hành thành công **deploy static website lên AWS với Github Actions**:
+  - Cấu hình S3 bucket để host static website
+  - Thiết lập AWS IAM User với quyền phù hợp
+  - Tạo và cấu hình Github Actions workflow
+  - Tự động hóa quá trình deploy khi push code lên repository
+- Hoàn thành lab **chuyển đổi ứng dụng Monolith sang Microservices**:
+  - Phân tích và tách biệt các thành phần của ứng dụng monolith
+  - Containerize các services với Docker
+  - Triển khai các containers độc lập trên AWS
+  - Hiểu được ưu điểm của kiến trúc microservices
+- Thực hành thành công **AWS Developer Tools - CI/CD Pipeline**:
+  - Thiết lập AWS CodeStar để quản lý project
+  - Cấu hình AWS CodePipeline cho automation workflow
+  - Sử dụng AWS CodeBuild để build ứng dụng
+  - Triển khai tự động với AWS CodeDeploy
+  - Tích hợp toàn bộ quy trình từ commit đến production
+- Hoàn thành lab **tạo Microservice**:
+  - Thiết kế và phát triển microservice độc lập
+  - Cấu hình API endpoints và communication
+  - Deploy microservice lên AWS
+  - Testing và monitoring microservice
+- Thực hành thành công **cơ cấu lại dữ liệu và quy trình làm việc**:
+  - Tối ưu hóa database schema cho microservices
+  - Refactor code và workflow
+  - Áp dụng best practices cho kiến trúc phân tán
+  - Cải thiện performance và scalability
+- Hoàn thành lab **truyền thông tin với Amazon Kinesis**:
+  - Thiết lập Kinesis Data Streams
+  - Xử lý real-time data streaming
+  - Tích hợp Kinesis với Lambda functions
+  - Phân tích và xử lý dữ liệu theo thời gian thực
+- Thực hành thành công **xây dựng Single Page Application (SPA) với xác thực**:
+  - Phát triển SPA với modern JavaScript framework
+  - Tích hợp authentication system
+  - Cấu hình authorization và access control
+  - Deploy SPA lên AWS với secure configuration
+  - Kết nối frontend với backend APIs  
