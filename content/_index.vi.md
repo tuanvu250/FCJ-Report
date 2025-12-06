@@ -13,11 +13,11 @@ chapter: false
 
 &emsp; **Số điện thoại:** 0329 069 810
 
-&emsp; **Email:** vuuong02@gmail.com
+&emsp; **Email:** vuutse180241@fpt.edu.vn
 
 &emsp; **Trường:** Đại học FPT TP.HCM
 
-&emsp; **Ngành:** Công nghệ thông tin
+&emsp; **Ngành:** Kỹ thuật phầm mềm
 
 &emsp; **Lớp:** SE180241
 
@@ -25,9 +25,9 @@ chapter: false
 
 &emsp; **Vị trí thực tập:** FCJ Cloud Intern
 
-&emsp; **Thời gian thực tập:** Từ ngày 12/08/2025 đến ngày 12/11/2025
+&emsp; **Thời gian thực tập:** Từ ngày 08/09/2025 đến ngày 12/12/2025
 
-<img src="/images/avatar-new.JPG" alt="Your profile picture" width="450"/>
+<img src="/images/TuanVu.jpg" alt="Your profile picture" width="450"/>
 
 ### Nội dung báo cáo
 

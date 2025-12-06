@@ -6,122 +6,113 @@ chapter: false
 pre: " <b> 3.1. </b> "
 ---
 
-# **Chạy và tối ưu các Small Language Models tại on-premises và tại edge**
+# **Running and Optimizing Small Language Models On-Premises and at the Edge**
 
-_Bởi Chris McEvilly, Fernando Galves Guy Ben Baruchn | Ngày: 23/06/2025_
+_By Chris McEvilly, Fernando Galves Guy Ben Baruchn | Date: 23/06/2025_
 
-_| [In Advanced (300)](https://aws.amazon.com/vi/blogs/compute/category/learning-levels/advanced-300/), [AWS Outposts](https://aws.amazon.com/vi/blogs/compute/category/compute/aws-outposts/), [Technical How-to](https://aws.amazon.com/vi/blogs/compute/category/post-types/technical-how-to/)_
+_| [In Advanced (300)](https://aws.amazon.com/blogs/compute/category/learning-levels/advanced-300/), [AWS Outposts](https://aws.amazon.com/blogs/compute/category/compute/aws-outposts/), [Technical How-to](https://aws.amazon.com/blogs/compute/category/post-types/technical-how-to/)_
 
-Khi bạn chuyển các triển khai generative AI của mình từ giai đoạn prototype sang production, bạn có thể nhận thấy nhu cầu cần chạy các foundation models (FMs) on-premises hoặc at the edge để đáp ứng các yêu cầu về data residency, information security (InfoSec) policy, hoặc low latency. Ví dụ, các khách hàng trong những ngành được quản lý chặt chẽ như financial services, healthcare, và telecom có thể muốn tận dụng các chatbots để hỗ trợ customer queries, tối ưu hóa internal workflows cho các complex reporting, và tự động phê duyệt yêu cầu - đồng thời vẫn giữ dữ liệu trong phạm vi quốc gia. Tương tự, một số tổ chức chọn triển khai các small language models (SLMs) của riêng họ để phù hợp với các yêu cầu InfoSec nội bộ nghiêm ngặt. Ví dụ khác, các nhà sản xuất có thể muốn triển khai SLMs ngay trong nhà máy của họ để phân tích dữ liệu sản xuất và cung cấp chẩn đoán thiết bị theo thời gian thực. Để đáp ứng các nhu cầu về data residency, latency và InfoSec của người dùng, bài viết này cung cấp hướng dẫn về cách triển khai [generative AI](https://aws.amazon.com/vi/ai/generative-ai/) FMs vào [AWS Local Zones](https://aws.amazon.com/vi/about-aws/global-infrastructure/localzones/) và [AWS Outposts](https://aws.amazon.com/vi/outposts/rack/). Mục tiêu là trình bày một framework giúp chạy nhiều loại SLMs khác nhau nhằm đáp ứng các yêu cầu xử lý dữ liệu tại chỗ dựa trên customer engagements.
+As you move your generative AI deployments from the prototype stage to production, you may find the need to run foundation models (FMs) on-premises or at the edge to meet data residency requirements, information security (InfoSec) policies, or low latency needs. For example, customers in highly regulated industries such as financial services, healthcare, and telecom may want to leverage chatbots to support customer queries, optimize internal workflows for complex reporting, and automate request approvals - while keeping data within national borders. Similarly, some organizations choose to deploy their own small language models (SLMs) to align with strict internal InfoSec requirements. In another example, manufacturers might want to deploy SLMs right on their factory floors to analyze production data and provide real-time equipment diagnostics. To meet user data residency, latency, and InfoSec needs, this article provides guidance on deploying [generative AI](https://aws.amazon.com/ai/generative-ai/) FMs to [AWS Local Zones](https://aws.amazon.com/about-aws/global-infrastructure/localzones/) and [AWS Outposts](https://aws.amazon.com/outposts/rack/). The goal is to present a framework for running various types of SLMs to satisfy data processing requirements based on customer engagements.
 
-### **Các tùy chọn triển khai Generative AI**
+### **Generative AI Deployment Options**
 
-Sự phát triển của generative AI trong triển khai và thử nghiệm đã tăng tốc với hai tùy chọn triển khai doanh nghiệp chính. Tùy chọn đầu tiên là sử dụng [large language model (LLM)](https://aws.amazon.com/what-is/large-language-model/) để đáp ứng các nhu cầu của doanh nghiệp. LLMs có tính linh hoạt đáng kinh ngạc: một mô hình duy nhất có thể thực hiện nhiều nhiệm vụ hoàn toàn khác nhau, chẳng hạn như trả lời câu hỏi, viết mã (coding), tóm tắt tài liệu, dịch ngôn ngữ, và tạo nội dung (content generation). LLMs có tiềm năng làm thay đổi cách con người tạo nội dung cũng như cách sử dụng công cụ tìm kiếm và trợ lý ảo. Tùy chọn triển khai thứ hai là sử dụng small language models (SLMs), tập trung vào một use case cụ thể. SLMs là các compact transformer models chủ yếu sử dụng decoder-only hoặc encoder-decoder architectures, thường có ít hơn 20 tỷ parameters, mặc dù định nghĩa này đang phát triển khi các mô hình lớn hơn ra đời. SLMs có thể đạt được hiệu suất tương đương hoặc thậm chí vượt trội khi được fine-tuned cho các domain hoặc task cụ thể, khiến chúng trở thành lựa chọn thay thế tuyệt vời cho các ứng dụng chuyên biệt.
+The growth of generative AI in deployment and testing has accelerated with two main enterprise deployment options. The first option is using a [large language model (LLM)](https://aws.amazon.com/what-is/large-language-model/) to meet business needs. LLMs have incredible versatility: a single model can perform completely different tasks, such as answering questions, coding, summarizing documents, translating languages, and content generation. LLMs have the potential to change how humans create content as well as how search engines and virtual assistants are used. The second deployment option is using small language models (SLMs), focused on a specific use case. SLMs are compact transformer models primarily using decoder-only or encoder-decoder architectures, generally having fewer than 20 billion parameters, although this definition is evolving as larger models emerge. SLMs can achieve comparable or even superior performance when fine-tuned for specific domains or tasks, making them an excellent alternative for specialized applications.
 
-Ngoài ra, SLMs còn mang lại thời gian suy luận (inference time) nhanh hơn, yêu cầu tài nguyên thấp hơn, và phù hợp để triển khai trên nhiều loại thiết bị hơn, đặc biệt hữu ích cho các ứng dụng chuyên biệt và edge computing, nơi không gian và nguồn điện bị giới hạn. Mặc dù SLMs có phạm vi và độ chính xác hạn chế hơn so với LLMs, bạn có thể nâng cao hiệu suất của chúng cho nhiệm vụ cụ thể thông qua [Retrieval Augmented Generation (RAG)](https://aws.amazon.com/what-is/retrieval-augmented-generation/) và fine-tuning. Sự kết hợp này tạo ra một SLM có khả năng trả lời các truy vấn liên quan đến một domain cụ thể với mức độ chính xác tương đương LLM, đồng thời giảm thiểu hiện tượng hallucinations. Nhìn chung, SLMs cung cấp các giải pháp hiệu quả, cân bằng giữa nhu cầu người dùng và hiệu quả chi phí.
+Additionally, SLMs offer faster inference times, lower resource requirements, and are suitable for deployment on a wider range of devices, which is particularly useful for specialized applications and edge computing where space and power are limited. Although SLMs have a more limited scope and accuracy compared to LLMs, you can enhance their performance for a specific task through [Retrieval Augmented Generation (RAG)](https://aws.amazon.com/what-is/retrieval-augmented-generation/) and fine-tuning. This combination creates an SLM capable of answering queries related to a specific domain with an accuracy level comparable to an LLM, while minimizing hallucinations. Overall, SLMs provide effective solutions that balance user needs and cost efficiency.
 
-### **Tổng quan kiến trúc**
+### **Architecture Overview**
 
-Giải pháp được trình bày trong bài viết này sử dụng Llama.cpp, một framework được tối ưu hóa được viết bằng C/C++ nhằm chạy hiệu quả nhiều loại SLMs. [Llama.cpp](https://github.com/ggml-org/llama.cpp) có thể hoạt động hiệu quả trong nhiều môi trường tính toán khác nhau, cho phép generative AI models vận hành trong [Local Zones hoặc Outposts](https://aws.amazon.com/vi/hybrid/) mà không cần các cụm GPU lớn (GPU clusters) như thường thấy khi chạy LLMs trong native frameworks của chúng. Framework này mở rộng lựa chọn mô hình và tăng hiệu suất hoạt động khi triển khai SLMs vào Local Zones và Outposts.
+The solution presented in this article uses Llama.cpp, an optimized framework written in C/C++ to efficiently run various types of SLMs. [Llama.cpp](https://github.com/ggml-org/llama.cpp) can operate effectively in diverse computing environments, allowing generative AI models to function in [Local Zones or Outposts](https://aws.amazon.com/hybrid/) without requiring massive GPU clusters often seen when running LLMs in their native frameworks. This framework expands model selection and increases operational performance when deploying SLMs to Local Zones and Outposts.
 
-Kiến trúc này cung cấp một template cho việc triển khai nhiều loại SLMs nhằm hỗ trợ các use case như chatbot hoặc content generation. Giải pháp bao gồm một front-end application nhận user queries, định dạng các prompts để trình bày cho mô hình và trả về các phản hồi từ mô hình cho người dùng. Để hỗ trợ một giải pháp có khả năng mở rộng (scalable), application servers và Amazon EC2 G4dn GPU-enabled instances được đặt phía sau [Application Load Balancer (ALB)](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html).
+This architecture provides a template for deploying various types of SLMs to support use cases such as chatbots or content generation. The solution consists of a front-end application that receives user queries, formats prompts to present to the model, and returns responses from the model to the user. To support a scalable solution, application servers and Amazon EC2 G4dn GPU-enabled instances are placed behind an [Application Load Balancer (ALB)](https://docs.aws.amazon.com/elasticloadbalancing/latest/application/introduction.html).
 
-Trong trường hợp số lượng prompts đến vượt quá khả năng xử lý của SLMs, có thể triển khai message queue ở phía trước SLMs. Ví dụ, bạn có thể triển khai một [RabbitMQ](https://www.rabbitmq.com/) cluster để hoạt động như queue manager cho hệ thống.
+In cases where the volume of incoming prompts exceeds the processing capability of the SLMs, a message queue can be deployed in front of the SLMs. For example, you can deploy a [RabbitMQ](https://www.rabbitmq.com/) cluster to act as a queue manager for the system.
 
-_Hình 1: Architecture overview_
+![Figure 1](/images/3-BlogsTranslated/3.1-Blog1/1.png)
+_Figure 1: Architecture overview_
 
-### **Triển khai giải pháp**
+### **Solution Deployment**
 
-Các hướng dẫn sau đây mô tả cách khởi chạy một SLM bằng Llama.cpp trong Local Zones hoặc trên Outposts. Mặc dù phần kiến trúc tổng quan trước đó trình bày một giải pháp hoàn chỉnh với nhiều thành phần, bài viết này tập trung cụ thể vào các bước cần thiết để triển khai SLM trong EC2 instance sử dụng Llama.cpp.
+The following instructions describe how to launch an SLM using Llama.cpp in Local Zones or on Outposts. Although the previous architecture overview presented a complete solution with multiple components, this article focuses specifically on the steps necessary to deploy an SLM in an EC2 instance using Llama.cpp.
 
-### **Điều kiện tiên quyết**
+### **Prerequisites**
 
-Để triển khai giải pháp này, bạn cần chuẩn bị các điều kiện sau:
+To deploy this solution, you need to prepare the following:
 
-- AWS account đã được allowlisted cho Local Zones, hoặc có một logical Outpost đã được cài đặt, cấu hình và hoạt động.  
+- An AWS account that has been allowlisted for Local Zones, or has a logical Outpost installed, configured, and operational.
+- Access to G4dn instances in your account at the selected location
+    _(check in [AWS Service Quotas](https://console.aws.amazon.com/servicequotas/home))._
+- A VPC created to host the deployment environment.
+- Public and private subnets to support the environment in the VPC.
+- A security group associated with your EC2 instance.
+- An [AWS Identity and Access Management (IAM)](https://aws.amazon.com/iam/) role with [AWS Systems Manager Session Manager permissions](https://docs.aws.amazon.com/systems-manager/latest/userguide/getting-started-create-iam-instance-profile.html).
 
-- Quyền truy cập vào G4dn instances trong tài khoản của bạn tại vị trí đã chọn  
-    _(kiểm tra trong [AWS Service Quotas](https://console.aws.amazon.com/servicequotas/home)).  
-    _
-- Một VPC đã được tạo để lưu trữ môi trường triển khai.  
+### **1\. Launch GPU instance for SLM**
 
-- Public và private subnets để hỗ trợ môi trường trong VPC.  
+Log in to the [AWS Management Console](https://aws.amazon.com/console/), open the Amazon EC2 console,
+and launch a **g4dn.12xlarge** EC2 instance in your Local Zone or Outposts environment.
 
-- Một security group được liên kết với EC2 instance của bạn.  
+Configuration includes:
 
-- [AWS Identity and Access Management (IAM)](https://aws.amazon.com/vi/iam/) role với quyền [AWS Systems Manager Session Manager permissions](https://docs.aws.amazon.com/systems-manager/latest/userguide/getting-started-create-iam-instance-profile.html).
+- Red Hat Enterprise Linux 9 (HVM), SSD Volume Type
+- Private subnet associated with the Local Zone or Outposts rack
+- 30 GiB gp2 root volume and an additional 300 GiB gp2 EBS volume
+- IAM role configured with necessary permissions for Systems Manager
+- SSM Agent installed to connect to the instance
+    _(refer to instructions in [Install SSM Agent on RHEL 8.x and 9.x](https://docs.aws.amazon.com/systems-manager/latest/userguide/agent-install-rhel-8-9.html) in the [Systems Manager User Guide](https://docs.aws.amazon.com/systems-manager/latest/userguide/what-is-systems-manager.html))_
 
-![Hình 1](/images/3-BlogsTranslated/3.1-Blog1/1.png)
-_Hình 1: Architecture overview_
+For detailed instructions on launching an EC2 instance, refer to: _Launch an [EC2 instance using the launch instance wizard in the console](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-instance-wizard.html)_ or _[Launch an instance on your Outposts rack](https://docs.aws.amazon.com/outposts/latest/userguide/launch-instance.html)_.
 
-### **1\. Khởi chạy GPU instance cho SLM**
+![Figure 2](/images/3-BlogsTranslated/3.1-Blog1/2.png)
+_Figure 2: SLM instance launched_
 
-Đăng nhập vào [AWS Management Console](https://aws.amazon.com/vi/console/), mở Amazon EC2 console,  
-và khởi chạy một **g4dn.12xlarge** EC2 instance trong Local Zone hoặc Outposts environment của bạn.
+### **2\. Install NVIDIA drivers**
 
-Cấu hình bao gồm:
+- Connect to the SLM instance using Systems Manager.
+    You can follow the instructions at [Connect to your Amazon EC2 instance using Session Manager](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/connect-with-systems-manager-session-manager.html) in the [Amazon EC2 User Guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html).
 
-- Red Hat Enterprise Linux 9 (HVM), SSD Volume Type  
-
-- Private subnet liên kết với Local Zone hoặc Outposts rack  
-
-- 30 GiB gp2 root volume và thêm 300 GiB gp2 EBS volume  
-
-- IAM role đã được cấu hình với các quyền cần thiết cho Systems Manager  
-
-- SSM Agent được cài đặt để kết nối tới instance  
-    _(tham khảo hướng dẫn trong [Install SSM Agent on RHEL 8.x and 9.x](https://docs.aws.amazon.com/systems-manager/latest/userguide/agent-install-rhel-8-9.html) trong [Systems Manager User Guide](https://docs.aws.amazon.com/systems-manager/latest/userguide/what-is-systems-manager.html))_
-
-Để biết hướng dẫn chi tiết về việc khởi chạy EC2 instance, tham khảo: _Launch an [EC2 instance using the launch instance wizard in the console](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-instance-wizard.html)_ hoặc _[Launch an instance on your Outposts rack](https://docs.aws.amazon.com/outposts/latest/userguide/launch-instance.html)_.  
-
-![Hình 2](/images/3-BlogsTranslated/3.1-Blog1/2.png)
-_Hình 2: SLM instance launched_
-
-
-### **2\. Cài đặt NVIDIA drivers**
-
-- Kết nối tới SLM instance bằng Systems Manager.  
-    Bạn có thể làm theo hướng dẫn tại [Connect to your Amazon EC2 instance using Session Manager](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/connect-with-systems-manager-session-manager.html) trong [Amazon EC2 User Guide](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/concepts.html).  
-
-- Cài đặt kernel packages và các công cụ cần thiết:
-```
+- Install kernel packages and necessary tools:
+```bash
  sudo su -  
- dnf update -y  <br>subscription-manager repos --enable codeready-builder-for-rhel-9-x86_64-rpms  
- dnf install -y <https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm>  dnf install -y ccache cmake gcc-c++ git git-lfs htop python3-pip unzip wget  
- dnf install -y dkms elfutils-libelf-devel kernel-devel kernel-modules-extra \\  libglvnd-devel vulkan-devel xorg-x11-server-Xorg  <br>systemctl enable --now dkms  
+ dnf update -y  
+ subscription-manager repos --enable codeready-builder-for-rhel-9-x86_64-rpms  
+ dnf install -y https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm  
+ dnf install -y ccache cmake gcc-c++ git git-lfs htop python3-pip unzip wget  
+ dnf install -y dkms elfutils-libelf-devel kernel-devel kernel-modules-extra \
+ libglvnd-devel vulkan-devel xorg-x11-server-Xorg  
+ systemctl enable --now dkms  
  reboot 
-
 ```
 
-- Cài đặt [Miniconda3](https://www.anaconda.com/docs/getting-started/miniconda/install#macos-linux-installation) trong thư mục /opt/miniconda3 hoặc trình quản lý package tương thích khác để quản lý Python dependencies.  
+- Install [Miniconda3](https://www.anaconda.com/docs/getting-started/miniconda/install#macos-linux-installation) in the /opt/miniconda3 directory or another compatible package manager to manage Python dependencies.
 
-- Cài đặt NVIDIA drivers:
+- Install NVIDIA drivers:
 
-```
-dnf config-manager --add-repo \\  
-<http://developer.download.nvidia.com/compute/cuda/repos/rhel9/x86_64/cuda-rhel9.repo>  
+```bash
+dnf config-manager --add-repo \
+http://developer.download.nvidia.com/compute/cuda/repos/rhel9/x86_64/cuda-rhel9.repo  
 dnf module install -y nvidia-driver:latest-dkms  
 dnf install -y cuda-toolkit  
-echo 'export PATH=/usr/local/cuda/bin:\$PATH' >> ~/.bashrc  
-echo 'export LD_LIBRARY_PATH=/usr/local/cuda/lib64:\$LD_LIBRARY_PATH' >> ~/.bashrc  
+echo 'export PATH=/usr/local/cuda/bin:$PATH' >> ~/.bashrc  
+echo 'export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH' >> ~/.bashrc  
 source ~/.bashrc
 ```
 
-### **3\. Tải xuống và cài đặt Llama.cpp**
+### **3\. Download and Install Llama.cpp**
 
-- Tạo và mount filesystem của Amazon EBS volume bạn đã tạo trước đó vào thư mục /opt/slm. Xem hướng dẫn tại [Make an Amazon EBS volume available for use](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-using-volumes.html) trong [Amazon EBS User Guide](https://docs.aws.amazon.com/ebs/latest/userguide/what-is-ebs.html).  
+- Create and mount the filesystem of the Amazon EBS volume you created earlier to the /opt/slm directory. See instructions at [Make an Amazon EBS volume available for use](https://docs.aws.amazon.com/ebs/latest/userguide/ebs-using-volumes.html) in the [Amazon EBS User Guide](https://docs.aws.amazon.com/ebs/latest/userguide/what-is-ebs.html).
 
-- Chạy các lệnh sau để tải và cài đặt Llama.cpp:
+- Run the following commands to download and install Llama.cpp:
 
-```
+```bash
 cd /opt/slm
 
-git clone -b b4942 \\<https://github.com/ggerganov/llama.cpp.git>
+git clone -b b4942 https://github.com/ggerganov/llama.cpp.git
 
 cd llama.cpp  
 cmake -B build -DGGML_CUDA=ON
 
-cmake --build build --config Release -j\$(nproc)  
+cmake --build build --config Release -j$(nproc)  
 conda install python=3.12
 
 pip install -r requirements.txt
@@ -129,75 +120,75 @@ pip install -r requirements.txt
 pip install nvitop
 ```
 
-### **4\. Tải xuống và chuyển đổi SLM model**
+### **4\. Download and Convert SLM model**
 
-Để chạy SLM hiệu quả với Llama.cpp, bạn cần chuyển đổi model sang định dạng GGUF (GPT-Generated Unified Format). Việc chuyển đổi này giúp tối ưu hiệu năng và mức sử dụng bộ nhớ cho các môi trường edge deployments có tài nguyên giới hạn. GGUF được thiết kế đặc biệt để hoạt động với Llama.cpp inference engine. Các bước sau đây minh họa cách tải SmolLM2 1.7B và chuyển đổi sang định dạng GGUF:
+To run SLMs efficiently with Llama.cpp, you need to convert the model to the GGUF (GPT-Generated Unified Format) format. This conversion optimizes performance and memory usage for resource-constrained edge deployments. GGUF is designed specifically to work with the Llama.cpp inference engine. The following steps illustrate how to download SmolLM2 1.7B and convert it to GGUF format:
 
-```
+```bash
 mkdir /opt/slm/models  
 cd /opt/slm/models  
 git lfs install  
-git clone <https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B-Instruct>  
+git clone https://huggingface.co/HuggingFaceTB/SmolLM2-1.7B-Instruct  
 cd /opt/slm/llama.cpp  
-python3 convert_hf_to_gguf.py --outtype f16 \\  
---outfile /opt/slm/llama.cpp/models/SmolLM2-1.7B-Instruct-f16.gguf \\  
+python3 convert_hf_to_gguf.py --outtype f16 \
+--outfile /opt/slm/llama.cpp/models/SmolLM2-1.7B-Instruct-f16.gguf \
 /opt/slm/models/SmolLM2-1.7B-Instruct  
-echo 'export PATH=/opt/slm/llama.cpp/build/bin:\$PATH' >> ~/.bashrc  
-echo 'export LD_LIBRARY_PATH=/opt/slm/llama.cpp/build/bin:\$LD_LIBRARY_PATH' >> ~/.bashrc  
+echo 'export PATH=/opt/slm/llama.cpp/build/bin:$PATH' >> ~/.bashrc  
+echo 'export LD_LIBRARY_PATH=/opt/slm/llama.cpp/build/bin:$LD_LIBRARY_PATH' >> ~/.bashrc  
 source ~/.bashrc
 ```
-Bạn cũng có thể tải các models khác được công khai từ [Hugging Face](https://huggingface.co/) nếu cần,  
-và thực hiện quá trình chuyển đổi tương tự.
+You can also download other publicly available models from [Hugging Face](https://huggingface.co/) if needed,
+and perform a similar conversion process.
 
 ### **SLM Operation and Optimization**
 
-Việc triển khai SLMs thông qua Llama.cpp mang lại tính linh hoạt cao trong vận hành, cho phép tùy chỉnh môi trường và tối ưu hóa theo các use case cụ thể. Với Llama.cpp, bạn có thể chọn nhiều tham số khác nhau để tối ưu việc sử dụng tài nguyên hệ thống và hoạt động của mô hình, giúp tận dụng hiệu quả tài nguyên mà không tiêu tốn không cần thiết hoặc ảnh hưởng đến hiệu suất. Các tham số phổ biến khi chạy Llama.cpp giúp kiểm soát cách mô hình hoạt động bao gồm:
+Deploying SLMs via Llama.cpp offers high operational flexibility, allowing environment customization and optimization for specific use cases. With Llama.cpp, you can choose various parameters to optimize system resource usage and model operation, effectively utilizing resources without unnecessary waste or impacting performance. Common parameters when running Llama.cpp to control model behavior include:
 
-- \-ngl N, --n-gpu-layers N: Khi biên dịch với GPU support, tùy chọn này cho phép chuyển một số layer sang GPU để tính toán, giúp tăng hiệu suất xử lý.
-- \-t N, --threads N: Xác định số lượng threads sử dụng trong quá trình sinh nội dung. Để đạt hiệu suất tối ưu, nên đặt giá trị này bằng số lõi CPU vật lý có trong hệ thống.
-- \-n N, --n-predict N: Xác định số lượng tokens cần sinh ra khi tạo văn bản.  
-    Điều chỉnh giá trị này sẽ ảnh hưởng đến độ dài đầu ra của văn bản.
-- \-sm, --split-mode: Xác định cách chia mô hình giữa nhiều GPU khi chạy trong môi trường multi-GPU. Nên thử "row" splitting mode, vì trong một số trường hợp, nó mang lại hiệu suất tốt hơn so với chia theo layer-based mặc định.
-- \--temp N: Temperature điều khiển mức độ ngẫu nhiên trong đầu ra của SLM. Giá trị thấp hơn (ví dụ 0.2-0.5) tạo ra câu trả lời nhất quán và xác định hơn, giá trị cao hơn (ví dụ 0.9-1.2) giúp mô hình sáng tạo và đa dạng hơn (mặc định: 0.88)
-- \-s SEED, --seed SEED: Cung cấp phương pháp kiểm soát ngẫu nhiên của mô hình. Việc đặt seed cố định giúp tái tạo kết quả nhất quán trong nhiều lần chạy (mặc định: -1, -1 = random seed).
-- \-c, --ctx-size N: Xác định context size, số lượng tokens mà FM có thể xử lý trong một prompt. Giá trị này ảnh hưởng đến mức RAM cần thiết và độ chính xác của mô hình. Ví dụ: với Phi-3, khuyến nghị giảm context size còn 8k hoặc 16k để tối ưu hiệu suất. Lệnh mẫu: --ctx-size XXXX trong đó XXXX là context size.
+- `-ngl N, --n-gpu-layers N`: When compiling with GPU support, this option allows offloading some layers to the GPU for computation, increasing processing performance.
+- `-t N, --threads N`: Determines the number of threads used during content generation. For optimal performance, set this value equal to the number of physical CPU cores in the system.
+- `-n N, --n-predict N`: Determines the number of tokens to generate when creating text.
+    Adjusting this value affects the output length of the text.
+- `-sm, --split-mode`: Determines how to split the model across multiple GPUs when running in a multi-GPU environment. Try the "row" splitting mode, as in some cases it offers better performance than the default layer-based splitting.
+- `--temp N`: Temperature controls the randomness in the SLM's output. Lower values (e.g., 0.2-0.5) produce more consistent and deterministic responses, while higher values (e.g., 0.9-1.2) allow the model to be more creative and diverse (default: 0.88).
+- `-s SEED, --seed SEED`: Provides a method to control model randomness. Setting a fixed seed helps reproduce consistent results across multiple runs (default: -1, -1 = random seed).
+- `-c, --ctx-size N`: Determines the context size, the number of tokens the FM can process in a prompt. This value affects the required RAM and model accuracy. For example: with Phi-3, it is recommended to reduce context size to 8k or 16k to optimize performance. Sample command: `--ctx-size XXXX` where XXXX is the context size.
 
-Phần này minh họa cách tối ưu hóa hiệu suất SLM cho các use case cụ thể bằng Llama.cpp, gồm hai kịch bản phổ biến: Chatbot interactions và Text summarization
+This section illustrates how to optimize SLM performance for specific use cases using Llama.cpp, covering two common scenarios: Chatbot interactions and Text summarization.
 
 ### **Chatbot Use Case Example**
 
 #### **Token Size Requirements**
 
-Đối với ứng dụng chatbot, kích thước token thông thường: Input: khoảng 50-150 tokens, hỗ trợ người dùng hỏi 1-2 câu và Output: khoảng 100-300 tokens, giúp mô hình phản hồi ngắn gọn nhưng chi tiết.  
+For chatbot applications, typical token sizes: Input: approximately 50-150 tokens, supporting 1-2 user questions, and Output: approximately 100-300 tokens, helping the model respond concisely but with detail.
 
 #### **Sample Command**
 
-```
-./build/bin/llama-cli -m ./models/SmolLM2-1.7B-Instruct-f16.gguf \\  
+```bash
+./build/bin/llama-cli -m ./models/SmolLM2-1.7B-Instruct-f16.gguf \
 -ngl 99 -n 512 --ctx-size 8192 -sm row --temp 0
---single-turn \\  
+--single-turn \
 -sys "You are a helpful assistant" -p "Hello"
 ```
-![Hình 3](/images/3-BlogsTranslated/3.1-Blog1/3.png)
-_Hình 3: Chatbot example_
+![Figure 3](/images/3-BlogsTranslated/3.1-Blog1/3.png)
+_Figure 3: Chatbot example_
 
 #### **Command Explanation**
 
-- \-m ./models/SmolLM2-1.7B-Instruct-f16.gguf : Chỉ định file model sử dụng
-- \-ngl 99 : Gán 99 GPU layers để đạt hiệu suất tối ưu
-- \-n 512 : Tối đa 512 output tokens (đủ cho 100-300 tokens cần thiết)
-- \--ctx-size 8192 : Đặt kích thước context window để xử lý hội thoại phức tạp
-- \-sm row : Chia hàng across GPUs
-- \--temp 0 : Đặt temperature bằng 0 để giảm tính sáng tạo
-- \--single-turn : Tối ưu cho các phản hồi một lượt
-- \-sys "You are a helpful assistant" : Thiết lập system prompt định nghĩa vai trò trợ lý
-- \-p "Hello" : Nhập prompt của người dùng
+- `-m ./models/SmolLM2-1.7B-Instruct-f16.gguf` : Specifies the model file to use
+- `-ngl 99` : Assigns 99 GPU layers for optimal performance
+- `-n 512` : Maximum 512 output tokens (sufficient for the needed 100-300 tokens)
+- `--ctx-size 8192` : Sets context window size to handle complex conversations
+- `-sm row` : Splits across GPUs by row
+- `--temp 0` : Sets temperature to 0 to reduce creativity
+- `--single-turn` : Optimized for single-turn responses
+- `-sys "You are a helpful assistant"` : Sets system prompt defining the assistant role
+- `-p "Hello"` : User prompt input
 
 ### **Text Summarization Example**
 
-Dòng lệnh dưới đây cho thấy SmolLM2-1.7B chạy tác vụ tóm tắt văn bản:
+The command line below shows SmolLM2-1.7B running a text summarization task:
 
-```
+```bash
 PROMPT_TEXT="Summarize the following text: Amazon DynamoDB is a serverless,  
 NoSQL database service that allows you to develop modern applications  
 at any scale. As a serverless database, you only pay for what you use  
@@ -209,20 +200,20 @@ tables is a multi-Region, multi-active database with a 99.999%
 availability SLA and increased resilience. DynamoDB reliability is  
 supported with managed backups, point-in-time recovery, and more.  
 With DynamoDB streams, you can build serverless event-driven applications."  
-./build/bin/llama-cli -m ./models/SmolLM2-1.7B-Instruct-f16.gguf \\  
--ngl 99 -n 512 --ctx-size 8192 -sm row --single-turn \\  
--sys "You are a technical writer" \\  
---prompt "\$PROMPT_TEXT"
+./build/bin/llama-cli -m ./models/SmolLM2-1.7B-Instruct-f16.gguf \
+-ngl 99 -n 512 --ctx-size 8192 -sm row --single-turn \
+-sys "You are a technical writer" \
+--prompt "$PROMPT_TEXT"
 ```
-![Hình 4](/images/3-BlogsTranslated/3.1-Blog1/4.png)
-_Hình 4: Summarization example_
+![Figure 4](/images/3-BlogsTranslated/3.1-Blog1/4.png)
+_Figure 4: Summarization example_
 
 ### **Cleaning Up**
 
-Để tránh chi phí phát sinh không cần thiết, hãy thực hiện các bước sau để xóa tài nguyên sau khi hoàn tất:
+To avoid unnecessary costs, perform the following steps to delete resources after completion:
 
-- [Terminate EC2 instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html) để ngừng tính phí. Xác minh rằng EBS volume 300 GiB đã được xóa đúng cách bằng cách kiểm tra mục Volumes trong phần Elastic Block Store.Nếu vẫn còn volume, hãy chọn và thực hiện: Actions > Delete volume.  
+- [Terminate EC2 instance](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/terminating-instances.html) to stop charges. Verify that the 300 GiB EBS volume was deleted correctly by checking the Volumes section under Elastic Block Store. If the volume remains, select it and perform: Actions > Delete volume.
 
-### **Kết luận**
+### **Conclusion**
 
-Bài viết này đã hướng dẫn bạn từng bước triển khai SLMs vào môi trường AWS on-premises hoặc edge nhằm đáp ứng các nhu cầu xử lý dữ liệu cục bộ. Phần đầu bài viết đã thảo luận về lợi ích kinh doanh của SLMs, bao gồm: Thời gian suy luận (inference time) nhanh hơn, Giảm chi phí vận hành và cải thiện kết quả đầu ra của mô hình. Các SLMs được triển khai bằng Llama.cpp và tối ưu hóa cho các use case cụ thể có thể cung cấp dịch vụ người dùng hiệu quả từ edge theo cách mở rộng linh hoạt (scalable). Các tham số tối ưu hóa được mô tả trong bài viết này cung cấp nhiều phương pháp cấu hình khác nhau để điều chỉnh mô hình cho các kịch bản triển khai đa dạng. Bạn có thể làm theo các bước và kỹ thuật được trình bày trong bài để triển khai generative AI phù hợp với yêu cầu về data residency, latency, hoặc InfoSec compliance, đồng thời vận hành hiệu quả trong giới hạn tài nguyên của môi trường edge computing. Để tìm hiểu thêm, hãy truy cập [AWS Local Zones](https://aws.amazon.com/vi/about-aws/global-infrastructure/localzones/) và [AWS Outposts](https://aws.amazon.com/vi/outposts/rack/).
+This article has guided you step-by-step through deploying SLMs to an AWS on-premises or edge environment to meet local data processing needs. The beginning of the article discussed the business benefits of SLMs, including: Faster inference time, reduced operational costs, and improved model outputs. SLMs deployed using Llama.cpp and optimized for specific use cases can deliver efficient user services from the edge in a scalable manner. The optimization parameters described in this article provide various configuration methods to tune the model for diverse deployment scenarios. You can follow the steps and techniques presented to deploy generative AI tailored to data residency, latency, or InfoSec compliance requirements, while operating efficiently within the resource constraints of edge computing environments. To learn more, visit [AWS Local Zones](https://aws.amazon.com/about-aws/global-infrastructure/localzones/) and [AWS Outposts](https://aws.amazon.com/outposts/rack/).

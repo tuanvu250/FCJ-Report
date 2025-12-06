@@ -6,121 +6,119 @@ chapter: false
 pre: " <b> 3.3. </b> "
 ---
 
-# **Cách thiết lập cảnh báo tự động cho các AWS Savings Plans mới mua**
+# **How to Setup Automated Alerts for Newly Purchased AWS Savings Plans**
 
-_Bởi Syed Muhammad Tawha và Dan Johns | ngày 26/06/2025 | [Amazon Simple Notification Service (SNS)](https://aws.amazon.com/vi/blogs/aws-cloud-financial-management/category/messaging/amazon-simple-notification-service-sns/), [AWS Cloud Financial Management](https://aws.amazon.com/vi/blogs/aws-cloud-financial-management/category/aws-cloud-financial-management/), [AWS CloudFormation](https://aws.amazon.com/vi/blogs/aws-cloud-financial-management/category/management-tools/aws-cloudformation/), [Cloud Cost Optimization](https://aws.amazon.com/vi/blogs/aws-cloud-financial-management/category/business-intelligence/cloud-cost-optimization/)_
+_By Syed Muhammad Tawha and Dan Johns | Date: 26/06/2025 | [Amazon Simple Notification Service (SNS)](https://aws.amazon.com/blogs/aws-cloud-financial-management/category/messaging/amazon-simple-notification-service-sns/), [AWS Cloud Financial Management](https://aws.amazon.com/blogs/aws-cloud-financial-management/category/aws-cloud-financial-management/), [AWS CloudFormation](https://aws.amazon.com/blogs/aws-cloud-financial-management/category/management-tools/aws-cloudformation/), [Cloud Cost Optimization](https://aws.amazon.com/blogs/aws-cloud-financial-management/category/business-intelligence/cloud-cost-optimization/)_
 
 ###
 
-Khi tổ chức phát triển, các nhóm FinOps cần một cái nhìn tổng thể về [AWS Savings Plans](https://aws.amazon.com/savingsplans/) để tối ưu hóa việc sử dụng. Giải pháp này giúp giám sát tự động và thiết lập cảnh báo nhằm phát hiện các Savings Plans sử dụng kém hiệu quả trong thời hạn hoàn trả hợp lệ.
+As organizations grow, FinOps teams need a holistic view of [AWS Savings Plans](https://aws.amazon.com/savingsplans/) to optimize usage. This solution enables automated monitoring and setting up alerts to detect underutilized Savings Plans within their eligible return window.
 
-Khi mua Savings Plan, bạn cam kết sử dụng trong 1 hoặc 3 năm. Các Savings Plan có cam kết theo giờ ≤ \$100 có thể được hoàn trả nếu được mua trong vòng 7 ngày gần nhất và trong cùng tháng dương lịch, miễn là bạn chưa vượt quá giới hạn hoàn trả. Sau khi tháng kết thúc (theo UTC), Savings Plans đó không thể hoàn trả.
+When purchasing a Savings Plan, you commit to usage for 1 or 3 years. Savings Plans with an hourly commitment of ≤ $100 can be returned if purchased within the last 7 days and in the same calendar month, provided you have not exceeded the return limit. After the month ends (UTC time), that Savings Plan cannot be returned.
 
-Ở bài viết này, chúng tôi cung cấp các [AWS CloudFormation](https://aws.amazon.com/vi/cloudformation/) templates giúp tạo [AWS Step Functions](https://aws.amazon.com/step-functions/) state machine, [Amazon Simple Notification Service](https://aws.amazon.com/sns/) (SNS) topic, [Amazon EventBridge](https://aws.amazon.com/vi/eventbridge/) scheduler, và các [AWS Identity and Access Management](https://aws.amazon.com/iam/) (IAM) roles cần thiết để giám sát tự động các Savings Plans mới mua và phát hiện những gói sử dụng thấp.  
+In this article, we provide [AWS CloudFormation](https://aws.amazon.com/cloudformation/) templates that create an [AWS Step Functions](https://aws.amazon.com/step-functions/) state machine, [Amazon Simple Notification Service](https://aws.amazon.com/sns/) (SNS) topic, [Amazon EventBridge](https://aws.amazon.com/eventbridge/) scheduler, and necessary [AWS Identity and Access Management](https://aws.amazon.com/iam/) (IAM) roles to automatically monitor newly purchased Savings Plans and detect underutilized ones.
 
-### **Tổng quan giải pháp**
+### **Solution Overview**
 
-Giải pháp này tuân theo AWS security best practices bằng cách tách triển khai trên hai tài khoản. Một CloudFormation stack sẽ được tạo trong [Management account](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#management-account) để thiết lập các IAM roles cần thiết để truy xuất dữ liệu sử dụng của Savings Plans. Một CloudFormation stack khác sẽ được triển khai trong [Member Account](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#member-account) đã chọn trong [AWS Organization](https://aws.amazon.com/vi/organizations/) của bạn.
+This solution follows AWS security best practices by separating deployment across two accounts. One CloudFormation stack will be created in the [Management account](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#management-account) to set up the necessary IAM roles to retrieve Savings Plans usage data. Another CloudFormation stack will be deployed in a chosen [Member Account](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#member-account) within your [AWS Organization](https://aws.amazon.com/organizations/).
 
-CloudFormation stack trong Member Account tạo một state machine thực hiện assume role trong Management Account của bạn và phân tích tất cả Savings Plans trong Management Account, bao gồm cả những gói đã được mua trong toàn bộ tổ chức của bạn. Workflow lọc các Savings Plans hoạt động theo ngày mua, tập trung vào các plan được mua trong 7 ngày gần nhất và tháng hiện tại. Sau đó, hệ thống đánh giá tỷ lệ sử dụng của chúng và xác định các plan dưới ngưỡng định sẵn.
+The CloudFormation stack in the Member Account creates a state machine that assumes a role in your Management Account and parses all Savings Plans in the Management Account, including those purchased across your entire organization. The workflow filters active Savings Plans by purchase date, focusing on plans purchased within the last 7 days and the current month. The system then evaluates their utilization rate and identifies plans below a predefined threshold.
 
-State machine sẽ thực thi theo tần suất bạn chỉ định và sử dụng Amazon SNS để gửi cảnh báo qua email đến các địa chỉ bạn cung cấp khi tạo CloudFormation stack. Các cảnh báo này sẽ chứa thông tin chi tiết về các Savings Plans sử dụng thấp và hướng dẫn về quy trình hoàn trả.
+The state machine will execute at the frequency you specify and use Amazon SNS to send email alerts to the addresses you provided when creating the CloudFormation stack. These alerts will contain details about underutilized Savings Plans and instructions on the return process.
 
-![Hình 1](/images/3-BlogsTranslated/3.3-Blog3/1.png) 
-_Hình 1: Kiến trúc AWS - Member Account nhận quyền đọc dữ liệu từ Management Account và kích hoạt Step Function để gửi cảnh báo qua SNS._
+![Figure 1](/images/3-BlogsTranslated/3.3-Blog3/1.png)
+_Figure 1: AWS Architecture - Member Account assumes read permissions from Management Account and triggers Step Function to send alerts via SNS._
 
-### **Triển khai giải pháp**
+### **Solution Deployment**
 
-#### **Điều kiện tiên quyết**
+#### **Prerequisites**
 
-- Có AWS Account  
+- An AWS Account
+- IAM permissions to create CloudFormation Stack and IAM Role in the Management Account
+- IAM permissions to create Step Functions, SNS, IAM Roles, and EventBridge in the Member Account
 
-- Có IAM permissions để tạo CloudFormation Stack và IAM Role trong Management Account  
+### **Deploying the Solution**
 
-- Có IAM permissions để tạo Step Functions, SNS, IAM Roles, và EventBridge trong Member Account
+In this section, we will deploy the resources for this solution in your account:
 
-### **Triển khai giải pháp**
+#### **Part 1 - Deploy in Member Account**
 
-Trong phần này, chúng ta sẽ triển khai các tài nguyên cho giải pháp này trong tài khoản của bạn:
+In this section, we will deploy resources for this solution in the chosen Member Account.
 
-#### **Phần 1 - Triển khai trong Member Account**
+- Log in to the AWS Management Console of the Member Account where you want to deploy the solution.
 
-Trong phần này, chúng ta sẽ triển khai các tài nguyên cho giải pháp này trong Member Account đã chọn.
+- Deploy this CloudFormation Stack [Launch Stack](https://us-west-2.signin.aws.amazon.com/oauth?client_id=arn%3Aaws%3Asignin%3A%3A%3Aconsole%2Fcloudformation&code_challenge=YJomWY7VmTPOJTzQ9JLD33u0lzPXCPrvnWvQYND8jCQ&code_challenge_method=SHA-256&response_type=code&redirect_uri=https%3A%2F%2Fus-west-2.console.aws.amazon.com%2Fcloudformation%2Fhome%3FhashArgs%3D%2523%252Fstacks%252Fcreate%252Freview%253FtemplateURL%253Dhttps%253A%252F%252Faws-well-architected-labs.s3.us-west-2.amazonaws.com%252FCost%252FBlogs%252Fsample-aws-new-savings-plan-utilization-alert%252Fsample-aws-new-savings-plan-utilization-alert_member.yaml%2526stackName%253Dnew-savings-plan-utilization-alert-member%26isauthcode%3Dtrue%26oauthStart%3D1759740140665%26region%3Dus-west-2%26state%3DhashArgsFromTB_us-west-2_b5fd02355eaf6afe)
 
-- Đăng nhập vào AWS Management Console của Member Account nơi bạn muốn triển khai giải pháp.  
+- Provide the Stack Name as `new-sp-utilization-alert-member`.
 
-- Triển khai CloudFormation Stack này [Launch Stack](https://us-west-2.signin.aws.amazon.com/oauth?client_id=arn%3Aaws%3Asignin%3A%3A%3Aconsole%2Fcloudformation&code_challenge=YJomWY7VmTPOJTzQ9JLD33u0lzPXCPrvnWvQYND8jCQ&code_challenge_method=SHA-256&response_type=code&redirect_uri=https%3A%2F%2Fus-west-2.console.aws.amazon.com%2Fcloudformation%2Fhome%3FhashArgs%3D%2523%252Fstacks%252Fcreate%252Freview%253FtemplateURL%253Dhttps%253A%252F%252Faws-well-architected-labs.s3.us-west-2.amazonaws.com%252FCost%252FBlogs%252Fsample-aws-new-savings-plan-utilization-alert%252Fsample-aws-new-savings-plan-utilization-alert_member.yaml%2526stackName%253Dnew-savings-plan-utilization-alert-member%26isauthcode%3Dtrue%26oauthStart%3D1759740140665%26region%3Dus-west-2%26state%3DhashArgsFromTB_us-west-2_b5fd02355eaf6afe)
+- In the `AlertEmails` parameter, enter a comma-separated list of emails that will receive notifications about underutilized Savings Plans.
 
-- Cung cấp Stack Name là new-sp-utilization-alert-member.  
+- In the `ManagementAccountId` parameter, enter the 12-digit AWS Account ID of the Management Account.
 
-- Trong tham số AlertEmails, nhập danh sách email cách nhau bởi dấu phẩy mà sẽ nhận thông báo về Savings Plans sử dụng kém.  
+- In the `ScheduleExpression` parameter, specify the execution frequency for the Step Functions state machine in cron format (default is daily at 9 AM UTC).
 
-- Trong tham số ManagementAccountId, nhập 12 chữ số AWS Account ID của Management Account.  
+- In the `UtilizationThreshold` parameter, specify the minimum utilization rate for your Savings Plans. You will receive a notification when utilization drops below this threshold.
 
-- Trong tham số ScheduleExpression, chỉ định tần suất thực thi cho Step Functions state machine theo định dạng cron (mặc định là hàng ngày vào lúc 9 AM UTC).  
+- Click Next, check the acknowledgment box, and create the stack.
 
-- Trong tham số UtilizationThreshold, chỉ định tỷ lệ sử dụng tối thiểu cho Savings Plans của bạn. Bạn sẽ nhận thông báo khi tỷ lệ sử dụng giảm dưới ngưỡng này.  
+- Wait until the stack completes and shows the status `CREATE-COMPLETE`.
 
-- Nhấn Next, chọn ô acknowledgment, và tạo stack.  
+- You will receive an email to confirm subscription to notifications from the SNS topic created by this stack. Please confirm the subscription to start receiving notifications.
 
-- Chờ cho đến khi stack hoàn thành và hiển thị trạng thái CREATE-COMPLETE.  
+- Access the Outputs tab of the created stack and record the values of `ExecutionRoleArn` and `StateMachineArn`, you will need them in the next section.
 
-- Bạn sẽ nhận một email để xác nhận đăng ký nhận thông báo từ SNS topic do stack này tạo. Vui lòng xác nhận đăng ký để bắt đầu nhận thông báo.  
+#### **Part 2 - Deploy in Management Account**
 
-- Truy cập vào tab Outputs của stack vừa tạo và ghi lại các giá trị của ExecutionRoleArn và StateMachineArn, bạn sẽ cần chúng trong phần tiếp theo.
+- Log in to the AWS Management Console. Note: This must be the same account as entered in the `ManagementAccountId` parameter in the previous section.
 
-#### **Phần 2 - Triển khai trong Management Account**
+- Deploy this CloudFormation Stack [Launch Stack](https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/create/review?templateURL=https://aws-well-architected-labs.s3.us-west-2.amazonaws.com/Cost/Blogs/sample-aws-new-savings-plan-utilization-alert/sample-aws-new-savings-plan-utilization-alert_management.yaml&stackName=aws-new-savings-plan-utilization-alert-management)
 
-- Đăng nhập vào AWS Management Console. Lưu ý: Đây phải là tài khoản giống như tài khoản đã nhập trong tham số ManagementAccountId ở phần trước.  
+- Provide the Stack Name as `new-sp-utilization-alert-management`.
 
-- Triển khai CloudFormation Stack này  [Launch Stack](https://us-west-2.console.aws.amazon.com/cloudformation/home?region=us-west-2#/stacks/create/review?templateURL=https://aws-well-architected-labs.s3.us-west-2.amazonaws.com/Cost/Blogs/sample-aws-new-savings-plan-utilization-alert/sample-aws-new-savings-plan-utilization-alert_management.yaml&stackName=aws-new-savings-plan-utilization-alert-management)
+- In the `ExecutionRoleArn` parameter, provide the value copied from the stack outputs of the stack deployed in the Member Account.
 
-- Cung cấp Stack Name là new-sp-utilization-alert-management.  
+- In the `StateMachineArn` parameter, provide the value copied from the stack outputs of the stack deployed in the Member Account.
 
-- Trong tham số ExecutionRoleArn, cung cấp giá trị đã sao chép từ stack outputs của stack đã triển khai trong Member Account.  
+- Click Next, check the acknowledgment box, and create the stack.
 
-- Trong tham số StateMachineArn, cung cấp giá trị đã sao chép từ stack outputs của stack đã triển khai trong Member Account.  
+- Wait until the stack completes and shows the status **CREATE-COMPLETE.**
 
-- Nhấn Next, chọn ô acknowledgment, và tạo stack.  
+### **Testing the Solution**
 
-- Chờ cho đến khi stack hoàn thành và hiển thị trạng thái **CREATE-COMPLETE.**
+Now that the Step Functions state machine and related resources have been deployed in the Member Account, we will test the implementation:
 
-### **Kiểm thử giải pháp**
+- Log back in to the AWS Management Console of the Member Account where you deployed Part 1 of this solution.
 
-Bây giờ mà Step Functions state machine và các tài nguyên liên quan đã được triển khai trong Member Account, chúng ta sẽ kiểm tra việc triển khai:
+- Access the Resources tab in the CloudFormation stack and find the `SavingsPlansAlerts` Step Functions state machine. Click on the blue hyperlink.
 
-- Đăng nhập lại vào AWS Management Console của Member Account nơi bạn đã triển khai phần 1 của giải pháp này.  
+- You will be redirected to the Step Functions console. Click `Start execution` on the right.
 
-- Truy cập vào tab Resources trong CloudFormation stack và tìm SavingsPlansAlerts Step Functions state machine. Nhấp vào hyperlink màu xanh dương.  
+- View execution details in the Events section to monitor the state machine's progress. If there are Savings Plans purchased within the last 7 days and current month, you will receive an email notification.
 
-- Bạn sẽ được chuyển hướng đến Step Functions console. Nhấn Start execution ở bên phải.  
+- A successful execution is shown by a green box in the Graph view. If any Savings Plans fall below the specified utilization threshold, you will receive an email at the provided address.
 
-- Xem chi tiết execution trong mục Events để theo dõi tiến trình của state machine. Nếu có Savings Plans được mua trong vòng 7 ngày gần nhất và tháng hiện tại, bạn sẽ nhận email thông báo.  
+### **Resource Cleanup**
 
-- Một execution thành công được hiển thị bằng ô màu xanh lá trong Graph view. Nếu bất kỳ Savings Plans nào rơi dưới ngưỡng tỷ lệ sử dụng đã chỉ định, bạn sẽ nhận email tại địa chỉ đã cung cấp.
+All resources deployed for this solution can be deleted by deleting the CloudFormation stacks. You can delete the stack via the AWS Management Console or AWS CLI.
 
-### **Dọn dẹp tài nguyên**
-
-Tất cả các tài nguyên đã triển khai cho giải pháp này có thể được xóa bằng cách xóa CloudFormation stacks. Bạn có thể xóa stack thông qua AWS Management Console hoặc AWS CLI.
-
-Để xóa stack trong Management Account (CLI):
-```
+To delete the stack in the Management Account (CLI):
+```bash
 aws cloudformation delete-stack --stack-name new-sp-utilization-alert_management
 ```
 
-Để xóa stack trong Member Account (CLI):
-```
+To delete the stack in the Member Account (CLI):
+```bash
 aws cloudformation delete-stack --stack-name new-sp-utilization-alert_member
 ```
-### **Hiểu và xử lý cảnh báo**
+### **Understanding and Handling Alerts**
 
-Khi bạn nhận được cảnh báo về Savings Plans sử dụng thấp, bạn nên xem lại chi tiết sử dụng được cung cấp trong thông báo email. Phân tích các chỉ số sử dụng của bạn so với cam kết ban đầu khi mua Savings Plan, và điều tra xem tỷ lệ sử dụng thấp có phải là điều đã dự kiến hay do các yếu tố khác như di chuyển khối lượng công việc, thay đổi kiến trúc, hoặc ước tính sai nhu cầu công suất. Hãy cân nhắc hoàn trả Savings Plan nếu tỷ lệ sử dụng vẫn duy trì dưới ngưỡng của bạn, plan được mua trong vòng 7 ngày gần nhất, mua trong tháng hiện tại, và cam kết mỗi giờ ≤ \$100. Ghi lại lý do hoàn trả để tham khảo và lập kế hoạch cho tương lai.
+When you receive an alert about underutilized Savings Plans, you should review the usage details provided in the email notification. Analyze your utilization metrics against the original commitment when purchasing the Savings Plan, and investigate whether the low utilization was expected or due to other factors such as workload migration, architectural changes, or capacity demand miscalculations. Consider returning the Savings Plan if utilization remains below your threshold, the plan was purchased within the last 7 days, purchased in the current month, and has an hourly commitment ≤ $100. Record the reason for the return for future reference and planning.
 
-### **Kết luận**
+### **Conclusion**
 
-Bài viết đã hướng dẫn cách sử dụng Savings Plan và Cost Explorer APIs để xác định Savings Plans sử dụng thấp trong tổ chức của bạn. Sau đó, chúng tôi đã minh họa cách sử dụng Step Functions State Machine để lọc các Savings Plans được mua trong 7 ngày gần nhất và tháng hiện tại, điều này rất quan trọng vì bạn có thể hoàn trả Savings Plans trong thời gian hoàn trả hợp lệ nếu chúng không được sử dụng hiệu quả. Để biết thêm chi tiết về việc hoàn trả Savings Plan, tham khảo tài liệu [Returning a Purchased Savings Plan](https://docs.aws.amazon.com/savingsplans/latest/userguide/return-sp.html)
+This article guided you on how to use Savings Plan and Cost Explorer APIs to identify underutilized Savings Plans in your organization. Then, we illustrated how to use a Step Functions State Machine to filter Savings Plans purchased within the last 7 days and current month, which is critical because you can return Savings Plans within the eligible return period if they are not used effectively. For more details on returning a Savings Plan, refer to the document [Returning a Purchased Savings Plan](https://docs.aws.amazon.com/savingsplans/latest/userguide/return-sp.html)
 
-|     |     |
+| | |
 | --- | --- |
-| ![Hình 2](/images/3-BlogsTranslated/3.3-Blog3/2.png)   | **Syed Muhammad Tawha** <br> Syed Muhammad Tawha là Principal Technical Account Manager tại AWS, có trụ sở tại Dublin, Ireland. Tawha chuyên môn về Storage, Resilience và Cloud Cost Optimization. Anh đam mê giúp đỡ khách hàng của AWS tối ưu hóa chi phí và cải thiện hiệu suất. Ngoài công việc, Tawha còn yêu thích dành thời gian với bạn bè và gia đình |
-|  ![Hình 3](/images/3-BlogsTranslated/3.3-Blog3/3.png)    | **Dan Johns** <br> Dan Johns là Senior Solutions Architect Engineer, hỗ trợ khách hàng xây dựng trên AWS và đáp ứng các yêu cầu kinh doanh. Ngoài công việc, anh thích đọc sách, dành thời gian với gia đình và tự động hóa các tác vụ trong nhà. |
+| ![Figure 2](/images/3-BlogsTranslated/3.3-Blog3/2.png) | **Syed Muhammad Tawha** <br> Syed Muhammad Tawha is a Principal Technical Account Manager at AWS, based in Dublin, Ireland. Tawha specializes in Storage, Resilience, and Cloud Cost Optimization. He is passionate about helping AWS customers optimize costs and improve performance. Outside of work, Tawha loves spending time with friends and family. |
+| ![Figure 3](/images/3-BlogsTranslated/3.3-Blog3/3.png) | **Dan Johns** <br> Dan Johns is a Senior Solutions Architect Engineer, supporting customers building on AWS and meeting business requirements. Outside of work, he enjoys reading, spending time with family, and automating household tasks. |

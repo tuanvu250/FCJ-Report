@@ -8,63 +8,27 @@ pre: " <b> 1.7. </b> "
 
 ### Mục tiêu tuần 7:
 
-- Thực hành **deploy static website lên AWS** và cấu hình **Github Actions với AWS IAM User**.
-- Thực hành **chuyển đổi ứng dụng Monolith sang Microservices**: tách biệt các thành phần, containerization.
-- Học và thực hành **AWS Developer Tools**: CodeStar, CodePipeline, CodeBuild, CodeDeploy.
-- Thực hành **CI/CD Pipeline**: tự động hóa quy trình build, test và deploy ứng dụng.
-- Thực hành **tạo Microservice**: thiết kế, triển khai và quản lý microservices trên AWS.
-- Thực hành **cơ cấu lại dữ liệu và quy trình làm việc**: tối ưu hóa kiến trúc ứng dụng.
-- Thực hành **Amazon Kinesis**: streaming data, real-time data processing.
-- Thực hành **xây dựng Single Page Application (SPA) với xác thực**: tích hợp authentication và authorization. 
-
+- **AWS Cloud Practitioner Study**: Ôn tập kiến thức nền tảng theo lộ trình [kananinirav.com](https://kananinirav.com/).
+- **Cloud Computing & IAM**: Nắm vững các khái niệm điện toán đám mây và quản lý truy cập (Users, Groups, Roles).
+- **Compute & Storage Services**: Tìm hiểu sâu về EC2, EBS, S3, EFS và các mô hình lưu trữ.
+- **Networking & Global Infrastructure**: Hiểu rõ kiến trúc VPC, Regions, AZs và Edge Locations.
+- **Databases & Security**: Khám phá các dịch vụ CSDL (RDS, DynamoDB) và mô hình bảo mật chia sẻ (Shared Responsibility Model).
 
 ### Các công việc cần triển khai trong tuần này:
 
 | Ngày | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --- | --- | --- | --- |
-| 1 | - Thực hành deploy stactic website lên AWS và cấu hình Github Actions với AWS IAM User <br> | 20/10/2025 | 20/10/2025 | <https://www.youtube.com/watch?v=oSZ0tzlkuWo> |
-| 2 | - Thực hành Chuyển đổi Ứng dụng Monolith | 21/10/2025 | 21/10/2025 | <https://000050.awsstudygroup.com/vi/> |
-| 3 | - Thực hành cấu hình tự động phát hành ứng dụng (AWS CodeStar, AWS CodePipeline, AWS CodeBuild, AWS CodeDeploy)  | 22/10/2025 | 22/10/2025 | <https://000051.awsstudygroup.com/vi/> |
-| 4 | -  Thực hành tạo một Microservice <br> - Cơ cấu lại dữ liệu và quy trình làm việc | 23/10/2025 | 23/10/2025 | <https://000052.awsstudygroup.com/vi/> <br> <https://000053.awsstudygroup.com/vi/> |
-| 5 | - Thực hành truyền thông tin với Kinesis | 24/10/2025 | 24/10/2025 | <https://000054.awsstudygroup.com/vi/> |
-| 6 | - Thực hành tạo một Ứng dụng Đơn trang (SPA) được xác thực  | 25/10/2025 | 25/10/2025 | <https://000055.awsstudygroup.com/vi/> |
+| 1 | - **Cloud Computing**: Nghiên cứu sâu về các mô hình điện toán đám mây (IaaS, PaaS, SaaS) và lợi ích cốt lõi của AWS. <br> - **IAM**: Thực hành tạo và quản lý Users, Groups, Roles; áp dụng chính sách bảo mật (IAM Policies) và MFA. <br> - **EC2**: Phân tích chi tiết các loại Instance (General Purpose, Compute Optimized,...) và các mô hình Pricing (On-Demand, Spot, Reserved). | 20/10/2025 | 20/10/2025 | [Cloud Computing](https://kananinirav.com/sections/cloud_computing.html) <br> [IAM](https://kananinirav.com/sections/iam.html) <br> [EC2](https://kananinirav.com/sections/ec2.html) |
+| 2 | - **EC2 Storage**: So sánh sự khác biệt giữa EBS, Instance Store và EFS; thực hành mount EFS vào nhiều instance. <br> - **ELB & ASG**: Cấu hình Elastic Load Balancer (ELB) để phân tải và Auto Scaling Group (ASG) để tự động co giãn tài nguyên. | 21/10/2025 | 21/10/2025 | [EC2 Storage](https://kananinirav.com/sections/ec2_storage.html) <br> [ELB & ASG](https://kananinirav.com/sections/elb_asg.html) |
+| 3 | - **S3**: Tìm hiểu các Storage Classes (Standard, IA, Glacier), cấu hình Versioning và thiết lập Lifecycle Policies để tối ưu chi phí. <br> - **Databases**: Tổng quan về các dịch vụ cơ sở dữ liệu được quản lý: RDS (SQL), DynamoDB (NoSQL), ElastiCache và Redshift. | 22/10/2025 | 22/10/2025 | [S3](https://kananinirav.com/sections/s3.html) <br> [Databases](https://kananinirav.com/sections/databases.html) |
+| 4 | - **Deploying**: Tìm hiểu quy trình Infrastructure as Code với CloudFormation và quản lý ứng dụng với Elastic Beanstalk. <br> - **Global Infrastructure**: Nắm vững khái niệm Regions, Availability Zones (AZs) và Edge Locations để thiết kế hệ thống có tính sẵn sàng cao. | 23/10/2025 | 23/10/2025 | [Deploying](https://kananinirav.com/sections/deploying.html) <br> [Global Infrastructure](https://kananinirav.com/sections/global_infrastructure.html) |
+| 5 | - **Cloud Integration**: Tích hợp ứng dụng lỏng lẻo (loose coupling) sử dụng SQS (Message Queue) và SNS (Notification). <br> - **Cloud Monitoring**: Giám sát metrics hệ thống với CloudWatch, theo dõi nhật ký hoạt động user với CloudTrail và quản lý cấu hình với AWS Config. | 24/10/2025 | 24/10/2025 | [Cloud Integration](https://kananinirav.com/sections/cloud_integration.html) <br> [Cloud Monitoring](https://kananinirav.com/sections/cloud_monitoring.html) |
+| 6 | - **VPC**: Thiết kế mạng ảo Private Cloud gồm Subnets, Route Tables, Security Groups và NACLs để kiểm soát lưu lượng mạng. <br> - **Security & Compliance**: Hiểu rõ Mô hình Trách nhiệm Chia sẻ (Shared Responsibility Model), sử dụng Inspector để đánh giá bảo mật và Shield để chống DDoS. | 25/10/2025 | 25/10/2025 | [VPC](https://kananinirav.com/sections/vpc.html) <br> [Security Compliance](https://kananinirav.com/sections/security_compliance.html) |
 
 ### Kết quả đạt được tuần 7:
 
-- Thực hành thành công **deploy static website lên AWS với Github Actions**:
-  - Cấu hình S3 bucket để host static website
-  - Thiết lập AWS IAM User với quyền phù hợp
-  - Tạo và cấu hình Github Actions workflow
-  - Tự động hóa quá trình deploy khi push code lên repository
-- Hoàn thành lab **chuyển đổi ứng dụng Monolith sang Microservices**:
-  - Phân tích và tách biệt các thành phần của ứng dụng monolith
-  - Containerize các services với Docker
-  - Triển khai các containers độc lập trên AWS
-  - Hiểu được ưu điểm của kiến trúc microservices
-- Thực hành thành công **AWS Developer Tools - CI/CD Pipeline**:
-  - Thiết lập AWS CodeStar để quản lý project
-  - Cấu hình AWS CodePipeline cho automation workflow
-  - Sử dụng AWS CodeBuild để build ứng dụng
-  - Triển khai tự động với AWS CodeDeploy
-  - Tích hợp toàn bộ quy trình từ commit đến production
-- Hoàn thành lab **tạo Microservice**:
-  - Thiết kế và phát triển microservice độc lập
-  - Cấu hình API endpoints và communication
-  - Deploy microservice lên AWS
-  - Testing và monitoring microservice
-- Thực hành thành công **cơ cấu lại dữ liệu và quy trình làm việc**:
-  - Tối ưu hóa database schema cho microservices
-  - Refactor code và workflow
-  - Áp dụng best practices cho kiến trúc phân tán
-  - Cải thiện performance và scalability
-- Hoàn thành lab **truyền thông tin với Amazon Kinesis**:
-  - Thiết lập Kinesis Data Streams
-  - Xử lý real-time data streaming
-  - Tích hợp Kinesis với Lambda functions
-  - Phân tích và xử lý dữ liệu theo thời gian thực
-- Thực hành thành công **xây dựng Single Page Application (SPA) với xác thực**:
-  - Phát triển SPA với modern JavaScript framework
-  - Tích hợp authentication system
-  - Cấu hình authorization và access control
-  - Deploy SPA lên AWS với secure configuration
-  - Kết nối frontend với backend APIs  
+- **Kiến thức nền tảng vững chắc**: Hoàn thành toàn bộ lộ trình AWS Cloud Practitioner (Cloud Computing, IAM, Billing).
+- **Core Services Mastery**: Hiểu sâu và vận dụng tốt các dịch vụ Compute (EC2) và Storage (S3, EBS).
+- **Networking Competence**: Nắm vững kiến trúc mạng trong AWS (VPC, Subnets, Security Groups).
+- **Security & Compliance**: Hiểu rõ mô hình chia sẻ trách nhiệm và các tiêu chuẩn bảo mật đám mây.
+- **Deployment & Monitoring**: Làm quen với các công cụ triển khai (CloudFormation) và giám sát (CloudWatch).

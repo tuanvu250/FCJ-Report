@@ -6,12 +6,6 @@ chapter: false
 pre: " <b> 3. </b> "
 ---
 
-{{% notice warning %}}  
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
-
-Tại đây sẽ là phần liệt kê, giới thiệu các blogs mà các bạn đã dịch. Ví dụ:
-
 ### [Blog 1 - Chạy và tối ưu các Small Language Models tại on-premises và tại edge](3.1-Blog1/)
 
 Bài viết hướng dẫn cách triển khai Small Language Models (SLMs) vào môi trường AWS on-premises hoặc edge (AWS Local Zones và AWS Outposts) để đáp ứng các yêu cầu về data residency, information security policy, và low latency. Nội dung bao gồm: sự khác biệt giữa LLMs và SLMs, lợi ích của SLMs (thời gian suy luận nhanh hơn, yêu cầu tài nguyên thấp hơn, phù hợp edge computing), kiến trúc triển khai sử dụng Llama.cpp framework, các bước cụ thể để cài đặt và cấu hình (khởi chạy GPU instance, cài đặt NVIDIA drivers, cài đặt Llama.cpp, tải và chuyển đổi model sang định dạng GGUF), và các ví dụ tối ưu hóa cho chatbot và text summarization.

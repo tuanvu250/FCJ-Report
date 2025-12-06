@@ -1,21 +1,26 @@
 ---
-title : "Introduction"
-date : "2025-09-09"
-weight : 1
-chapter : false
-pre : " <b> 5.1. </b> "
+title: "Introduction"
+date: "2025-09-09"
+weight: 1
+chapter: false
+pre: " <b> 5.1. </b> "
 ---
 
-#### VPC endpoints
+### Overview
 
-- **VPC endpoints** are virtual devices. They are horizontally scaled, redundant, and highly available VPC components. They allow communication between your compute resources and AWS services without imposing availability risks.
-- Compute resources running in VPC can access **Amazon S3** using a Gateway endpoint. PrivateLink interface endpoints can be used by compute resources running in VPC or on-premises.
+In this workshop, we will focus on building an intelligent AI assistant capable of "reading and understanding" and answering questions based on proprietary enterprise data (RAG technique).
 
-#### Workshop overview
+The main objective is to establish a fully automated and serverless data processing workflow, consisting of the following steps:
 
-In this workshop, you will use two VPCs.
+1.  **Ingestion:** Loading source documents into the system.
+2.  **Indexing:** Converting text into vectors and storing them for retrieval.
+3.  **Retrieval & Generation:** Configuring the AI model to search for relevant information and generate answers to user questions.
 
-- **"VPC Cloud"** is for cloud resources such as a **Gateway endpoint** and an EC2 instance to test with.
-- **"VPC On-Prem"** simulates an on-premises environment such as a factory or corporate datacenter. An EC2 instance running strongSwan VPN software has been deployed in "VPC On-prem" and automatically configured to establish a Site-to-Site VPN tunnel with AWS Transit Gateway. This VPN simulates connectivity from an on-premises location to the AWS cloud. To minimize costs, only one VPN instance is provisioned to support this workshop. When planning VPN connectivity for your production workloads, AWS recommends using multiple VPN devices for high availability.
+> 💡 **Highlight:** This solution allows you to **eliminate the need to manage any server infrastructure**, optimizing costs and operational time.
 
-![overview](/images/5-Workshop/5.1-Workshop-overview/diagram1.png)
+![overview](/images/5-Workshop/5.1-Workshop-overview/overview_diagram.png)
+
+#### Implementation Steps
+
+1. [RAG Explanation](5.1.1-WhatIsRag/)
+2. [Service Introduction](5.1.2-Services/)

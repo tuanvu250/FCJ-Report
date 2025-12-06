@@ -1,58 +1,34 @@
 ---
 title: "Worklog Tuần 8"
-date: "2025-09-09"
+date: "2025-11-02"
 weight: 1
 chapter: false
 pre: " <b> 1.8. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
 ### Mục tiêu tuần 8:
 
-- Kết nối, làm quen với các thành viên trong First Cloud Journey.
-- Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+- **AWS Cloud Practitioner Study**: Hoàn tất các module cuối cùng và ôn tập toàn diện.
+- **Account Management & Security**: Tìm hiểu về Billing, Cost Explorer, Organizations và các dịch vụ định danh nâng cao.
+- **Architecture & Ecosystem**: Nắm vững Well-Architected Framework và Cloud Adoption Framework.
+- **Exam Preparation**: Luyện đề, thi thử và hoàn thành kỳ thi giữa kỳ.
+- **Project Kickoff**: Thống nhất yêu cầu, công nghệ và khởi động dự án chính thức.
 
 ### Các công việc cần triển khai trong tuần này:
 
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP <br>                    | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Ngày | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
+| --- | --- | --- | --- | --- |
+| 1 | - **Account Management**: Cấu hình AWS Organizations để quản lý đa tài khoản, thiết lập Billing dashboard và Cost Explorer để quản lý chi phí. <br> - **Advanced Identity**: Tìm hiểu về Amazon Cognito cho xác thực ứng dụng và AWS SSO cho đăng nhập một lần. | 27/10/2025 | 27/10/2025 | [Account Management](https://kananinirav.com/sections/account_management_billing_support.html) <br> [Advanced Identity](https://kananinirav.com/sections/advanced_identity.html) |
+| 2 | - **Other AWS Services**: Khám phá các dịch vụ khác như Amazon WorkSpaces (VDI), Amazon Connect (Contact Center) và Amazon Chime. | 28/10/2025 | 28/10/2025 | [Other AWS Services](https://kananinirav.com/sections/other_aws_services.html) |
+| 3 | - **Architecting & Ecosystem**: Nghiên cứu sâu Well-Architected Framework (6 pillars) và Cloud Adoption Framework (CAF) để chuẩn hóa quy trình thiết kế. | 29/10/2025 | 29/10/2025 | [Architecting](https://kananinirav.com/sections/architecting_and_ecosystem.html) |
+| 4 | - **Review & Self-study**: Hệ thống hóa lại toàn bộ kiến thức đã học, Thực hiện các bài thi thử trên AWS Skill Builder. | 30/10/2025 | 30/10/2025 | [Practice Exam](https://kananinirav.com/practice-exam/exams.html) |
+| 5 | - **Practice Exam & Mid-term Exam**: Thực hiện các bài thi thử full-test (65 câu hỏi) để quản lý thời gian và hoàn thành kỳ thi giữa kỳ bắt buộc. | 31/10/2025 | 31/10/2025 | [Practice Exam](https://kananinirav.com/practice-exam/exams.html) |
+| 6 | - **Project Kickoff**: Tổ chức buổi họp khởi động dự án chính thức. Thống nhất yêu cầu nghiệp vụ (SRS), lựa chọn Technology Stack và lập kế hoạch chi tiết (Gantt chart). <br> - Tính toán chi phí của hệ thống | 01/11/2025 | 01/11/2025 | |
 
 ### Kết quả đạt được tuần 8:
 
-- Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản:
-
-  - Compute
-  - Storage
-  - Networking
-  - Database
-  - ...
-
-- Đã tạo và cấu hình AWS Free Tier account thành công.
-
-- Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-- Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-
-  - Access Key
-  - Secret Key
-  - Region mặc định
-  - ...
-
-- Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  - Kiểm tra thông tin tài khoản & cấu hình
-  - Lấy danh sách region
-  - Xem dịch vụ EC2
-  - Tạo và quản lý key pair
-  - Kiểm tra thông tin dịch vụ đang chạy
-  - ...
-
-- Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-- ...
+- **AWS Certified Cloud Practitioner**: Hoàn thành toàn bộ nội dung khóa học và sẵn sàng 100% cho kỳ thi.
+- **Mid-term Exam**: Hoàn thành kỳ thi giữa kỳ với kết quả tốt, nắm vững kiến thức nền tảng.
+- **Architecture Proficiency**: Hiểu rõ Well-Architected Framework để thiết kế hệ thống tối ưu.
+- **Advanced Tools Mastery**: Sử dụng thành thạo các công cụ quản lý tài khoản và bảo mật nâng cao.
+- **Project Readiness**: Dự án chính thức khởi động với sự thống nhất cao về công nghệ và quy trình.

@@ -1,3 +1,4 @@
+
 ---
 title: "Bản đề xuất"
 date: "2025-09-09"
@@ -5,122 +6,178 @@ weight: 2
 chapter: false
 pre: " <b> 2. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
-Tại phần này, bạn cần tóm tắt các nội dung trong workshop mà bạn **dự tính** sẽ làm.
+# Ứng dụng quản lý tài chính cá nhân (Vicobi)
 
-# IoT Weather Platform for Lab Research
-
-## Giải pháp AWS Serverless hợp nhất cho giám sát thời tiết thời gian thực
+### Bạn có thể đọc toàn bộ proposal ở đây: <a href="/files/2-Proposal/Vicobi_Proposal.pdf" download>Vicobi Proposal</a>
 
 ### 1. Tóm tắt điều hành
 
-IoT Weather Platform được thiết kế dành cho nhóm _ITea Lab_ tại TP. Hồ Chí Minh nhằm nâng cao khả năng thu thập và phân tích dữ liệu thời tiết. Nền tảng hỗ trợ tối đa 5 trạm thời tiết, có khả năng mở rộng lên 10–15 trạm, sử dụng thiết bị biên Raspberry Pi kết hợp cảm biến ESP32 để truyền dữ liệu qua MQTT. Nền tảng tận dụng các dịch vụ AWS Serverless để cung cấp giám sát thời gian thực, phân tích dự đoán và tiết kiệm chi phí, với quyền truy cập giới hạn cho 5 thành viên phòng lab thông qua Amazon Cognito.
+Dự án **Vicobi** (Personal Finance Management App) hướng đến việc cung cấp một nền tảng quản lý tài chính cá nhân thông minh, hiện đại và mang tính tự động hóa cao. Vicobi đơn giản hóa việc quản lý tài chính qua 4 trụ cột chính:
+
+1.  **Ghi chép thông minh (Smart Recording):** Nhập liệu bằng giọng nói và quét hóa đơn, loại bỏ rào cản nhập liệu thủ công.
+2.  **Lập ngân sách theo mục tiêu (Goal-based Budgeting):** Tự động hóa tạo và quản lý các hũ tiền (money jars) linh hoạt.
+3.  **Phân tích & Kiểm soát:** Cung cấp báo cáo trực quan và hệ thống cảnh báo thông minh.
+4.  **Trợ lý tài chính (AI Chatbot):** Tích hợp Chatbot AI đóng vai trò tư vấn viên, hỗ trợ giải đáp và nâng cao kiến thức tài chính.
+
+Về mặt công nghệ, Vicobi được xây dựng trên kiến trúc **Microservices** sử dụng **.NET Aspire** và **FastAPI**, triển khai trên **AWS Cloud**, đảm bảo tính linh hoạt và an toàn dữ liệu. Quy trình phát triển tuân theo mô hình **Agile/Scrum** (2 tuần/sprint trong giai đoạn phát triển chính), với mục tiêu hoàn thành MVP trong 2 tháng thực thi.
 
 ### 2. Tuyên bố vấn đề
 
-_Vấn đề hiện tại_  
-Các trạm thời tiết hiện tại yêu cầu thu thập dữ liệu thủ công, khó quản lý khi có nhiều trạm. Không có hệ thống tập trung cho dữ liệu hoặc phân tích thời gian thực, và các nền tảng bên thứ ba thường tốn kém và quá phức tạp.
+#### Vấn đề hiện tại
 
-_Giải pháp_  
-Nền tảng sử dụng AWS IoT Core để tiếp nhận dữ liệu MQTT, AWS Lambda và API Gateway để xử lý, Amazon S3 để lưu trữ (bao gồm data lake), và AWS Glue Crawlers cùng các tác vụ ETL để trích xuất, chuyển đổi, tải dữ liệu từ S3 data lake sang một S3 bucket khác để phân tích. AWS Amplify với Next.js cung cấp giao diện web, và Amazon Cognito đảm bảo quyền truy cập an toàn. Tương tự như Thingsboard và CoreIoT, người dùng có thể đăng ký thiết bị mới và quản lý kết nối, nhưng nền tảng này hoạt động ở quy mô nhỏ hơn và phục vụ mục đích sử dụng nội bộ. Các tính năng chính bao gồm bảng điều khiển thời gian thực, phân tích xu hướng và chi phí vận hành thấp.
+Trong thị trường năng động hiện nay, người dùng gặp khó khăn trong việc kiểm soát tài chính do "sức ỳ hành vi" — ngại ghi chép thủ công từng giao dịch. Các ứng dụng hiện có (như Money Lover, Misa Money Keeper) vẫn dựa nhiều vào nhập liệu bằng tay, gây ra tình trạng "mệt mỏi khi nhập liệu" (input fatigue) và tỷ lệ bỏ cuộc cao.
 
-_Lợi ích và hoàn vốn đầu tư (ROI)_  
-Giải pháp tạo nền tảng cơ bản để các thành viên phòng lab phát triển một nền tảng IoT lớn hơn, đồng thời cung cấp nguồn dữ liệu cho những người nghiên cứu AI phục vụ huấn luyện mô hình hoặc phân tích. Nền tảng giảm bớt báo cáo thủ công cho từng trạm thông qua hệ thống tập trung, đơn giản hóa quản lý và bảo trì, đồng thời cải thiện độ tin cậy dữ liệu. Chi phí hàng tháng ước tính 0,66 USD (theo AWS Pricing Calculator), tổng cộng 7,92 USD cho 12 tháng. Tất cả thiết bị IoT đã được trang bị từ hệ thống trạm thời tiết hiện tại, không phát sinh chi phí phát triển thêm. Thời gian hoàn vốn 6–12 tháng nhờ tiết kiệm đáng kể thời gian thao tác thủ công.
+#### Giải pháp
+
+Vicobi giải quyết vấn đề bằng cách tự động hóa cao độ quy trình nhập liệu thông qua AWS Cloud và Microservices:
+
+- **Công nghệ lõi:** Tích hợp AI xử lý giọng nói tiếng Việt (Voice-to-Text) và nhận diện hóa đơn (OCR) chi tiết.
+- **Kiến trúc tối ưu:** Sử dụng **AWS ECS Fargate** chạy mô hình Multi-container Task (gộp Backend .NET và AI Service) để giảm chi phí hạ tầng nhưng vẫn đảm bảo giao tiếp liền mạch.
+- **Frontend hiện đại:** Sử dụng **Next.js** được lưu trữ trên **Amazon S3** và phân phối toàn cầu qua **Amazon CloudFront**.
+
+#### Lợi ích và hoàn vốn đầu tư (ROI)
+
+Giải pháp mang lại lợi thế cạnh tranh rõ rệt:
+
+- **Giá trị người dùng:** Giảm hơn **70%** thao tác thủ công. Độ chính xác nhận diện giọng nói đạt **90%** và trích xuất hóa đơn đạt **80%**.
+- **Hiệu quả kinh tế:** Tận dụng tối đa AWS Free Tier (S3, CloudFront, Cognito). Ngân sách vận hành tinh gọn khoảng **~$60/tháng** cho hạ tầng và **~$15/tháng** cho AI compute.
+- **Hoàn vốn:** Dự kiến đạt ROI trong **6–12 tháng** nhờ tiết kiệm thời gian và tăng hiệu suất.
+- **Khả năng mở rộng:** Kiến trúc Microservices sẵn sàng cho việc tích hợp Mobile App hoặc Open Banking.
 
 ### 3. Kiến trúc giải pháp
 
-Nền tảng áp dụng kiến trúc AWS Serverless để quản lý dữ liệu từ 5 trạm dựa trên Raspberry Pi, có thể mở rộng lên 15 trạm. Dữ liệu được tiếp nhận qua AWS IoT Core, lưu trữ trong S3 data lake và xử lý bởi AWS Glue Crawlers và ETL jobs để chuyển đổi và tải vào một S3 bucket khác cho mục đích phân tích. Lambda và API Gateway xử lý bổ sung, trong khi Amplify với Next.js cung cấp bảng điều khiển được bảo mật bởi Cognito.
+Hệ thống được thiết kế theo mô hình **Microservices** phân tán, sử dụng API Gateway làm điểm nhập duy nhất.
 
-![IoT Weather Station Architecture](/images/2-Proposal/edge_architecture.jpeg)
+![Ứng dụng quản lý tài chính cá nhân Software Architecture](/images/2-Proposal/development_architecture.png)
 
-![IoT Weather Platform Architecture](/images/2-Proposal/platform_architecture.jpeg)
+#### Chi tiết Tech Stack:
 
-_Dịch vụ AWS sử dụng_
+| Thành phần       | Công nghệ            | Chi tiết                                                                   |
+| :--------------- | :------------------- | :------------------------------------------------------------------------- |
+| **Frontend**     | **Next.js 16**       | App Router, TypeScript, Tailwind CSS, Zustand, React Query.                |
+| **Backend Core** | **.NET Aspire**      | Điều phối Microservices (User, Wallet, Transaction, Report, Notification). |
+| **AI Service**   | **FastAPI (Python)** | Xử lý Voice (PhoWhisper), OCR (Bedrock), Chatbot (RAG).                    |
+| **Database**     | **Polyglot**         | PostgreSQL, MongoDB, Elasticsearch, Qdrant (Vector DB).                    |
+| **Messaging**    | **RabbitMQ**         | Giao tiếp bất đồng bộ giữa các service.                                    |
 
-- _AWS IoT Core_: Tiếp nhận dữ liệu MQTT từ 5 trạm, mở rộng lên 15.
-- _AWS Lambda_: Xử lý dữ liệu và kích hoạt Glue jobs (2 hàm).
-- _Amazon API Gateway_: Giao tiếp với ứng dụng web.
-- _Amazon S3_: Lưu trữ dữ liệu thô (data lake) và dữ liệu đã xử lý (2 bucket).
-- _AWS Glue_: Crawlers lập chỉ mục dữ liệu, ETL jobs chuyển đổi và tải dữ liệu.
-- _AWS Amplify_: Lưu trữ giao diện web Next.js.
-- _Amazon Cognito_: Quản lý quyền truy cập cho người dùng phòng lab.
+![Ứng dụng quản lý tài chính cá nhân Cloud Architecture](/images/2-Proposal/cloud_architecture.png)
 
-_Thiết kế thành phần_
+#### Luồng hoạt động trên AWS:
 
-- _Thiết bị biên_: Raspberry Pi thu thập và lọc dữ liệu cảm biến, gửi tới IoT Core.
-- _Tiếp nhận dữ liệu_: AWS IoT Core nhận tin nhắn MQTT từ thiết bị biên.
-- _Lưu trữ dữ liệu_: Dữ liệu thô lưu trong S3 data lake; dữ liệu đã xử lý lưu ở một S3 bucket khác.
-- _Xử lý dữ liệu_: AWS Glue Crawlers lập chỉ mục dữ liệu; ETL jobs chuyển đổi để phân tích.
-- _Giao diện web_: AWS Amplify lưu trữ ứng dụng Next.js cho bảng điều khiển và phân tích thời gian thực.
-- _Quản lý người dùng_: Amazon Cognito giới hạn 5 tài khoản hoạt động.
+1.  **Truy cập:** Người dùng truy cập qua **Route 53**, được bảo vệ bởi **AWS WAF** và tăng tốc bởi **CloudFront**.
+2.  **Xác thực:** **Amazon Cognito** quản lý định danh và cấp phát JWT Token.
+3.  **Xử lý API:** Request đi qua **API Gateway**, kết nối an toàn qua **AWS PrivateLink** tới **Application Load Balancer (ALB)**.
+4.  **Compute:** ALB phân phối tải tới các container trong **ECS Fargate** (nằm trong Private Subnet).
+5.  **DevOps:** Quy trình CI/CD tự động hóa hoàn toàn bằng **GitLab**, build image đẩy lên **Amazon ECR** và update task trên ECS.
 
 ### 4. Triển khai kỹ thuật
 
-_Các giai đoạn triển khai_  
-Dự án gồm 2 phần — thiết lập trạm thời tiết biên và xây dựng nền tảng thời tiết — mỗi phần trải qua 4 giai đoạn:
+#### Các giai đoạn triển khai
 
-1. _Nghiên cứu và vẽ kiến trúc_: Nghiên cứu Raspberry Pi với cảm biến ESP32 và thiết kế kiến trúc AWS Serverless (1 tháng trước kỳ thực tập).
-2. _Tính toán chi phí và kiểm tra tính khả thi_: Sử dụng AWS Pricing Calculator để ước tính và điều chỉnh (Tháng 1).
-3. _Điều chỉnh kiến trúc để tối ưu chi phí/giải pháp_: Tinh chỉnh (ví dụ tối ưu Lambda với Next.js) để đảm bảo hiệu quả (Tháng 2).
-4. _Phát triển, kiểm thử, triển khai_: Lập trình Raspberry Pi, AWS services với CDK/SDK và ứng dụng Next.js, sau đó kiểm thử và đưa vào vận hành (Tháng 2–3).
+Dự án kéo dài 4 tháng (bao gồm thực tập):
 
-_Yêu cầu kỹ thuật_
+1.  **Tháng 0 (Pre-internship):** Lên ý tưởng và kế hoạch tổng thể.
+2.  **Tháng 1 (Foundation):** Học AWS, nâng cấp kỹ năng .NET/Next.js/AI. Thiết lập VPC, IAM.
+3.  **Tháng 2 (Design):** Thiết kế kiến trúc High-level & Detailed trên AWS.
+4.  **Tháng 3-4 (Realization):** Coding, Integration Testing, Deploy lên AWS Production, thiết lập Monitoring.
+5.  **Sau tháng 5:** Nghiên cứu phát triển Mobile App.
 
-- _Trạm thời tiết biên_: Cảm biến (nhiệt độ, độ ẩm, lượng mưa, tốc độ gió), vi điều khiển ESP32, Raspberry Pi làm thiết bị biên. Raspberry Pi chạy Raspbian, sử dụng Docker để lọc dữ liệu và gửi 1 MB/ngày/trạm qua MQTT qua Wi-Fi.
-- _Nền tảng thời tiết_: Kiến thức thực tế về AWS Amplify (lưu trữ Next.js), Lambda (giảm thiểu do Next.js xử lý), AWS Glue (ETL), S3 (2 bucket), IoT Core (gateway và rules), và Cognito (5 người dùng). Sử dụng AWS CDK/SDK để lập trình (ví dụ IoT Core rules tới S3). Next.js giúp giảm tải Lambda cho ứng dụng web fullstack.
+#### Yêu cầu kỹ thuật chi tiết:
 
-### 5. Lộ trình & Mốc triển khai
+- **Frontend:** Triển khai **Next.js 16** trên S3 + CloudFront. Sử dụng **Origin Access Control (OAC)** để bảo mật bucket.
+- **Backend:**
+  - Sử dụng **.NET Aspire** để quản lý cấu hình Cloud-native.
+  - Database-per-service: **PostgreSQL** & **MongoDB**. **Elasticsearch** cho tìm kiếm giao dịch phức tạp.
+  - Background Jobs: Sử dụng **Hangfire**.
+- **AI Service Pipelines:**
+  - _Voice:_ Tiền xử lý bằng Pydub, Model **PhoWhisper-small** (VinAI) cho tiếng Việt.
+  - _OCR:_ **Amazon Bedrock** (Claude 3.5 Sonnet Multimodal) để trích xuất thông tin hóa đơn chính xác.
+  - _Chatbot (RAG):_ Knowledge Base lưu trong **Qdrant**, sinh câu trả lời qua **Amazon Bedrock** (Claude 3.5 Sonnet).
+- **Bảo mật:**
+  - Mã hóa dữ liệu đường truyền (HTTPS/TLS 1.2+) và lưu trữ (AES-256).
+  - Quản lý bí mật (Secrets) chưa tích hợp sâu (đang ở mức MVP), sẽ nâng cấp lên AWS Secrets Manager trong tương lai.
 
-- _Trước thực tập (Tháng 0)_: 1 tháng lên kế hoạch và đánh giá trạm cũ.
-- _Thực tập (Tháng 1–3)_:
-  - Tháng 1: Học AWS và nâng cấp phần cứng.
-  - Tháng 2: Thiết kế và điều chỉnh kiến trúc.
-  - Tháng 3: Triển khai, kiểm thử, đưa vào sử dụng.
-- _Sau triển khai_: Nghiên cứu thêm trong vòng 1 năm.
+### 5. Lộ trình & Mốc triển khai (Sprints)
+
+Giai đoạn thực thi chính được chia thành 4 Sprint:
+
+- **Sprint 1: Core Foundation**
+  - Xác thực (Cognito), Quản lý Ví (Wallets), Hũ chi tiêu (Spending Jars).
+- **Sprint 2: Core Features**
+  - Giao dịch (CRUD), Xử lý giọng nói AI (Voice Processing).
+- **Sprint 3: Analytics**
+  - Báo cáo/Biểu đồ, Hệ thống thông báo (SES), Message Broker.
+- **Sprint 4: Stabilization**
+  - Kiểm thử tích hợp (Integration Testing), Tinh chỉnh UI, Deploy lên AWS ECS & CloudFront.
+- **Testing & Go-live:**
+  - Cấu hình Domain, SSL, Monitoring Dashboard, UAT và bảo vệ đồ án.
 
 ### 6. Ước tính ngân sách
 
-Có thể xem chi phí trên [AWS Pricing Calculator](https://calculator.aws/#/estimate?id=621f38b12a1ef026842ba2ddfe46ff936ed4ab01)  
-Hoặc tải [tệp ước tính ngân sách](../attachments/budget_estimation.pdf).
+Dựa trên bảng dự toán chi tiết cho giai đoạn MVP.
 
-_Chi phí hạ tầng_
+Bạn có thể xem chi tiết bảng dự toán chi phí bằng cách tải về các tệp sau:
+_📊 <a href="/files/2-Proposal/pricing.csv" download>Tệp định dạng CSV</a>_
+_💾 <a href="/files/2-Proposal/pricing.json" download>Tệp định dạng JSON</a>_
 
-- AWS Lambda: 0,00 USD/tháng (1.000 request, 512 MB lưu trữ).
-- S3 Standard: 0,15 USD/tháng (6 GB, 2.100 request, 1 GB quét).
-- Truyền dữ liệu: 0,02 USD/tháng (1 GB vào, 1 GB ra).
-- AWS Amplify: 0,35 USD/tháng (256 MB, request 500 ms).
-- Amazon API Gateway: 0,01 USD/tháng (2.000 request).
-- AWS Glue ETL Jobs: 0,02 USD/tháng (2 DPU).
-- AWS Glue Crawlers: 0,07 USD/tháng (1 crawler).
-- MQTT (IoT Core): 0,08 USD/tháng (5 thiết bị, 45.000 tin nhắn).
+| Dịch vụ AWS                | Thành phần / Sử dụng      | Chi Phí (USD/tháng) |
+| :------------------------- | :------------------------ | :------------------ |
+| **Elastic Load Balancing** | Application Load Balancer | $18.98              |
+| **Amazon ECS**             | Fargate (vCPU & Memory)   | $17.30              |
+| **Amazon VPC**             | VPC Endpoints & NAT       | $10.49              |
+| **AWS WAF**                | Web ACL & Requests        | $7.20               |
+| **Amazon API Gateway**     | API Calls & Data Transfer | $2.50               |
+| **Amazon CloudFront**      | Data Transfer Out         | $2.00               |
+| **Amazon ECR**             | Storage                   | $1.00               |
+| **Amazon Route 53**        | Hosted Zones              | $0.54               |
+| **Amazon S3**              | Standard Storage          | $0.34               |
+| **TỔNG CHI PHÍ AWS**       |                           | **~$60.35**         |
 
-_Tổng_: 0,7 USD/tháng, 8,40 USD/12 tháng
+**Chi phí khác:**
+| Hạng mục | Chi tiết | Chi Phí (USD/tháng) |
+| :--- | :--- | :--- |
+| **AI Compute / Tooling** | Gemini API, Amazon Bedrock | ~$15.00 |
+| **TỔNG CỘNG DỰ ÁN** | | **~$75.35 / tháng** |
 
-- _Phần cứng_: 265 USD một lần (Raspberry Pi 5 và cảm biến).
+_(Dựa trên giá On-Demand khu vực Singapore - ap-southeast-1)_
 
 ### 7. Đánh giá rủi ro
 
-_Ma trận rủi ro_
+- **Rủi ro chính:** Lộ thông tin người dùng (Impact: High), Mất kết nối AWS Region (Impact: High), AI nhận diện sai (Impact: Medium).
+- **Chiến lược giảm thiểu:**
+  - _Bảo mật:_ Mã hóa AES-256, HTTPS, IAM Least Privilege, AWS WAF.
+  - _High Availability:_ Triển khai Multi-AZ cho ECS và ALB.
+  - _AI:_ Cải thiện model liên tục với dữ liệu thực tế.
+  - _Resilience:_ Sử dụng RabbitMQ nội bộ để xử lý bất đồng bộ và retry.
+- **Kế hoạch dự phòng (Disaster Recovery):** Sử dụng IaC (Infrastructure as Code) để khôi phục nhanh hạ tầng.
 
-- Mất mạng: Ảnh hưởng trung bình, xác suất trung bình.
-- Hỏng cảm biến: Ảnh hưởng cao, xác suất thấp.
-- Vượt ngân sách: Ảnh hưởng trung bình, xác suất thấp.
+### 8. Kết quả kỳ vọng & Đội ngũ
 
-_Chiến lược giảm thiểu_
+#### Kết quả mong đợi của dự án
 
-- Mạng: Lưu trữ cục bộ trên Raspberry Pi với Docker.
-- Cảm biến: Kiểm tra định kỳ, dự phòng linh kiện.
-- Chi phí: Cảnh báo ngân sách AWS, tối ưu dịch vụ.
+- **Nhập liệu tài chính tự động:** Ứng dụng giúp người dùng tránh nhập liệu thủ công, chỉ cần chụp ảnh hóa đơn hoặc ghi âm giọng nói để hệ thống tự động phân loại chi tiêu.
+- **Quản lý tài chính trực quan:** Người dùng có thể xem biểu đồ chi tiêu, báo cáo hàng tháng và nhận đề xuất tiết kiệm dựa trên hành vi tiêu dùng.
+- **Trải nghiệm người dùng tối thiểu:** Giao diện web thân thiện, thiết kế hiện đại, được tối ưu hóa cho thiết bị di động và phù hợp với người mới bắt đầu quản lý tài chính.
+- **Hệ thống ổn định, có khả năng mở rộng:** Kiến trúc microservices giúp dễ dàng thêm các tính năng mới như nhắc nhở chi tiêu, phân tích dự đoán AI hoặc mở rộng sang ứng dụng di động.
+- **Nâng cao kỹ năng nhóm phát triển:** Các thành viên dự án có quyền truy cập thực tế vào các quy trình DevOps, triển khai CI/CD và tối ưu hóa ứng dụng trên nền tảng đám mây.
 
-_Kế hoạch dự phòng_
+#### Hạn chế của dự án
 
-- Quay lại thu thập thủ công nếu AWS gặp sự cố.
-- Sử dụng CloudFormation để khôi phục cấu hình liên quan đến chi phí.
+- **Mô hình AI Việt Nam còn hạn chế:** Khả năng nhận dạng giọng nói vùng miền hoặc hóa đơn viết tay vẫn chưa đạt độ chính xác cao.
 
-### 8. Kết quả kỳ vọng
+- **Không có ứng dụng di động riêng biệt:** Phiên bản MVP chỉ hỗ trợ nền tảng web, không có ứng dụng di động gốc.
 
-_Cải tiến kỹ thuật_: Dữ liệu và phân tích thời gian thực thay thế quy trình thủ công. Có thể mở rộng tới 10–15 trạm.  
-_Giá trị dài hạn_: Nền tảng dữ liệu 1 năm cho nghiên cứu AI, có thể tái sử dụng cho các dự án tương lai.
+#### Đội ngũ thực hiện (Team):
+
+| Họ tên                   | Vai trò                     | Email                     |
+| :----------------------- | :-------------------------- | :------------------------ |
+| **Lê Vũ Phương Hòa**     | Backend Developer (Leader)  | hoalvpse181951@fpt.edu.vn |
+| **Nguyễn Văn Anh Duy**   | AI Developer (Member)       | duynvase181823@fpt.edu.vn |
+| **Uông Tuấn Vũ**         | Frontend Developer (Member) | vuutse180241@fpt.edu.vn   |
+| **Trần Nguyễn Bảo Minh** | AI Developer (Member)       | baominhbrthcs@gmail.com   |
+
+**Mentor Support:**
+
+- **Nguyễn Gia Hưng** - Head of Solution Architects
+- **Văn Hoàng Kha** - Cloud Security Engineer

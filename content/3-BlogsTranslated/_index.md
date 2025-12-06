@@ -6,12 +6,6 @@ chapter: false
 pre: " <b> 3. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
-
-This section will list and introduce the blogs you have translated. For example:
-
 ### [Blog 1 - Running and Optimizing Small Language Models On-Premises and at the Edge](3.1-Blog1/)
 
 This blog provides a comprehensive guide on deploying Small Language Models (SLMs) to AWS on-premises or edge environments (AWS Local Zones and AWS Outposts) to meet requirements for data residency, information security policies, and low latency. The content covers: differences between LLMs and SLMs, benefits of SLMs (faster inference time, lower resource requirements, suitable for edge computing), deployment architecture using the Llama.cpp framework, specific steps for installation and configuration (launching GPU instances, installing NVIDIA drivers, installing Llama.cpp, downloading and converting models to GGUF format), and optimization examples for chatbot and text summarization use cases.

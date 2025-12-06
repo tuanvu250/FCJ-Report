@@ -6,135 +6,176 @@ chapter: false
 pre: " <b> 2. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
+# Personal Finance Management App (Vicobi)
 
-In this section, you need to summarize the contents of the workshop that you **plan** to conduct.
-
-# IoT Weather Platform for Lab Research
-
-## A Unified AWS Serverless Solution for Real-Time Weather Monitoring
+### You can read the full proposal here: <a href="/files/2-Proposal/Vicobi_Proposal.pdf" download>Vicobi Proposal</a>
 
 ### 1. Executive Summary
 
-The IoT Weather Platform is designed for the ITea Lab team in Ho Chi Minh City to enhance weather data collection and analysis. It supports up to 5 weather stations, with potential scalability to 10-15, utilizing Raspberry Pi edge devices with ESP32 sensors to transmit data via MQTT. The platform leverages AWS Serverless services to deliver real-time monitoring, predictive analytics, and cost efficiency, with access restricted to 5 lab members via Amazon Cognito.
+The **Vicobi** (Personal Finance Management App) project aims to provide an intelligent, modern, and highly automated personal financial management platform. Vicobi simplifies financial management through 4 main pillars:
+
+1.  **Smart Recording:** Voice input and invoice scanning, eliminating manual data entry barriers.
+2.  **Goal-based Budgeting:** Automated creation and flexible management of money jars.
+3.  **Analysis & Control:** Provides visual reports and intelligent alert systems.
+4.  **AI Financial Assistant (Chatbot):** Integrates AI Chatbot acting as an advisor, supporting inquiries and enhancing financial knowledge.
+
+From a technical perspective, Vicobi is built on a **Microservices** architecture using **.NET Aspire** and **FastAPI**, deployed on **AWS Cloud**, ensuring flexibility and data security. The development process follows the **Agile/Scrum** model (2 weeks/sprint during the main development phase), with the goal of completing MVP within 2 months of execution.
 
 ### 2. Problem Statement
 
-### What’s the Problem?
+#### Current Problem
 
-Current weather stations require manual data collection, becoming unmanageable with multiple units. There is no centralized system for real-time data or analytics, and third-party platforms are costly and overly complex.
+In today's dynamic market, users face difficulties in controlling finances due to "behavioral inertia" — reluctance to manually record each transaction. Existing applications (like Money Lover, Misa Money Keeper) still rely heavily on manual input, causing "input fatigue" and high abandonment rates.
 
-### The Solution
+#### Solution
 
-The platform uses AWS IoT Core to ingest MQTT data, AWS Lambda and API Gateway for processing, Amazon S3 for storage (including a data lake), and AWS Glue Crawlers and ETL jobs to extract, transform, and load data from the S3 data lake to another S3 bucket for analysis. AWS Amplify with Next.js provides the web interface, and Amazon Cognito ensures secure access. Similar to Thingsboard and CoreIoT, users can register new devices and manage connections, though this platform operates on a smaller scale and is designed for private use. Key features include real-time dashboards, trend analysis, and low operational costs.
+Vicobi solves the problem through high automation of the data entry process using AWS Cloud and Microservices:
 
-### Benefits and Return on Investment
+- **Core Technology:** Integrates AI for Vietnamese voice processing (Voice-to-Text) and detailed invoice recognition (OCR).
+- **Optimized Architecture:** Uses **AWS ECS Fargate** running Multi-container Task model (combining .NET Backend and AI Service) to reduce infrastructure costs while ensuring seamless communication.
+- **Modern Frontend:** Uses **Next.js** hosted on **Amazon S3** and distributed globally via **Amazon CloudFront**.
 
-The solution establishes a foundational resource for lab members to develop a larger IoT platform, serving as a study resource, and provides a data foundation for AI enthusiasts for model training or analysis. It reduces manual reporting for each station via a centralized platform, simplifying management and maintenance, and improves data reliability. Monthly costs are $0.66 USD per the AWS Pricing Calculator, with a 12-month total of $7.92 USD. All IoT equipment costs are covered by the existing weather station setup, eliminating additional development expenses. The break-even period of 6-12 months is achieved through significant time savings from reduced manual work.
+#### Benefits and Return on Investment (ROI)
+
+The solution provides clear competitive advantages:
+
+- **User Value:** Reduces over **70%** manual operations. Voice recognition accuracy reaches **90%** and invoice extraction reaches **80%**.
+- **Economic Efficiency:** Maximizes AWS Free Tier usage (S3, CloudFront, Cognito). Lean operating budget around **~$60/month** for infrastructure and **~$15/month** for AI compute.
+- **ROI:** Expected to achieve ROI within **6–12 months** thanks to time savings and increased efficiency.
+- **Scalability:** Microservices architecture ready for Mobile App integration or Open Banking.
 
 ### 3. Solution Architecture
 
-The platform employs a serverless AWS architecture to manage data from 5 Raspberry Pi-based stations, scalable to 15. Data is ingested via AWS IoT Core, stored in an S3 data lake, and processed by AWS Glue Crawlers and ETL jobs to transform and load it into another S3 bucket for analysis. Lambda and API Gateway handle additional processing, while Amplify with Next.js hosts the dashboard, secured by Cognito. The architecture is detailed below:
+The system is designed with a distributed **Microservices** model, using API Gateway as the single entry point.
 
-![IoT Weather Station Architecture](/images/2-Proposal/edge_architecture.jpeg)
+![Personal Finance Management App Software Architecture](/images/2-Proposal/development_architecture.png)
 
-![IoT Weather Platform Architecture](/images/2-Proposal/platform_architecture.jpeg)
+#### Tech Stack Details:
 
-### AWS Services Used
+| Component        | Technology           | Details                                                                       |
+| :--------------- | :------------------- | :---------------------------------------------------------------------------- |
+| **Frontend**     | **Next.js 16**       | App Router, TypeScript, Tailwind CSS, Zustand, React Query.                   |
+| **Backend Core** | **.NET Aspire**      | Orchestrates Microservices (User, Wallet, Transaction, Report, Notification). |
+| **AI Service**   | **FastAPI (Python)** | Handles Voice (PhoWhisper), OCR (Bedrock), Chatbot (RAG).                     |
+| **Database**     | **Polyglot**         | PostgreSQL, MongoDB, Elasticsearch, Qdrant (Vector DB).                       |
+| **Messaging**    | **RabbitMQ**         | Asynchronous communication between services.                                  |
 
-- **AWS IoT Core**: Ingests MQTT data from 5 stations, scalable to 15.
-- **AWS Lambda**: Processes data and triggers Glue jobs (two functions).
-- **Amazon API Gateway**: Facilitates web app communication.
-- **Amazon S3**: Stores raw data in a data lake and processed outputs (two buckets).
-- **AWS Glue**: Crawlers catalog data, and ETL jobs transform and load it.
-- **AWS Amplify**: Hosts the Next.js web interface.
-- **Amazon Cognito**: Secures access for lab users.
+![Personal Finance Management App Cloud Architecture](/images/2-Proposal/cloud_architecture.png)
 
-### Component Design
+#### AWS Workflow:
 
-- **Edge Devices**: Raspberry Pi collects and filters sensor data, sending it to IoT Core.
-- **Data Ingestion**: AWS IoT Core receives MQTT messages from the edge devices.
-- **Data Storage**: Raw data is stored in an S3 data lake; processed data is stored in another S3 bucket.
-- **Data Processing**: AWS Glue Crawlers catalog the data, and ETL jobs transform it for analysis.
-- **Web Interface**: AWS Amplify hosts a Next.js app for real-time dashboards and analytics.
-- **User Management**: Amazon Cognito manages user access, allowing up to 5 active accounts.
+1.  **Access:** Users access via **Route 53**, protected by **AWS WAF** and accelerated by **CloudFront**.
+2.  **Authentication:** **Amazon Cognito** manages identity and issues JWT Tokens.
+3.  **API Processing:** Requests go through **API Gateway**, connecting securely via **AWS PrivateLink** to **Application Load Balancer (ALB)**.
+4.  **Compute:** ALB distributes load to containers in **ECS Fargate** (located in Private Subnet).
+5.  **DevOps:** CI/CD process fully automated by **GitLab**, builds images pushed to **Amazon ECR** and updates tasks on ECS.
 
-### 4. Technical Implementation
+### 4. Technical Deployment
 
-**Implementation Phases**
-This project has two parts—setting up weather edge stations and building the weather platform—each following 4 phases:
+#### Implementation Phases
 
-- Build Theory and Draw Architecture: Research Raspberry Pi setup with ESP32 sensors and design the AWS serverless architecture (1 month pre-internship)
-- Calculate Price and Check Practicality: Use AWS Pricing Calculator to estimate costs and adjust if needed (Month 1).
-- Fix Architecture for Cost or Solution Fit: Tweak the design (e.g., optimize Lambda with Next.js) to stay cost-effective and usable (Month 2).
-- Develop, Test, and Deploy: Code the Raspberry Pi setup, AWS services with CDK/SDK, and Next.js app, then test and release to production (Months 2-3).
+The project spans 4 months (including internship):
 
-**Technical Requirements**
+1.  **Month 0 (Pre-internship):** Ideation and overall planning.
+2.  **Month 1 (Foundation):** Learn AWS, upgrade .NET/Next.js/AI skills. Set up VPC, IAM.
+3.  **Month 2 (Design):** Design High-level & Detailed architecture on AWS.
+4.  **Month 3-4 (Realization):** Coding, Integration Testing, Deploy to AWS Production, set up Monitoring.
+5.  **After Month 5:** Research and develop Mobile App.
 
-- Weather Edge Station: Sensors (temperature, humidity, rainfall, wind speed), a microcontroller (ESP32), and a Raspberry Pi as the edge device. Raspberry Pi runs Raspbian, handles Docker for filtering, and sends 1 MB/day per station via MQTT over Wi-Fi.
-- Weather Platform: Practical knowledge of AWS Amplify (hosting Next.js), Lambda (minimal use due to Next.js), AWS Glue (ETL), S3 (two buckets), IoT Core (gateway and rules), and Cognito (5 users). Use AWS CDK/SDK to code interactions (e.g., IoT Core rules to S3). Next.js reduces Lambda workload for the fullstack web app.
+#### Detailed Technical Requirements:
 
-### 5. Timeline & Milestones
+- **Frontend:** Deploy **Next.js 16** on S3 + CloudFront. Use **Origin Access Control (OAC)** to secure bucket.
+- **Backend:**
+  - Use **.NET Aspire** to manage Cloud-native configuration.
+  - Database-per-service: **PostgreSQL** & **MongoDB**. **Elasticsearch** for complex transaction search.
+  - Background Jobs: Use **Hangfire**.
+- **AI Service Pipelines:**
+  - _Voice:_ Preprocessing with Pydub, **PhoWhisper-small** Model (VinAI) for Vietnamese.
+  - _OCR:_ **Amazon Bedrock** (Claude 3.5 Sonnet Multimodal) to accurately extract invoice information.
+  - _Chatbot (RAG):_ Knowledge Base stored in **Qdrant**, generates responses via **Amazon Bedrock** (Claude 3.5 Sonnet).
+- **Security:**
+  - Data encryption in transit (HTTPS/TLS 1.2+) and at rest (AES-256).
+  - Secrets management not deeply integrated (currently at MVP level), will upgrade to AWS Secrets Manager in the future.
 
-**Project Timeline**
+### 5. Timeline & Milestones (Sprints)
 
-- Pre-Internship (Month 0): 1 month for planning and old station review.
-- Internship (Months 1-3): 3 months.
-  - Month 1: Study AWS and upgrade hardware.
-  - Month 2: Design and adjust architecture.
-  - Month 3: Implement, test, and launch.
-- Post-Launch: Up to 1 year for research.
+The main execution phase is divided into 4 Sprints:
+
+- **Sprint 1: Core Foundation**
+  - Authentication (Cognito), Wallet Management, Spending Jars.
+- **Sprint 2: Core Features**
+  - Transactions (CRUD), AI Voice Processing.
+- **Sprint 3: Analytics**
+  - Reports/Charts, Notification System (SES), Message Broker.
+- **Sprint 4: Stabilization**
+  - Integration Testing, UI Refinement, Deploy to AWS ECS & CloudFront.
+- **Testing & Go-live:**
+  - Domain Configuration, SSL, Monitoring Dashboard, UAT and project defense.
 
 ### 6. Budget Estimation
 
-You can find the budget estimation on the [AWS Pricing Calculator](https://calculator.aws/#/estimate?id=621f38b12a1ef026842ba2ddfe46ff936ed4ab01).  
-Or you can download the [Budget Estimation File](../attachments/budget_estimation.pdf).
+Based on detailed cost estimates for the MVP phase.
 
-### Infrastructure Costs
+You can review the detailed cost estimation by downloading the following files:
+_📊 <a href="/files/2-Proposal/pricing.csv" download>CSV Pricing File</a>_
+_💾 <a href="/files/2-Proposal/pricing.json" download>JSON Pricing File</a>_
 
-- AWS Services:
-  - AWS Lambda: $0.00/month (1,000 requests, 512 MB storage).
-  - S3 Standard: $0.15/month (6 GB, 2,100 requests, 1 GB scanned).
-  - Data Transfer: $0.02/month (1 GB inbound, 1 GB outbound).
-  - AWS Amplify: $0.35/month (256 MB, 500 ms requests).
-  - Amazon API Gateway: $0.01/month (2,000 requests).
-  - AWS Glue ETL Jobs: $0.02/month (2 DPUs).
-  - AWS Glue Crawlers: $0.07/month (1 crawler).
-  - MQTT (IoT Core): $0.08/month (5 devices, 45,000 messages).
+| AWS Service                | Component / Usage         | Cost (USD/month) |
+| :------------------------- | :------------------------ | :--------------- |
+| **Elastic Load Balancing** | Application Load Balancer | $18.98           |
+| **Amazon ECS**             | Fargate (vCPU & Memory)   | $17.30           |
+| **Amazon VPC**             | VPC Endpoints & NAT       | $10.49           |
+| **AWS WAF**                | Web ACL & Requests        | $7.20            |
+| **Amazon API Gateway**     | API Calls & Data Transfer | $2.50            |
+| **Amazon CloudFront**      | Data Transfer Out         | $2.00            |
+| **Amazon ECR**             | Storage                   | $1.00            |
+| **Amazon Route 53**        | Hosted Zones              | $0.54            |
+| **Amazon S3**              | Standard Storage          | $0.34            |
+| **TOTAL AWS COST**         |                           | **~$60.35**      |
 
-Total: $0.7/month, $8.40/12 months
+**Other Costs:**
+| Category | Details | Cost (USD/month) |
+| :--- | :--- | :--- |
+| **AI Compute / Tooling** | Gemini API, Amazon Bedrock | ~$15.00 |
+| **PROJECT TOTAL** | | **~$75.35 / month** |
 
-- Hardware: $265 one-time (Raspberry Pi 5 and sensors).
+_(Based on On-Demand pricing in Singapore region - ap-southeast-1)_
 
 ### 7. Risk Assessment
 
-#### Risk Matrix
+- **Main Risks:** User information leakage (Impact: High), AWS Region connection loss (Impact: High), AI misrecognition (Impact: Medium).
+- **Mitigation Strategies:**
+  - _Security:_ AES-256 encryption, HTTPS, IAM Least Privilege, AWS WAF.
+  - _High Availability:_ Multi-AZ deployment for ECS and ALB.
+  - _AI:_ Continuously improve model with real data.
+  - _Resilience:_ Use internal RabbitMQ for asynchronous processing and retry.
+- **Disaster Recovery Plan:** Use IaC (Infrastructure as Code) for rapid infrastructure restoration.
 
-- Network Outages: Medium impact, medium probability.
-- Sensor Failures: High impact, low probability.
-- Cost Overruns: Medium impact, low probability.
+### 8. Expected Results & Team
 
-#### Mitigation Strategies
+#### Expected Results of the Project
 
-- Network: Local storage on Raspberry Pi with Docker.
-- Sensors: Regular checks and spares.
-- Cost: AWS budget alerts and optimization.
+- **Automated financial data entry:** The application helps users avoid manual entry, just take a photo of the invoice or record a voice for the system to automatically classify spending.
+- **Intuitive financial management:** Users can view spending charts, monthly reports, and receive savings suggestions based on consumer behavior.
+- **Minimal user experience:** Friendly web interface, modern design, optimized for mobile devices and suitable for people new to financial management.
+- **Stable, scalable system:** Microservices architecture makes it easy to add new features such as spending reminders, AI predictive analysis, or expand to a mobile app.
+- **Improving development team skills:** Project members have practical access to DevOps processes, CI/CD implementation, and cloud-based application optimization.
 
-#### Contingency Plans
+#### Project Limitations
 
-- Revert to manual methods if AWS fails.
-- Use CloudFormation for cost-related rollbacks.
+- **Vietnamese AI model is still limited:** The ability to recognize regional voices or handwritten invoices has not yet achieved high accuracy.
+- **No separate mobile application:** The MVP version only supports the web platform, there is no native mobile app.
 
-### 8. Expected Outcomes
+#### Implementation Team:
 
-#### Technical Improvements:
+| Name                     | Role                        | Email                     |
+| :----------------------- | :-------------------------- | :------------------------ |
+| **Le Vu Phuong Hoa**     | Backend Developer (Leader)  | hoalvpse181951@fpt.edu.vn |
+| **Nguyen Van Anh Duy**   | AI Developer (Member)       | duynvase181823@fpt.edu.vn |
+| **Uong Tuan Vu**         | Frontend Developer (Member) | vuutse180241@fpt.edu.vn   |
+| **Tran Nguyen Bao Minh** | AI Developer (Member)       | baominhbrthcs@gmail.com   |
 
-Real-time data and analytics replace manual processes.  
-Scalable to 10-15 stations.
+**Mentor Support:**
 
-#### Long-term Value
-
-1-year data foundation for AI research.  
-Reusable for future projects.
+- **Nguyen Gia Hung** - Head of Solution Architects
+- **Van Hoang Kha** - Cloud Security Engineer

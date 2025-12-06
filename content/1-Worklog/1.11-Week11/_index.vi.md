@@ -1,58 +1,30 @@
 ---
 title: "Worklog Tuần 11"
-date: "2025-09-09"
-weight: 2
+date: "2025-11-23"
+weight: 1
 chapter: false
 pre: " <b> 1.11. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
 ### Mục tiêu tuần 11:
 
-- Kết nối, làm quen với các thành viên trong First Cloud Journey.
-- Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+- Hoàn thiện các tính năng AI: **Bill Scanning**, **Categorization**, **Analytics**.
+- Xây dựng **Chatbot** và trang **Quản lý Chatbot**.
+- Tối ưu hóa **Mobile-First**.
 
 ### Các công việc cần triển khai trong tuần này:
 
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP <br>                    | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Ngày | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
+| --- | --- | --- | --- | --- |
+| 1 | - **Bill Scanning (OCR)**: Sử dụng AI API để upload và phân tích ảnh hóa đơn. Trích xuất thông tin: Ngày, Tổng tiền, Tên sản phẩm. <br> - Tham gia AWS Cloud Mastery Series #2: Từ DevOps, IaC đến Container & Observability | 17/11/2025 | 17/11/2025 | |
+| 2 | - **AI Categorization & Suggestions**: Xây dựng logic để tự động mapping tên giao dịch sang category tương ứng. Hiển thị UI gợi ý cho người dùng xác nhận hoặc sửa đổi. | 18/11/2025 | 18/11/2025 | |
+| 3 | - **Statistics & History**: Xây dựng chức năng hiển thị số liệu thống kê chi tiết (hàng ngày, tuần, tháng, năm) và lịch sử giao dịch tổng hợp cho từng Ví và Hũ. | 19/11/2025 | 19/11/2025 | |
+| 4 | - **Chatbot Page**: Xây dựng giao diện chat (`/services/chatbot`) với layout giống ChatGPT. Tích hợp stream response từ API `askChatbot` và hiển thị markdown message. | 20/11/2025 | 20/11/2025 | |
+| 5 | - **Chatbot Management**: Xây dựng module quản lý Knowledge Base (`/services/chatbot-management`). Cho phép Admin upload PDF/Docx để training chatbot và xóa file context cũ. | 21/11/2025 | 21/11/2025 | |
+| 6 | - **Mobile Optimization**: Tinh chỉnh lại toàn bộ CSS cho thiết bị di động (Mobile-first). Tăng kích thước nút bấm (touch targets), tối ưu layout drawer/modal và kiểm tra hiển thị trên thiết bị thật. | 22/11/2025 | 22/11/2025 | |
 
 ### Kết quả đạt được tuần 11:
 
-- Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản:
-
-  - Compute
-  - Storage
-  - Networking
-  - Database
-  - ...
-
-- Đã tạo và cấu hình AWS Free Tier account thành công.
-
-- Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-- Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-
-  - Access Key
-  - Secret Key
-  - Region mặc định
-  - ...
-
-- Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  - Kiểm tra thông tin tài khoản & cấu hình
-  - Lấy danh sách region
-  - Xem dịch vụ EC2
-  - Tạo và quản lý key pair
-  - Kiểm tra thông tin dịch vụ đang chạy
-  - ...
-
-- Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-- ...
+- **AI & Chatbot**: Hoàn thiện toàn bộ tính năng thông minh và trợ lý ảo.
+- **Mobile Ready**: Ứng dụng hoạt động mượt mà trên thiết bị di động.
+- **Analytics**: Báo cáo trực quan, giúp người dùng nắm bắt tình hình tài chính.

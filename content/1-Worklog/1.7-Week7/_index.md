@@ -8,62 +8,27 @@ pre: " <b> 1.7. </b> "
 
 ### Week 7 Objectives:
 
-- Practice **deploying static website to AWS** and configure **Github Actions with AWS IAM User**.
-- Practice **converting Monolith application to Microservices**: separating components, containerization.
-- Learn and practice **AWS Developer Tools**: CodeStar, CodePipeline, CodeBuild, CodeDeploy.
-- Practice **CI/CD Pipeline**: automate build, test, and deployment processes.
-- Practice **creating Microservices**: design, deploy, and manage microservices on AWS.
-- Practice **restructuring data and workflows**: optimize application architecture.
-- Practice **Amazon Kinesis**: streaming data, real-time data processing.
-- Practice **building Single Page Application (SPA) with authentication**: integrate authentication and authorization.
+- **AWS Cloud Practitioner Study**: Review foundational knowledge following the [kananinirav.com](https://kananinirav.com/) roadmap.
+- **Cloud Computing & IAM**: Master cloud computing concepts and access management (Users, Groups, Roles).
+- **Compute & Storage Services**: Deep dive into EC2, EBS, S3, EFS, and storage models.
+- **Networking & Global Infrastructure**: Understand VPC architecture, Regions, AZs, and Edge Locations.
+- **Databases & Security**: Explore Database services (RDS, DynamoDB) and the Shared Responsibility Model.
 
 ### Tasks to be carried out this week:
 
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | --- | --- | --- | --- |
-| 1 | - Practice deploying static website to AWS and configure Github Actions with AWS IAM User <br> | 10/20/2025 | 10/20/2025 | <https://www.youtube.com/watch?v=oSZ0tzlkuWo> |
-| 2 | - Practice converting Monolith Application | 10/21/2025 | 10/21/2025 | <https://000050.awsstudygroup.com/vi/> |
-| 3 | - Practice configuring automated application release (AWS CodeStar, AWS CodePipeline, AWS CodeBuild, AWS CodeDeploy) | 10/22/2025 | 10/22/2025 | <https://000051.awsstudygroup.com/vi/> |
-| 4 | - Practice creating a Microservice <br> - Restructure data and workflows | 10/23/2025 | 10/23/2025 | <https://000052.awsstudygroup.com/vi/> <br> <https://000053.awsstudygroup.com/vi/> |
-| 5 | - Practice messaging with Kinesis | 10/24/2025 | 10/24/2025 | <https://000054.awsstudygroup.com/vi/> |
-| 6 | - Practice creating an authenticated Single Page Application (SPA) | 10/25/2025 | 10/25/2025 | <https://000055.awsstudygroup.com/vi/> |
+| 1 | - **Cloud Computing**: Deep research into cloud computing models (IaaS, PaaS, SaaS) and core AWS benefits. <br> - **IAM**: Practice creating and managing Users, Groups, Roles; applying security policies (IAM Policies) and MFA. <br> - **EC2**: Detailed analysis of Instance types (General Purpose, Compute Optimized,...) and Pricing models (On-Demand, Spot, Reserved). | 20/10/2025 | 20/10/2025 | [Cloud Computing](https://kananinirav.com/sections/cloud_computing.html) <br> [IAM](https://kananinirav.com/sections/iam.html) <br> [EC2](https://kananinirav.com/sections/ec2.html) |
+| 2 | - **EC2 Storage**: Compare differences between EBS, Instance Store, and EFS; practice mounting EFS to multiple instances. <br> - **ELB & ASG**: Configure Elastic Load Balancer (ELB) for load distribution and Auto Scaling Group (ASG) for automatic resource scaling. | 21/10/2025 | 21/10/2025 | [EC2 Storage](https://kananinirav.com/sections/ec2_storage.html) <br> [ELB & ASG](https://kananinirav.com/sections/elb_asg.html) |
+| 3 | - **S3**: Explore Storage Classes (Standard, IA, Glacier), configure Versioning, and setup Lifecycle Policies for cost optimization. <br> - **Databases**: Overview of managed database services: RDS (SQL), DynamoDB (NoSQL), ElastiCache, and Redshift. | 22/10/2025 | 22/10/2025 | [S3](https://kananinirav.com/sections/s3.html) <br> [Databases](https://kananinirav.com/sections/databases.html) |
+| 4 | - **Deploying**: Understand Infrastructure as Code process with CloudFormation and application management with Elastic Beanstalk. <br> - **Global Infrastructure**: Master concepts of Regions, Availability Zones (AZs), and Edge Locations to design high-availability systems. | 23/10/2025 | 23/10/2025 | [Deploying](https://kananinirav.com/sections/deploying.html) <br> [Global Infrastructure](https://kananinirav.com/sections/global_infrastructure.html) |
+| 5 | - **Cloud Integration**: Loosely coupled application integration using SQS (Message Queue) and SNS (Notification). <br> - **Cloud Monitoring**: Monitor system metrics with CloudWatch, track user activity logs with CloudTrail, and manage configuration with AWS Config. | 24/10/2025 | 24/10/2025 | [Cloud Integration](https://kananinirav.com/sections/cloud_integration.html) <br> [Cloud Monitoring](https://kananinirav.com/sections/cloud_monitoring.html) |
+| 6 | - **VPC**: Design Private Cloud virtual network including Subnets, Route Tables, Security Groups, and NACLs to control network traffic. <br> - **Security & Compliance**: Understand Shared Responsibility Model, use Inspector for security assessment, and Shield for DDoS protection. | 25/10/2025 | 25/10/2025 | [VPC](https://kananinirav.com/sections/vpc.html) <br> [Security Compliance](https://kananinirav.com/sections/security_compliance.html) |
 
 ### Week 7 Achievements:
 
-- Successfully practiced **deploying static website to AWS with Github Actions**:
-  - Configured S3 bucket to host static website
-  - Set up AWS IAM User with appropriate permissions
-  - Created and configured Github Actions workflow
-  - Automated deployment process when pushing code to repository
-- Completed **converting Monolith application to Microservices** lab:
-  - Analyzed and separated components of monolith application
-  - Containerized services with Docker
-  - Deployed independent containers on AWS
-  - Understood advantages of microservices architecture
-- Successfully practiced **AWS Developer Tools - CI/CD Pipeline**:
-  - Set up AWS CodeStar for project management
-  - Configured AWS CodePipeline for automation workflow
-  - Used AWS CodeBuild to build applications
-  - Automated deployment with AWS CodeDeploy
-  - Integrated entire process from commit to production
-- Completed **creating Microservice** lab:
-  - Designed and developed independent microservice
-  - Configured API endpoints and communication
-  - Deployed microservice to AWS
-  - Testing and monitoring microservice
-- Successfully practiced **restructuring data and workflows**:
-  - Optimized database schema for microservices
-  - Refactored code and workflow
-  - Applied best practices for distributed architecture
-  - Improved performance and scalability
-- Completed **messaging with Amazon Kinesis** lab:
-  - Set up Kinesis Data Streams
-  - Processed real-time data streaming
-  - Integrated Kinesis with Lambda functions
-  - Analyzed and processed data in real-time
-- Successfully practiced **building Single Page Application (SPA) with authentication**:
-  - Developed SPA with modern JavaScript framework
-  - Integrated authentication system
-  - Configured authorization and access control
-  - Deployed SPA to AWS with secure configuration
-  - Connected frontend with backend APIs
+- **Solid Foundation**: Completed the entire AWS Cloud Practitioner roadmap (Cloud Computing, IAM, Billing).
+- **Core Services Mastery**: Deep understanding and effective use of Compute (EC2) and Storage (S3, EBS) services.
+- **Networking Competence**: Mastered network architecture in AWS (VPC, Subnets, Security Groups).
+- **Security & Compliance**: Clear understanding of the shared responsibility model and cloud security standards.
+- **Deployment & Monitoring**: Familiarized with deployment tools (CloudFormation) and monitoring (CloudWatch).

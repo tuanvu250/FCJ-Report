@@ -17,7 +17,7 @@ chapter: false
 
 &emsp; **University:** FPT University Campus Ho Chi Minh
 
-&emsp; **Major:** Information Technology
+&emsp; **Major:** Software Engineering
 
 &emsp; **Class:** SE180241
 
@@ -25,9 +25,9 @@ chapter: false
 
 &emsp; **Internship Position:** FCJ Cloud Intern
 
-&emsp; **Internship Duration:** From 12/08/2025 to 12/11/2025
+&emsp; **Internship Duration:** From 08/09/2025 to 12/12/2025
 
-<img src="/images/avatar-new.JPG" alt="Your profile picture" width="450"/>
+<img src="/images/TuanVu.jpg" alt="Your profile picture" width="450"/>
 
 ### Report Content
 

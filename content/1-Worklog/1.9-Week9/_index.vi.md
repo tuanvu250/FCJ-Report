@@ -1,58 +1,34 @@
 ---
 title: "Worklog Tuần 9"
-date: "2025-09-09"
+date: "2025-11-09"
 weight: 1
 chapter: false
 pre: " <b> 1.9. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
 ### Mục tiêu tuần 9:
 
-- Kết nối, làm quen với các thành viên trong First Cloud Journey.
-- Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+- **Project Initialization**: Khởi tạo dự án Next.js 16, React 19, TypeScript và cấu hình ESLint, Husky.
+- **Design System Setup**: Thiết lập hệ thống thiết kế Neobrutalism, cài đặt Tailwind CSS và Shadcn UI.
+- **Authentication Flow**: Tích hợp AWS Cognito, xây dựng trang Login/Register với Zod validation.
+- **Dashboard Development**: Xây dựng layout responsive cho User/Admin và các thành phần giao diện chính.
+- **State Management & API**: Cấu hình Axios client, Redux/Zustand store và tích hợp React Query.
 
 ### Các công việc cần triển khai trong tuần này:
 
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP <br>                    | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Ngày | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
+| --- | --- | --- | --- | --- |
+| 1 | - **Project Setup**: Khởi tạo dự án với Next.js 16.0.1 (App Router), React 19 và TypeScript. <br> - **Dev Tools**: Cấu hình quy trình Git hook với Husky, kiểm soát commit message với Commitlint và thiết lập ESLint/Prettier chuẩn. | 03/11/2025 | 03/11/2025 | [Next.js 16](https://nextjs.org/), [Husky](https://typicode.github.io/husky/) |
+| 2 | - **Design System Setup**: Cài đặt Tailwind CSS và cấu hình Design Tokens cho phong cách Neobrutalism (đậm nét, shadow cứng). Tùy biến Shadcn UI components và cài thêm Framer Motion cho animation. | 04/11/2025 | 04/11/2025 | [Framer Motion](https://www.framer.com/motion/) |
+| 3 | - **Authentication Flow**: Tích hợp AWS Cognito Identity Provider. Xây dựng form Login/Register/Forgot Password sử dụng React Hook Form kết hợp Zod validation. Kết nối `authService`. | 05/11/2025 | 05/11/2025 | [AWS Cognito](https://aws.amazon.com/cognito/) |
+| 4 | - **Dashboard Layout**: Xây dựng Layout riêng biệt cho Group Route `(member)` và `(admin)`. Implement Sidebar navigation responsive hoàn chỉnh và Widget hệ thống style Neobrutalist. | 06/11/2025 | 06/11/2025 | |
+| 5 | - **API Client & Store**: Thiết lập Axios Interceptor (`lib/api/core.ts`) để tự động gắn Token và refresh token. Cấu hình Global State với Zustand (`authStore`) và tích hợp React Query (`apiStore`). | 07/11/2025 | 07/11/2025 | [Zustand](https://zustand-demo.pmnd.rs/) |
+| 6 | - **Wallet Management Start**: Phân tích API swagger, implement `fetchWallet` service và custom hook `useWallet`. Xây dựng UI danh sách ví và modal tạo ví mới. <br> - **Weekly Review**: Review lại cấu trúc thư mục và convention code. | 08/11/2025 | 08/11/2025 | |
 
 ### Kết quả đạt được tuần 9:
 
-- Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản:
-
-  - Compute
-  - Storage
-  - Networking
-  - Database
-  - ...
-
-- Đã tạo và cấu hình AWS Free Tier account thành công.
-
-- Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-- Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-
-  - Access Key
-  - Secret Key
-  - Region mặc định
-  - ...
-
-- Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  - Kiểm tra thông tin tài khoản & cấu hình
-  - Lấy danh sách region
-  - Xem dịch vụ EC2
-  - Tạo và quản lý key pair
-  - Kiểm tra thông tin dịch vụ đang chạy
-  - ...
-
-- Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-- ...
+- **Development Environment**: Khởi tạo thành công dự án Next.js 16/React 19, cấu hình ESLint/Prettier chuẩn chỉ.
+- **Neobrutalism Design System**: Hệ thống UI components, typography và màu sắc đã được thiết lập đồng bộ.
+- **Authentication System**: Hoàn thiện luồng đăng ký/đăng nhập với AWS Cognito và form validation chặt chẽ.
+- **Dashboard UI**: Giao diện Dashboard responsive cho Admin và User đã hoạt động.
+- **Foundation Layer**: Cấu hình xong API Client (Axios) và State Management (Zustand/TanStack Query).

@@ -1,21 +1,26 @@
 ---
-title : "Giới thiệu"
-date : "2025-09-09"
-weight : 1
-chapter : false
-pre : " <b> 5.1. </b> "
+title: "Giới thiệu"
+date: "2025-09-09"
+weight: 1
+chapter: false
+pre: " <b> 5.1. </b> "
 ---
 
-#### Giới thiệu về VPC Endpoint
+### Giới thiệu tổng quan
 
-- Điểm cuối VPC (endpoint) là thiết bị ảo. Chúng là các thành phần VPC có thể mở rộng theo chiều ngang, dự phòng và có tính sẵn sàng cao. Chúng cho phép giao tiếp giữa tài nguyên điện toán của bạn và dịch vụ AWS mà không gây ra rủi ro về tính sẵn sàng.
-- Tài nguyên điện toán đang chạy trong VPC có thể truy cập Amazon S3 bằng cách sử dụng điểm cuối Gateway. Interface Endpoint PrivateLink có thể được sử dụng bởi tài nguyên chạy trong VPC hoặc tại TTDL.
+Trong bài thực hành này, chúng ta sẽ tập trung xây dựng một trợ lý AI thông minh có khả năng "đọc hiểu" và trả lời câu hỏi dựa trên dữ liệu riêng của doanh nghiệp (kỹ thuật RAG).
 
-#### Tổng quan về workshop
+Mục tiêu chính là thiết lập một quy trình xử lý dữ liệu hoàn toàn tự động và không máy chủ (Serverless), bao gồm các bước:
 
-Trong workshop này, bạn sẽ sử dụng hai VPC.
+1.  **Ingestion (Nhập liệu):** Đưa tài liệu gốc vào hệ thống.
+2.  **Indexing (Tạo chỉ mục):** Chuyển đổi văn bản thành vector và lưu trữ để tra cứu.
+3.  **Retrieval & Generation (Truy xuất & Tạo sinh):** Cấu hình mô hình AI để tìm kiếm thông tin liên quan và trả lời câu hỏi của người dùng.
 
-- **"VPC Cloud"** dành cho các tài nguyên cloud như Gateway endpoint và EC2 instance để kiểm tra.
-- **"VPC On-Prem"** mô phỏng môi trường truyền thống như nhà máy hoặc trung tâm dữ liệu của công ty. Một EC2 Instance chạy phần mềm StrongSwan VPN đã được triển khai trong "VPC On-prem" và được cấu hình tự động để thiết lập đường hầm VPN Site-to-Site với AWS Transit Gateway. VPN này mô phỏng kết nối từ một vị trí tại TTDL (on-prem) với AWS cloud. Để giảm thiểu chi phí, chỉ một phiên bản VPN được cung cấp để hỗ trợ workshop này. Khi lập kế hoạch kết nối VPN cho production workloads của bạn, AWS khuyên bạn nên sử dụng nhiều thiết bị VPN để có tính sẵn sàng cao.
+> 💡 **Điểm nổi bật:** Giải pháp này giúp bạn **không cần quản lý bất kỳ hạ tầng máy chủ nào**, tối ưu hóa chi phí và thời gian vận hành.
 
-![overview](/images/5-Workshop/5.1-Workshop-overview/diagram1.png)
+![overview](/images/5-Workshop/5.1-Workshop-overview/overview_diagram.png)
+
+#### Các Bước Thực hiện
+
+1. [Giải thích RAG](5.1.1-WhatIsRag/)
+2. [Giới thiệu các dịch vụ](5.1.2-Services/)

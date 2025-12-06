@@ -1,58 +1,30 @@
 ---
 title: "Worklog Tuần 12"
-date: "2025-09-09"
-weight: 2
+date: "2025-11-30"
+weight: 1
 chapter: false
-pre: " <b> 1.12 </b> "
+pre: " <b> 1.12. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
 
 ### Mục tiêu tuần 12:
 
-- Kết nối, làm quen với các thành viên trong First Cloud Journey.
-- Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+- **Production Deployment**: Triển khai lên AWS S3 + CloudFront.
+- **Docker Deployment**: Kiểm thử deploy với Docker.
+- **Quality Assurance**: UAT, Security Audit, Documentation và Final Polish.
 
 ### Các công việc cần triển khai trong tuần này:
 
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP <br>                    | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
+| Ngày | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
+| --- | --- | --- | --- | --- |
+| 1 | - **Static Export & AWS Deployment**: Cấu hình Next.js `output: export`. Upload static build lên S3 Bucket. Cấu hình CloudFront distribution trỏ về S3, thiết lập Custom Domain với Route 53 và chứng chỉ SSL ACM. | 24/11/2025 | 24/11/2025 | [AWS S3 Hosting](https://docs.aws.amazon.com/AmazonS3/latest/userguide/WebsiteHosting.html) |
+| 2 | - **Docker Setup**: Viết `Dockerfile` multistage tối ưu dung lượng và `docker-compose.yml` cho production. Thực hiện build image và deploy thử nghiệm trên môi trường Staging EC2. | 25/11/2025 | 25/11/2025 | [Docker Docs](https://docs.docker.com/) |
+| 3 | - **UAT & Hotfixes**: Mở truy cập cho nhóm tester/user chạy User Acceptance Testing (UAT). Theo dõi log lỗi, fix bug phát sinh và tinh chỉnh caching policy. | 26/11/2025 | 26/11/2025 | |
+| 4 | - **Security & Performance**: Audit lại bảo mật API keys, cấu hình Content Security Policy (CSP). Phân tích bundle size, thực hiện code splitting và lazy loading để cải thiện chỉ số Lighthouse. | 27/11/2025 | 27/11/2025 | |
+| 5 | - **Documentation & Code Quality**: Hoàn thiện tài liệu API (Swagger/Postman), cập nhật README.md hướng dẫn cài đặt. Chạy full linting và type-checking lần cuối để clean code. | 28/11/2025 | 28/11/2025 | |
+| 6 | - **Final Polish & Preparation**: Rà soát lại toàn bộ UI/UX, đảm bảo không còn lỗi vặt. Đóng gói mã nguồn và chuẩn bị tài liệu kỹ thuật chờ bàn giao. <br> - Tham gia AWS Cloud Mastery Series #3: Cloud Security & Operations Mastery | 29/11/2025 | 29/11/2025 | |
 
 ### Kết quả đạt được tuần 12:
 
-- Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản:
-
-  - Compute
-  - Storage
-  - Networking
-  - Database
-  - ...
-
-- Đã tạo và cấu hình AWS Free Tier account thành công.
-
-- Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-- Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-
-  - Access Key
-  - Secret Key
-  - Region mặc định
-  - ...
-
-- Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  - Kiểm tra thông tin tài khoản & cấu hình
-  - Lấy danh sách region
-  - Xem dịch vụ EC2
-  - Tạo và quản lý key pair
-  - Kiểm tra thông tin dịch vụ đang chạy
-  - ...
-
-- Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-- ...
+- **Triển khai thành công**: Website chạy ổn định trên Production (AWS) và Docker.
+- **Sản phẩm hoàn thiện**: Đáp ứng mọi yêu cầu, bảo mật tốt, hiệu năng cao.
+- **Sẵn sàng bàn giao**: Đã chuẩn bị đầy đủ tài liệu và mã nguồn chất lượng.

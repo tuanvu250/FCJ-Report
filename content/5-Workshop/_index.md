@@ -6,28 +6,37 @@ chapter: false
 pre: " <b> 5. </b> "
 ---
 
-{{% notice warning %}}
-⚠️ **Note:** The information below is for reference purposes only. Please **do not copy verbatim** for your report, including this warning.
-{{% /notice %}}
-
-# Secure Hybrid Access to S3 using VPC Endpoints
+# Building a RAG Application using Knowledge Bases for Amazon Bedrock
 
 #### Overview
 
-**AWS PrivateLink** provides private connectivity to AWS services from VPCs and your on-premises networks, without exposing your traffic to the Public Internet.
+**Knowledge Bases for Amazon Bedrock** is a fully managed feature that helps you implement RAG (Retrieval-Augmented Generation) techniques by connecting Foundation Models to your internal data sources to deliver accurate, cited, and contextually relevant responses.
 
-In this lab, you will learn how to create, configure, and test VPC endpoints that enable your workloads to reach AWS services without traversing the Public Internet.
+> RAG is a technique to optimize Large Language Model (LLM) output by retrieving information from a trusted external database (Retrieval) and adding it to the context (Augmentation) before generating the answer (Generation). This method helps overcome limitations regarding outdated training data and ensures the AI answers based on the actual provided information.
 
-You will create two types of endpoints to access Amazon S3: a Gateway VPC endpoint, and an Interface VPC endpoint. These two types of VPC endpoints offer different benefits depending on if you are accessing Amazon S3 from the cloud or your on-premises location
+In this lab, we will learn how to build an AI assistant capable of "reading and understanding" proprietary enterprise documents. You will perform the process from data ingestion and creating vector indexes to configuring the model to answer questions based on those documents without managing any servers.
 
-- **Gateway** - Create a gateway endpoint to send traffic to Amazon S3 or DynamoDB using private IP addresses.You route traffic from your VPC to the gateway endpoint using route tables.
-- **Interface** - Create an interface endpoint to send traffic to endpoint services that use a Network Load Balancer to distribute traffic. Traffic destined for the endpoint service is resolved using DNS.
+We will use three main components to set up a complete RAG processing workflow:
 
-#### Content
+- **Data Source (Amazon S3)** - Acts as the repository of "truth". You will upload documents (PDF, Word, Text) to an S3 bucket. The Knowledge Base will use this source to synchronize data.
+- **Vector Store (OpenSearch Serverless)** - The place to store vector embeddings (numerically encoded data). When a user asks a question, the system will perform a semantic search here to extract the most relevant text segments instead of standard keyword searching.
+- **Foundation Model (Claude 3)** - The Large Language Model acting as the processing brain. It receives the user's question along with information found from the Vector Store, then synthesizes and generates a natural, accurate answer accompanied by source citations.
 
-1. [Workshop overview](5.1-Workshop-overview)
-2. [Prerequiste](5.2-Prerequiste/)
-3. [Access S3 from VPC](5.3-S3-vpc/)
-4. [Access S3 from On-premises](5.4-S3-onprem/)
-5. [VPC Endpoint Policies (Bonus)](5.5-Policy/)
-6. [Clean up](5.6-Cleanup/)
+#### Outcomes
+
+By the end of the workshop, you will have a practical, functioning Chatbot system with the following features:
+
+- Q&A chat regarding proprietary document content.
+- Accurate answers, no hallucinations.
+- Source citations (knowing exactly which page the answer comes from).
+- Rapid deployment without writing complex data processing code.
+
+#### Contents
+
+1. [Workshop Overview](5.1-Workshop-overview/)
+2. [Environment Preparation](5.2-Prerequiste/)
+3. [Create and Configure Knowledge Base](5.3-Knowledge-Base/)
+4. [Test Chatbot (RAG)](5.4-Test-Chatbot/)
+5. [Client Application Integration (Optional)](5.5-Client-Integration/)
+6. [Update Data](5.6-Cleanup/)
+7. [Clean Up Resources](5.7-Cleanup/)
