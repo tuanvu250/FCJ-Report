@@ -1,6 +1,6 @@
 ---
 title: "Event 3"
-date: "2025-10-16"
+date: "2025-09-18"
 weight: 1
 chapter: false
 pre: " <b> 4.3. </b> "
@@ -89,4 +89,4 @@ Buổi workshop thực sự là một trải nghiệm bổ ích, giúp tôi hệ
 
 #### Một số hình ảnh khi tham gia sự kiện
 
-![](/images/4-EventParticipated/event4-3-1.png)
+![](/images/4-EventParticipated/event-3.png)

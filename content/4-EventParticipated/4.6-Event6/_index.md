@@ -1,6 +1,6 @@
 ---
 title: "Event 6"
-date: "2025-09-09"
+date: "2025-09-18"
 weight: 1
 chapter: false
 pre: " <b> 4.6. </b> "
@@ -19,14 +19,12 @@ This series was not just about individual services but a journey in **System Thi
 
 ### Speakers List
 
-The event gathered top experts from the AWS community, including AWS Community Builders, Cloud Engineers, and core members of the First Cloud Journey program:
-
-- **AWS Cloud Clubs Representatives:** Captains from HCMUTE, SGU, PTIT, HUFLIT (Le Vu Xuan An, Tran Duc Anh, Tran Doan Cong Ly, Danh Hoang Hieu Nghi).
-- **Identity & Governance:** Huynh Hoang Long, Dinh Le Hoang Anh (AWS Community Builders).
-- **Detection & Monitoring:** Tran Duc Anh, Nguyen Tuan Thinh, Nguyen Do Thanh Dat.
-- **Network Security:** Kha Van (Cloud Security Engineer | AWS Community Builder).
-- **Data Protection:** Thinh Lam, Viet Nguyen.
-- **Incident Response:** Mendel Grabski (Long) - ex Head of Security & DevOps, Tinh Truong - Platform Engineer.
+- **Huynh Hoang Long, Dinh Le Hoang Anh** - AWS Builders
+- **Tran Duc Anh, Nguyen Tuan Thinh, Nguyen Do Thanh Dat** - Cloud Engineer Trainee FCJ
+- **Kha Van** - Cloud Security Engineer, AWS Community Builders
+- **Thinh Lam, Viet Nguyen** - FCJer
+- **Mendel Grabski (Long)** - ex Head of Security & DevOps Cloud Security Solution Architect
+- **Tinh Truong** - AWS Builders, Platform Engineer at TymeX
 
 ### Detailed Content
 

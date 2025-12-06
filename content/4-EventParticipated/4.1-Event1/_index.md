@@ -125,6 +125,5 @@ pre: " <b> 4.1. </b> "
 
 #### Some event photos
 
-_Add your event photos here_
-
-> Overall, the event not only provided technical knowledge but also helped me reshape my thinking about application design, system modernization, and cross-team collaboration.
+![event-1](/images/4-EventParticipated/event-1-01.png)
+![event-1](/images/4-EventParticipated/event-1-02.png)

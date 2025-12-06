@@ -1,6 +1,6 @@
 ---
 title: "Event 6"
-date: "2025-11-29"
+date: "2025-09-18"
 weight: 1
 chapter: false
 pre: " <b> 4.6. </b> "
@@ -21,7 +21,12 @@ Chuỗi sự kiện khép lại với chủ đề tối quan trọng: **Bảo M�
 
 ### Danh Sách Diễn Giả
 
-Sự kiện quy tụ đội ngũ chuyên gia dày dặn kinh nghiệm từ hệ sinh thái AWS, bao gồm các AWS Community Builders và các Captains năng động từ các CLB AWS Cloud Clubs.
+- **Huynh Hoang Long, Dinh Le Hoang Anh** - AWS Builders
+- **Tran Duc Anh, Nguyen Tuan Thinh, Nguyen Do Thanh Dat** - Cloud Engineer Trainee FCJ
+- **Kha Van** - Cloud Security Engineer, AWS Community Builders
+- **Thinh Lam, Viet Nguyen** - FCJer
+- **Mendel Grabski (Long)** - ex Head of Security & DevOps Cloud Security Solution Architect
+- **Tinh Truong** - AWS Builders, Platform Engineer at TymeX
 
 ### Nội Dung Chi Tiết
 

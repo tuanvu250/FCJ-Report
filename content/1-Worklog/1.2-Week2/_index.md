@@ -1,6 +1,6 @@
 ---
 title: "Week 2 Worklog"
-date: "2025-09-21"
+date: "2025-09-14"
 weight: 1
 chapter: false
 pre: " <b> 1.2. </b> "
