@@ -16,7 +16,7 @@ pre: " <b> 1.12. </b> "
 
 | Day | Task | Start Date | Completion Date | Reference Material |
 | --- | --- | --- | --- | --- |
-| 1 | - **Static Export & AWS Deployment**: Configure Next.js `output: export`. Upload static build to S3 Bucket. Configure CloudFront distribution pointing to S3, set up Custom Domain with Route 53 and ACM SSL certificate. | 24/11/2025 | 24/11/2025 | [AWS S3 Hosting](https://docs.aws.amazon.com/AmazonS3/latest/userguide/WebsiteHosting.html) |
+| 1 | - **Static Export & AWS Deployment**: Configure Next.js `output: export`. Upload static build to S3 Bucket. Configure CloudFront distribution pointing to S3, set up Custom Domain with Route 53 and ACM SSL certificate. | 24/11/2025 | 24/11/2025 | [AWS CloudFront](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html) <br> [AWS Route 53](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/Introduction.html) <br> [Vicobi Infrastructure](https://gitlab.com/vicobi/vicobi-infrastructure) |
 | 2 | - **Docker Setup**: Write multi-stage `Dockerfile` optimizing size and `docker-compose.yml` for production. Build image and test deployment on Staging EC2 environment. | 25/11/2025 | 25/11/2025 | [Docker Docs](https://docs.docker.com/) |
 | 3 | - **UAT & Hotfixes**: Open access for testers/users to run User Acceptance Testing (UAT). Monitor error logs, fix arising bugs, and refine caching policy. | 26/11/2025 | 26/11/2025 | |
 | 4 | - **Security & Performance**: Audit API keys security, configure Content Security Policy (CSP). Analyze bundle size, implement code splitting and lazy loading to improve Lighthouse scores. | 27/11/2025 | 27/11/2025 | |

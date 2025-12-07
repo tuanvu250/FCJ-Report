@@ -1,488 +1,304 @@
-# Vicobi Frontend
+# FCJ Internship Report
 
-Ứng dụng Next.js hiện đại cho quản lý tài chính cá nhân với xử lý giao dịch bằng AI, ngân sách dựa trên hũ (jar), và quản lý ví toàn diện.
+Báo cáo thực tập tại Amazon Web Services Vietnam - FCJ Cloud Intern Program. Dự án sử dụng Hugo static site generator với theme hugo-theme-learn để tạo tài liệu trực tuyến chuyên nghiệp.
 
 ## Mục Lục
 
-- [Tính Năng](#tính-năng)
+- [Giới Thiệu](#giới-thiệu)
 - [Công Nghệ](#công-nghệ)
 - [Yêu Cầu](#yêu-cầu)
 - [Cài Đặt](#cài-đặt)
-- [Cấu Hình](#cấu-hình)
 - [Cấu Trúc Dự Án](#cấu-trúc-dự-án)
-- [Scripts Khả Dụng](#scripts-khả-dụng)
-- [Quy Trình Phát Triển](#quy-trình-phát-triển)
-- [Tích Hợp API](#tích-hợp-api)
-- [Hệ Thống Thiết Kế](#hệ-thống-thiết-kế)
+- [Sử Dụng](#sử-dụng)
 - [Triển Khai](#triển-khai)
-- [Đóng Góp](#đóng-góp)
+- [Nội Dung Báo Cáo](#nội-dung-báo-cáo)
 
-## Tính Năng
+## Giới Thiệu
 
-### 🔐 Xác Thực & Quản Lý Người Dùng
+Website báo cáo thực tập FCJ (First Cloud Journey) cho chương trình thực tập tại Amazon Web Services Vietnam. Trang web được xây dựng bằng Hugo framework và triển khai trên GitHub Pages, cung cấp giao diện song ngữ (Tiếng Anh và Tiếng Việt).
 
-- Tích hợp AWS Cognito cho xác thực bảo mật
-- Đăng ký đa bước với xác minh OTP
-- Luồng đặt lại và khôi phục mật khẩu
-- Tạo và quản lý hồ sơ
-- Cài đặt tài khoản với kiểm soát bảo mật
+### Thông Tin Sinh Viên
 
-### 💰 Quản Lý Tiền
-
-- **Hệ Thống Hũ**: Ngân sách theo danh mục với các hũ tùy chỉnh
-- **Quản Lý Ví**: Hỗ trợ đa ví với theo dõi giao dịch
-- **Lịch Sử Giao Dịch**: Nhật ký giao dịch toàn diện với lọc và tìm kiếm
-- **Phân Tích Trực Quan**: Biểu đồ và đồ thị cho thông tin chi tiêu
-- **Quét Hóa Đơn**: Nhận diện và xử lý hóa đơn bằng OCR
-
-### 🤖 Tính Năng AI
-
-- Nhập giao dịch bằng giọng nói chuyển văn bản
-- Phân loại giao dịch hỗ trợ bởi AI
-- Đề xuất phân bổ hũ tự động
-- Phân tích giao dịch thông minh từ biên lai
-- Xử lý giao dịch bằng ngôn ngữ tự nhiên
-
-### 🎨 Giao Diện Người Dùng
-
-- Thiết kế Neobrutalist với viền đậm và màu sắc rực rỡ
-- Bố cục responsive hoàn toàn cho mobile và desktop
-- Hiệu ứng mượt mà với Framer Motion
-- Thành phần accessible xây dựng với Radix UI
+- **Họ và Tên:** Uông Tuấn Vũ
+- **Email:** vuutse180241@fpt.edu.vn
+- **Trường:** FPT University Campus TP.HCM
+- **Chuyên ngành:** Software Engineering
+- **Lớp:** SE180241
+- **Công ty thực tập:** Amazon Web Services Vietnam Co., Ltd.
+- **Vị trí:** FCJ Cloud Intern
+- **Thời gian:** 08/09/2025 - 12/12/2025
 
 ## Công Nghệ
 
-### Framework Cốt Lõi
+### Framework & Tools
 
-- **Next.js 16.0.1** - React framework với App Router
-- **React 19.2.0** - Thư viện UI
-- **TypeScript 5.x** - An toàn kiểu dữ liệu
+- **Hugo** - Static site generator mạnh mẽ và nhanh chóng
+- **hugo-theme-learn** - Theme chuyên dụng cho documentation
+- **GitHub Pages** - Hosting tĩnh miễn phí
+- **Git** - Version control
 
-### Xác Thực
+### Tính Năng
 
-- **AWS Cognito** - Xác thực và ủy quyền người dùng
-- **Amazon Cognito Identity JS** - Cognito SDK
-
-### Quản Lý State
-
-- **Zustand 5.0.8** - Quản lý state nhẹ
-- **Redux Toolkit 2.10.1** - Quản lý state phức tạp
-- **React Query (TanStack Query) 5.90.8** - Quản lý state server
-
-### UI Components & Styling
-
-- **Tailwind CSS 3.4.18** - CSS framework utility-first
-- **shadcn/ui** - Thư viện component tái sử dụng
-- **Radix UI** - Component primitives accessible
-- **Framer Motion 12.23.24** - Thư viện animation
-- **Lucide React** - Thư viện icon
-
-### Forms & Validation
-
-- **React Hook Form 7.66.0** - Quản lý form
-- **Zod 4.1.12** - Validation schema
-- **@hookform/resolvers** - Resolvers validation form
-
-### Tiện Ích
-
-- **Axios 1.13.2** - HTTP client
-- **date-fns 4.1.0** - Xử lý ngày tháng
-- **class-variance-authority** - Component variants
-- **clsx** - Conditional classnames
-
-### Công Cụ Phát Triển
-
-- **ESLint** - Code linting
-- **Prettier** - Code formatting
-- **Husky** - Git hooks
-- **Commitlint** - Commit message linting
-- **lint-staged** - Chạy linters trên staged files
+- ✅ Hỗ trợ đa ngôn ngữ (English/Tiếng Việt)
+- ✅ Navigation sidebar tự động
+- ✅ Tìm kiếm toàn văn (search functionality)
+- ✅ Responsive design cho mobile và desktop
+- ✅ Syntax highlighting cho code blocks
+- ✅ Breadcrumb navigation
+- ✅ Dark/Light theme variants
 
 ## Yêu Cầu
 
-- **Node.js**: Phiên bản 24.10.1 trở lên
-- **npm/yarn/pnpm**: Trình quản lý package
-- **AWS Account**: Để cài đặt xác thực Cognito
-- **Backend API**: Truy cập vào dịch vụ backend Vicobi
+- **Hugo Extended**: Phiên bản mới nhất (khuyến nghị v0.110.0+)
+- **Git**: Để quản lý version control và deployment
+- **Text Editor**: VS Code, Sublime Text, hoặc editor tương tự
+
+### Cài Đặt Hugo
+
+**Windows:**
+```powershell
+# Sử dụng Chocolatey
+choco install hugo-extended -y
+
+# Hoặc sử dụng Scoop
+scoop install hugo-extended
+```
+
+**macOS:**
+```bash
+brew install hugo
+```
+
+**Linux:**
+```bash
+snap install hugo
+```
 
 ## Cài Đặt
 
-### Phương Pháp 1: Cài Đặt Thông Thường
+### 1. Clone Repository
 
-1. **Clone repository**
+```bash
+git clone https://github.com/tuanvu250/FCJ-Report.git
+cd FCJ-Report
+```
 
-   ```bash
-   git clone https://gitlab.com/vicobi/vicobi-frontend.git
-   cd vicobi-frontend
-   ```
+### 2. Cài Đặt Theme
 
-2. **Cài đặt dependencies**
+Theme `hugo-theme-learn` đã được bao gồm trong thư mục `themes/`. Không cần cài đặt thêm.
 
-   ```bash
-   npm install
-   ```
+### 3. Chạy Local Development Server
 
-3. **Thiết lập biến môi trường**
+```bash
+hugo server -D
+```
 
-   Tạo file `.env.local` trong thư mục root:
-
-   ```env
-   # Cấu hình AWS Cognito
-   NEXT_PUBLIC_AWS_REGION=your-aws-region
-   NEXT_PUBLIC_COGNITO_USER_POOL_ID=your-user-pool-id
-   NEXT_PUBLIC_COGNITO_CLIENT_ID=your-client-id
-   NEXT_PUBLIC_COGNITO_IDENTITY_POOL_ID=your-identity-pool-id
-
-   # API Endpoints
-   NEXT_PUBLIC_API_BASE_URL=https://api.vicobi.com
-   NEXT_PUBLIC_AI_SERVICE_URL=https://ai-api.vicobi.com
-
-   # Cài đặt ứng dụng
-   NEXT_PUBLIC_APP_ENV=development
-   ```
-
-4. **Khởi tạo Husky (cho Git hooks)**
-   ```bash
-   npm run prepare
-   ```
-
-### Phương Pháp 2: Sử Dụng Docker 🐳
-
-Docker là cách nhanh nhất để chạy ứng dụng mà không cần cài đặt Node.js hay dependencies!
-
-1. **Cài đặt môi trường**
-
-   ```bash
-   cp .env.example .env
-   # Chỉnh sửa file .env với cấu hình của bạn
-   ```
-
-2. **Khởi động ứng dụng**
-
-   ```bash
-   # Sử dụng script nhanh (Windows)
-   .\docker-quick-start.ps1 start
-
-   # Hoặc dùng docker-compose trực tiếp
-   docker-compose up -d
-   ```
-
-3. **Truy cập ứng dụng**
-
-   Mở trình duyệt: `http://localhost:3000`
-
-Xem [DOCKER.md](./DOCKER.md) để biết hướng dẫn chi tiết về Docker setup, cấu hình, và deployment.
-
-## Cấu Hình
-
-### Thiết Lập AWS Cognito
-
-1. Tạo User Pool trong AWS Cognito
-2. Cấu hình cài đặt app client
-3. Thiết lập các thuộc tính bắt buộc (email, phone_number, v.v.)
-4. Cấu hình MFA và chính sách mật khẩu
-5. Cập nhật `.env.local` với thông tin Cognito của bạn
-
-### Cấu Hình API
-
-Ứng dụng kết nối đến hai dịch vụ chính:
-
-- **Backend API**: REST API chính cho business logic
-- **AI Service**: Tính năng và xử lý bằng AI
-
-Cập nhật các URL API trong `.env.local` để phù hợp với môi trường của bạn.
+Website sẽ chạy tại: `http://localhost:1313/FCJ-Report/`
 
 ## Cấu Trúc Dự Án
 
 ```
-vicobi-frontend/
-├── app/                          # Next.js App Router
-│   ├── (admin)/                  # Routes admin (được bảo vệ)
-│   ├── (user)/                   # Routes user (được bảo vệ)
-│   │   ├── page.tsx             # Dashboard người dùng
-│   │   ├── (public)/            # Trang public
-│   │   └── services/            # Dịch vụ người dùng
-│   ├── auth/                    # Routes xác thực
-│   │   ├── login/
-│   │   ├── register/
-│   │   ├── verify-otp/
-│   │   ├── forgot-password/
-│   │   └── reset-password/
-│   ├── layout.tsx               # Layout gốc
-│   └── globals.css              # Styles toàn cục
+FCJ-Report/
+├── config.toml                 # Cấu hình Hugo chính
+├── deploy.bat                  # Script tự động deploy
 │
-├── components/                   # React components
-│   ├── ui/                      # UI components tái sử dụng (shadcn/ui)
-│   │   ├── button.tsx
-│   │   ├── input.tsx
-│   │   ├── dialog.tsx
+├── content/                    # Nội dung markdown
+│   ├── _index.md              # Trang chủ (English)
+│   ├── _index.vi.md           # Trang chủ (Tiếng Việt)
+│   │
+│   ├── 1-Worklog/             # Nhật ký công việc hàng tuần
+│   │   ├── 1.1-Week1/
+│   │   ├── 1.2-Week2/
 │   │   └── ...
-│   ├── auth/                    # Components xác thực
-│   ├── jars/                    # Components quản lý hũ
-│   ├── wallet/                  # Components ví
-│   ├── transactions/            # Components giao dịch
-│   ├── transaction-ai/          # Xử lý giao dịch AI
-│   ├── modal/                   # Modal dialogs
-│   ├── sidebar/                 # Sidebar navigation
-│   └── landing/                 # Components landing page
+│   │
+│   ├── 2-Proposal/            # Đề xuất dự án
+│   │
+│   ├── 3-BlogsTranslated/     # Bài viết đã dịch
+│   │   ├── 3.1-Blog1/
+│   │   ├── 3.2-Blog2/
+│   │   └── 3.3-Blog3/
+│   │
+│   ├── 4-EventParticipated/   # Sự kiện tham gia
+│   │   ├── 4.1-Event1/
+│   │   ├── 4.2-Event2/
+│   │   └── ...
+│   │
+│   ├── 5-Workshop/            # Workshop tự tạo
+│   │   ├── 5.1-Workshop-overview/
+│   │   ├── 5.2-Prerequiste/
+│   │   ├── 5.3-Knowledge-Base/
+│   │   └── ...
+│   │
+│   ├── 6-Self-evaluation/     # Tự đánh giá
+│   │
+│   └── 7-Feedback/            # Chia sẻ và phản hồi
 │
-├── hooks/                       # Custom React hooks
-│   ├── useAuth.tsx              # Hook xác thực
-│   ├── useWallet.tsx            # Hook quản lý ví
-│   ├── useJars.tsx              # Hook quản lý hũ
-│   ├── useTransactions.tsx      # Hook giao dịch
-│   └── useAIService.tsx         # Hook dịch vụ AI
+├── static/                     # Static assets
+│   ├── images/                # Hình ảnh
+│   ├── files/                 # Files tài liệu
+│   └── css/                   # Custom CSS
 │
-├── lib/                         # Thư viện tiện ích
-│   ├── api/                     # Tích hợp API
-│   │   ├── core.ts             # API service class
-│   │   └── services/           # Service endpoints
-│   │       ├── authService.ts
-│   │       ├── fetchWallet.ts
-│   │       ├── fetchJars.ts
-│   │       ├── fetchTransaction.ts
-│   │       └── fetchAIService.ts
-│   ├── store/                   # Quản lý state
-│   │   ├── authStore.ts        # Auth state (Zustand)
-│   │   └── apiStore.ts         # API state
-│   ├── providers/               # Context providers
-│   └── utils/                   # Utility functions
+├── layouts/                    # Custom layouts
+│   ├── partials/              # Partial templates
+│   │   ├── logo.html
+│   │   ├── custom-footer.html
+│   │   └── menu-footer.html
+│   └── shortcodes/            # Hugo shortcodes
 │
-├── utils/                       # Helper utilities
-│   ├── const/                   # Hằng số
-│   ├── date/                    # Tiện ích ngày tháng
-│   ├── email/                   # Tiện ích email
-│   └── numbers/                 # Định dạng số
+├── themes/                     # Hugo themes
+│   └── hugo-theme-learn/      # Documentation theme
 │
-├── public/                      # Static assets
-├── docs/                        # Tài liệu
-│
-├── next.config.mjs              # Cấu hình Next.js
-├── tailwind.config.ts           # Cấu hình Tailwind CSS
-├── tsconfig.json                # Cấu hình TypeScript
-├── components.json              # Cấu hình shadcn/ui
-├── commitlint.config.js         # Cấu hình Commitlint
-└── package.json                 # Dependencies và scripts
+└── public/                     # Generated static site (sau khi build)
 ```
 
-## Scripts Khả Dụng
+## Sử Dụng
+
+### Tạo Nội Dung Mới
 
 ```bash
-# Phát triển
-npm run dev              # Khởi động server phát triển (localhost:3000)
-npm run build            # Build cho production
-npm run start            # Khởi động server production
-
-# Chất lượng Code
-npm run lint             # Chạy ESLint
-npm run lint:fix         # Tự động sửa lỗi ESLint
-npm run type-check       # Chạy kiểm tra kiểu TypeScript
-npm run format           # Format code với Prettier
-
-# Git Hooks
-npm run prepare          # Khởi tạo Husky hooks
+# Tạo file markdown mới
+hugo new content/section-name/post-name.md
+hugo new content/section-name/post-name.vi.md  # Bản Tiếng Việt
 ```
 
-### Development Server
+### Front Matter Template
 
-Server phát triển chạy trên `http://localhost:3000` với:
+Mỗi file markdown cần có front matter:
 
-- Hot Module Replacement (HMR)
-- Fast Refresh
-- React Query DevTools
-- Kiểm tra lỗi TypeScript
+```yaml
+---
+title: "Tiêu đề trang"
+date: "2025-12-07"
+weight: 1
+chapter: false
+pre: " <b> 1.1. </b> "
+---
 
-## Quy Trình Phát Triển
-
-### Git Workflow
-
-Dự án này sử dụng **Husky** cho Git hooks và **Commitlint** cho conventional commits.
-
-#### Pre-commit Hook
-
-Tự động chạy khi `git commit`:
-
-- Kiểm tra ESLint và tự động sửa trên staged files
-- Format với Prettier
-- Kiểm tra kiểu TypeScript
-
-#### Format Commit Message
-
-Tuân theo [Conventional Commits](https://www.conventionalcommits.org/):
-
-```
-<type>: <description>
-
-Ví dụ:
-feat: thêm nhập giao dịch bằng giọng nói
-fix: sửa lỗi CORS trong wallet API
-docs: cập nhật hướng dẫn cài đặt
-chore: cấu hình husky và eslint
-refactor: tái cấu trúc auth store
-style: format components với prettier
-perf: tối ưu hiệu suất render biểu đồ
-test: thêm unit tests cho login form
+# Nội dung của bạn ở đây
 ```
 
-**Các type được chấp nhận:**
+### Build Static Site
 
-- `feat` - Tính năng mới
-- `fix` - Sửa bug
-- `docs` - Thay đổi tài liệu
-- `style` - Format code (không ảnh hưởng logic)
-- `refactor` - Tái cấu trúc code
-- `perf` - Cải thiện hiệu suất
-- `test` - Thêm tests
-- `chore` - Các thay đổi khác (config, dependencies)
+```bash
+# Build production site
+hugo
 
-### Code Style
-
-- **ESLint**: Áp dụng quy tắc chất lượng code
-- **Prettier**: Xử lý format code
-- **TypeScript**: Bật chế độ strict
-- **Tailwind CSS**: Phương pháp utility-first với theme tùy chỉnh
-
-## Tích Hợp API
-
-### API Services
-
-Ứng dụng sử dụng class `ApiService` tùy chỉnh cho HTTP requests:
-
-```typescript
-// lib/api/core.ts
-import { ApiService } from '@/lib/api/core'
-
-const api = new ApiService(baseURL, timeout, onAuthError)
-api.setAuthToken(token)
+# Build với drafts
+hugo -D
 ```
 
-### Service Modules
-
-- **authService**: Đăng nhập, đăng ký, xác minh OTP
-- **fetchWallet**: Các thao tác CRUD ví
-- **fetchJars**: Quản lý hũ và ngân sách
-- **fetchTransaction**: Lịch sử và chi tiết giao dịch
-- **fetchAIService**: Xử lý giao dịch bằng AI
-- **fetchUsers**: Hồ sơ và cài đặt người dùng
-- **fetchNotification**: Quản lý thông báo
-
-### Custom Hooks
-
-React Query hooks cho việc fetch dữ liệu:
-
-```typescript
-// Ví dụ sử dụng
-import { useWallet } from '@/hooks/useWallet'
-
-const { data, isLoading, error } = useWallet()
-```
-
-## Hệ Thống Thiết Kế
-
-### Theme
-
-Ứng dụng sử dụng hệ thống thiết kế **Neobrutalist** với:
-
-- Viền đen đậm (3-4px)
-- Bảng màu rực rỡ
-- Bóng đổ mạnh
-- Độ tương phản cao
-- Hình dạng hình học
-
-### Color Tokens
-
-Được định nghĩa trong `globals.css` sử dụng CSS variables:
-
-```css
---background: 0 0% 100% --foreground: 0 0% 3.9% --primary: 0 0% 9%
-  --secondary: 0 0% 96.1% --accent: 0 0% 96.1% --destructive: 0 84.2% 60.2%;
-```
-
-### Component Library
-
-**shadcn/ui** components với tùy chỉnh:
-
-- Button variants (default, destructive, outline, ghost)
-- Form components với validation
-- Dialog và modal patterns
-- Data tables với sắp xếp và lọc
-- Biểu đồ và trực quan hóa
-
-### Responsive Design
-
-- Phương pháp mobile-first
-- Breakpoints: `sm`, `md`, `lg`, `xl`, `2xl`
-- Custom hook `use-mobile` cho logic responsive
+Files được tạo trong thư mục `public/`
 
 ## Triển Khai
 
-### Static Export
+### Tự Động Deploy với Script
 
-Ứng dụng được cấu hình cho static export:
-
-```javascript
-// next.config.mjs
-const nextConfig = {
-  output: 'export',
-  trailingSlash: true,
-  images: {
-    unoptimized: true,
-  },
-}
-```
-
-### Quy Trình Build
+Dự án bao gồm script `deploy.bat` để tự động build và deploy lên GitHub Pages:
 
 ```bash
-npm run build
+# Windows
+.\deploy.bat
 ```
 
-Lệnh này tạo thư mục `out/` chứa các file tĩnh sẵn sàng để triển khai.
+Script này sẽ:
+1. Build Hugo site
+2. Khởi tạo Git repository trong `public/`
+3. Commit các thay đổi
+4. Push lên branch `gh-pages`
 
-### Tùy Chọn Triển Khai
+### Deploy Thủ Công
 
-- **AWS S3 + CloudFront**: Static hosting với CDN
-- **Vercel**: Triển khai một cú nhấp chuột cho Next.js
-- **Netlify**: Triển khai tự động từ Git
-- **GitHub Pages**: Static hosting miễn phí
+```bash
+# Build site
+hugo
 
-### Biến Môi Trường
+# Navigate to public folder
+cd public
 
-Đảm bảo tất cả biến môi trường `NEXT_PUBLIC_*` được thiết lập trong nền tảng triển khai của bạn.
+# Initialize git and deploy
+git init
+git add .
+git commit -m "Deploy update"
+git branch -M gh-pages
+git remote add origin https://github.com/tuanvu250/FCJ-Report.git
+git push -f origin gh-pages
+```
 
-## Đóng Góp
+### Cấu Hình GitHub Pages
 
-### Bắt Đầu
+1. Truy cập repository Settings → Pages
+2. Source: Deploy from branch `gh-pages`
+3. Folder: `/ (root)`
+4. Save
 
-1. Fork repository
-2. Tạo branch tính năng: `git checkout -b feat/your-feature`
-3. Thực hiện thay đổi tuân theo hướng dẫn code style
-4. Commit sử dụng conventional commits: `git commit -m "feat: thêm tính năng mới"`
-5. Push lên fork của bạn: `git push origin feat/your-feature`
-6. Mở merge request
+Website sẽ có sẵn tại: `https://tuanvu250.github.io/FCJ-Report/`
 
-### Hướng Dẫn Pull Request
+## Nội Dung Báo Cáo
 
-- Tuân theo cấu trúc và patterns code hiện có
-- Thêm/cập nhật tests nếu có thể
-- Cập nhật tài liệu khi cần thiết
-- Đảm bảo tất cả checks pass (lint, type-check)
-- Cung cấp mô tả rõ ràng về các thay đổi
-- Tham chiếu đến các issues liên quan
+Báo cáo thực tập bao gồm 7 phần chính:
 
-### Quy Trình Code Review
+### 1. [Worklog](content/1-Worklog/) 📝
+Nhật ký công việc chi tiết theo tuần, ghi lại các hoạt động, kết quả đạt được và bài học trong suốt quá trình thực tập.
 
-Tất cả merge requests yêu cầu:
+### 2. [Proposal](content/2-Proposal/) 📋
+Đề xuất dự án và kế hoạch thực hiện cho workshop chính.
 
-- Pass CI/CD checks
-- Approval từ code review
-- Không có merge conflicts
-- Tài liệu được cập nhật
+### 3. [Blogs Translated](content/3-BlogsTranslated/) 📰
+Các bài viết kỹ thuật đã dịch từ tiếng Anh sang tiếng Việt về AWS services và cloud computing.
+
+### 4. [Events Participated](content/4-EventParticipated/) 🎯
+Tổng hợp các sự kiện AWS đã tham dự bao gồm:
+- GenAI & Data workshops
+- AI-Driven Development Lifecycle
+- Data Science on AWS
+- AWS Community events
+
+### 5. [Workshop](content/5-Workshop/) 🛠️
+Workshop tự tạo: "Building AI-Powered Knowledge Base with Amazon Bedrock"
+- Overview và architecture
+- Prerequisites
+- Knowledge Base setup
+- Testing và integration
+- Data updates và maintenance
+
+### 6. [Self-evaluation](content/6-Self-evaluation/) 📊
+Đánh giá tự thân về quá trình thực tập, kỹ năng đạt được và định hướng phát triển.
+
+### 7. [Feedback](content/7-Feedback/) 💬
+Chia sẻ kinh nghiệm và phản hồi về chương trình thực tập FCJ.
+
+## Tùy Chỉnh
+
+### Thay Đổi Theme
+
+Chỉnh sửa trong `config.toml`:
+
+```toml
+[params]
+  themeVariant = "workshop"  # Có thể là "red", "blue", "green", "workshop"
+```
+
+### Custom CSS
+
+Thêm custom styles vào `static/css/` và import trong layouts.
+
+### Logo & Footer
+
+- Logo: `layouts/partials/logo.html`
+- Footer: `layouts/partials/custom-footer.html`
+- Menu Footer: `layouts/partials/menu-footer.html`
+
+## Liên Kết Hữu Ích
+
+- 🌐 **Live Site:** [https://tuanvu250.github.io/FCJ-Report/](https://tuanvu250.github.io/FCJ-Report/)
+- 📘 **Hugo Documentation:** [https://gohugo.io/documentation/](https://gohugo.io/documentation/)
+- 🎨 **Hugo Learn Theme:** [https://learn.netlify.app/](https://learn.netlify.app/)
+- 👥 **AWS Study Group:** [Facebook Group](https://www.facebook.com/groups/awsstudygroupfcj/)
+
+## License
+
+Copyright © 2025 Uong Tuan Vu - FCJ Internship Report
 
 ---
 
-**Được xây dựng với ❤️ bởi Vicobi Team**
-
-## Project status
-
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+**Được xây dựng với ❤️ tại AWS First Cloud Journey Program**

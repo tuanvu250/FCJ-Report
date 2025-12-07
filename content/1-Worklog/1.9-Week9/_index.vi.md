@@ -13,6 +13,7 @@ pre: " <b> 1.9. </b> "
 - **Authentication Flow**: Tích hợp AWS Cognito, xây dựng trang Login/Register với Zod validation.
 - **Dashboard Development**: Xây dựng layout responsive cho User/Admin và các thành phần giao diện chính.
 - **State Management & API**: Cấu hình Axios client, Redux/Zustand store và tích hợp React Query.
+- **Repository**: [https://gitlab.com/vicobi/vicobi-frontend](https://gitlab.com/vicobi/vicobi-frontend)
 
 ### Các công việc cần triển khai trong tuần này:
 

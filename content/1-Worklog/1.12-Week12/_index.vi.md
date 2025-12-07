@@ -16,7 +16,7 @@ pre: " <b> 1.12. </b> "
 
 | Ngày | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
 | --- | --- | --- | --- | --- |
-| 1 | - **Static Export & AWS Deployment**: Cấu hình Next.js `output: export`. Upload static build lên S3 Bucket. Cấu hình CloudFront distribution trỏ về S3, thiết lập Custom Domain với Route 53 và chứng chỉ SSL ACM. | 24/11/2025 | 24/11/2025 | [AWS S3 Hosting](https://docs.aws.amazon.com/AmazonS3/latest/userguide/WebsiteHosting.html) |
+| 1 | - **Static Export & AWS Deployment**: Cấu hình Next.js `output: export`. Upload static build lên S3 Bucket. Cấu hình CloudFront distribution trỏ về S3, thiết lập Custom Domain với Route 53 và chứng chỉ SSL ACM. | 24/11/2025 | 24/11/2025 | [AWS CloudFront](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html) <br> [AWS Route 53](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/Introduction.html) <br> [Vicobi Infrastructure](https://gitlab.com/vicobi/vicobi-infrastructure) |
 | 2 | - **Docker Setup**: Viết `Dockerfile` multistage tối ưu dung lượng và `docker-compose.yml` cho production. Thực hiện build image và deploy thử nghiệm trên môi trường Staging EC2. | 25/11/2025 | 25/11/2025 | [Docker Docs](https://docs.docker.com/) |
 | 3 | - **UAT & Hotfixes**: Mở truy cập cho nhóm tester/user chạy User Acceptance Testing (UAT). Theo dõi log lỗi, fix bug phát sinh và tinh chỉnh caching policy. | 26/11/2025 | 26/11/2025 | |
 | 4 | - **Security & Performance**: Audit lại bảo mật API keys, cấu hình Content Security Policy (CSP). Phân tích bundle size, thực hiện code splitting và lazy loading để cải thiện chỉ số Lighthouse. | 27/11/2025 | 27/11/2025 | |

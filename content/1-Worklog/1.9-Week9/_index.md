@@ -13,6 +13,7 @@ pre: " <b> 1.9. </b> "
 - **Authentication Flow**: Integrate AWS Cognito, build Login/Register pages with Zod validation.
 - **Dashboard Development**: Build responsive layout for User/Admin and core interface components.
 - **State Management & API**: Configure Axios client, Redux/Zustand store, and integrate React Query.
+- **Repository**: [https://gitlab.com/vicobi/vicobi-frontend](https://gitlab.com/vicobi/vicobi-frontend)
 
 ### Tasks to be carried out this week:
 

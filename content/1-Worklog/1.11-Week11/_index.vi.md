@@ -11,6 +11,7 @@ pre: " <b> 1.11. </b> "
 - Hoàn thiện các tính năng AI: **Bill Scanning**, **Categorization**, **Analytics**.
 - Xây dựng **Chatbot** và trang **Quản lý Chatbot**.
 - Tối ưu hóa **Mobile-First**.
+- **Repository**: [https://gitlab.com/vicobi/vicobi-frontend](https://gitlab.com/vicobi/vicobi-frontend)
 
 ### Các công việc cần triển khai trong tuần này:
 

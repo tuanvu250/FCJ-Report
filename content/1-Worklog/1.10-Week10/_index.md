@@ -13,6 +13,7 @@ pre: " <b> 1.10. </b> "
 - **Budget Allocation Logic**: Develop budget allocation logic and input data validation.
 - **Transaction Features**: Create transaction form, history list, and search filters.
 - **AI Service Integration**: Connect AI API and implement Voice-to-Transaction feature.
+- **Repository**: [https://gitlab.com/vicobi/vicobi-frontend](https://gitlab.com/vicobi/vicobi-frontend)
 
 ### Tasks to be carried out this week:
 

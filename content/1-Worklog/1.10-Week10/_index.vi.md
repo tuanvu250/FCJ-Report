@@ -13,6 +13,7 @@ pre: " <b> 1.10. </b> "
 - **Budget Allocation Logic**: Phát triển logic phân bổ ngân sách và validate dữ liệu đầu vào.
 - **Transaction Features**: Tạo form thêm giao dịch, danh sách lịch sử và bộ lọc tìm kiếm.
 - **AI Service Integration**: Kết nối API AI và triển khai tính năng nhập liệu bằng giọng nói (Voice-to-Transaction).
+- **Repository**: [https://gitlab.com/vicobi/vicobi-frontend](https://gitlab.com/vicobi/vicobi-frontend)
 
 ### Các công việc cần triển khai trong tuần này:
 

@@ -23,7 +23,7 @@ pre: " <b> 1.8. </b> "
 | 3 | - **Architecting & Ecosystem**: Deep dive into Well-Architected Framework (6 pillars) and Cloud Adoption Framework (CAF) to standardize design processes. | 29/10/2025 | 29/10/2025 | [Architecting](https://kananinirav.com/sections/architecting_and_ecosystem.html) |
 | 4 | - **Review & Self-study**: Systematize all learned knowledge. Perform practice exams on AWS Skill Builder. | 30/10/2025 | 30/10/2025 | [Practice Exam](https://kananinirav.com/practice-exam/exams.html) |
 | 5 | - **Practice Exam & Mid-term Exam**: Take full-test practice exams (65 questions) for time management and complete the mandatory mid-term exam. | 31/10/2025 | 31/10/2025 | [Practice Exam](https://kananinirav.com/practice-exam/exams.html) |
-| 6 | - **Project Kickoff**: Organize official project kickoff meeting. Finalize business requirements (SRS), select Technology Stack, and create detailed plan (Gantt chart). <br> - Calculate system costs | 01/11/2025 | 01/11/2025 | |
+| 6 | - **Project Kickoff**: Organize official project kickoff meeting. Finalize business requirements (SRS), select Technology Stack, and create detailed plan (Gantt chart). <br> - Calculate system costs | 01/11/2025 | 01/11/2025 | https://gitlab.com/vicobi/vicobi-docs|
 
 ### Week 8 Achievements:
 

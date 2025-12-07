@@ -23,7 +23,7 @@ pre: " <b> 1.8. </b> "
 | 3 | - **Architecting & Ecosystem**: Nghiên cứu sâu Well-Architected Framework (6 pillars) và Cloud Adoption Framework (CAF) để chuẩn hóa quy trình thiết kế. | 29/10/2025 | 29/10/2025 | [Architecting](https://kananinirav.com/sections/architecting_and_ecosystem.html) |
 | 4 | - **Review & Self-study**: Hệ thống hóa lại toàn bộ kiến thức đã học, Thực hiện các bài thi thử trên AWS Skill Builder. | 30/10/2025 | 30/10/2025 | [Practice Exam](https://kananinirav.com/practice-exam/exams.html) |
 | 5 | - **Practice Exam & Mid-term Exam**: Thực hiện các bài thi thử full-test (65 câu hỏi) để quản lý thời gian và hoàn thành kỳ thi giữa kỳ bắt buộc. | 31/10/2025 | 31/10/2025 | [Practice Exam](https://kananinirav.com/practice-exam/exams.html) |
-| 6 | - **Project Kickoff**: Tổ chức buổi họp khởi động dự án chính thức. Thống nhất yêu cầu nghiệp vụ (SRS), lựa chọn Technology Stack và lập kế hoạch chi tiết (Gantt chart). <br> - Tính toán chi phí của hệ thống | 01/11/2025 | 01/11/2025 | |
+| 6 | - **Project Kickoff**: Tổ chức buổi họp khởi động dự án chính thức. Thống nhất yêu cầu nghiệp vụ (SRS), lựa chọn Technology Stack và lập kế hoạch chi tiết (Gantt chart). <br> - Tính toán chi phí của hệ thống | 01/11/2025 | 01/11/2025 | https://gitlab.com/vicobi/vicobi-docs |
 
 ### Kết quả đạt được tuần 8:
 

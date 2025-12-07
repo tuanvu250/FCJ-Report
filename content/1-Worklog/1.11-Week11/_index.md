@@ -11,6 +11,7 @@ pre: " <b> 1.11. </b> "
 - Complete AI features: **Bill Scanning**, **Categorization**, **Analytics**.
 - Build **Chatbot** and **Chatbot Management** page.
 - Optimize **Mobile-First**.
+- **Repository**: [https://gitlab.com/vicobi/vicobi-frontend](https://gitlab.com/vicobi/vicobi-frontend)
 
 ### Tasks to be carried out this week:
 
